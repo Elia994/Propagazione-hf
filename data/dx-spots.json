@@ -1,0 +1,10 @@
+{
+  "checked_at": "2026-11-21T15:37:23.865995Z",
+  "status": "unavailable",
+  "new_spots": 0,
+  "errors": [
+    "dxc.nc7j.com: timed out",
+    "cluster.dl9gtb.de: timed out"
+  ],
+  "spots": []
+}
