@@ -90,6 +90,7 @@
 <div class="log-fields"><div><label for="log-myplace">Località</label><input id="log-myplace" placeholder="Comune" maxlength="120"></div><div><label for="log-mygrid">Locator Maidenhead</label><input id="log-mygrid" placeholder="Es. JN45AB" maxlength="8" style="text-transform:uppercase"></div><div><label for="log-lat">Latitudine</label><input id="log-lat" placeholder="—" inputmode="decimal"></div><div><label for="log-lon">Longitudine</label><input id="log-lon" placeholder="—" inputmode="decimal"></div></div>
 <p id="log-gps-status" class="log-hint" role="status">GPS: rileva coordinate e locator e cerca il comune con OpenStreetMap. Puoi modificare tutti i campi manualmente.</p></section>
 <section class="panel log-panel"><div class="log-heading">📡 QTH corrispondente</div><div class="log-fields"><div><label for="log-dxplace">Località</label><input id="log-dxplace" placeholder="Città / Paese" maxlength="120"></div><div><label for="log-dxgrid">Locator Maidenhead</label><input id="log-dxgrid" placeholder="Es. PM53AB" maxlength="8" style="text-transform:uppercase"></div></div>
+<p class="log-hint" id="log-dxlookup-status" role="status" aria-live="polite">Scrivi città e, se necessario, Paese; premi Invio o esci dal campo per ottenere il locator automatico. Puoi sempre inserirlo manualmente. Ricerca: © OpenStreetMap.</p>
 <div class="log-qrb-box"><div class="log-meta">Distanza stimata tra i QTH · QRB</div><strong id="log-qrb" aria-live="polite">—</strong><div class="log-hint">Distanza sulla superficie terrestre, calcolata dalle coordinate GPS o dal centro dei locator. Serve il locator del corrispondente.</div></div></section>
 <section class="panel log-panel"><label class="log-label" for="log-notes">Note (facoltative)</label><input class="log-notes" id="log-notes" placeholder="Nome, antenna, potenza…" maxlength="500">
 <div class="log-actions" style="margin-top:12px"><div><div class="log-meta" id="log-clock">Ora UTC automatica</div><div class="log-meta" id="log-band">Banda: 20 m</div></div><div class="log-submit-buttons"><button type="button" id="log-cancel-edit" hidden>Annulla modifica</button><button type="button" class="log-primary" id="log-save">✓ Registra QSO</button></div></div>
@@ -608,7 +609,86 @@ function logUpdateQrb(){
  const km=logComputeQrb($('log-mygrid').value,$('log-dxgrid').value,$('log-lat').value,$('log-lon').value);
  $('log-qrb').textContent=km===null?'—':km.toLocaleString('it-IT')+' km';
 }
-$('log-dxgrid').addEventListener('input',logUpdateQrb);
+// Ricerca una sola volta al termine della digitazione (Invio/uscita dal campo), non autocomplete.
+const logDxCityCache=new Map();
+let logDxLookupSerial=0,logDxAutoGrid='',logDxLastSearchAt=0;
+function logDxStatus(message){$('log-dxlookup-status').textContent=message}
+function logDxResetLookup(){
+ logDxLookupSerial++;
+ logDxAutoGrid='';
+ logDxStatus('Scrivi città e, se necessario, Paese; premi Invio o esci dal campo per ottenere il locator automatico. Puoi sempre inserirlo manualmente. Ricerca: © OpenStreetMap.');
+}
+function logDxLookupResult(place,city){
+ const latitude=Number(place.lat),longitude=Number(place.lon);
+ if(!Number.isFinite(latitude)||!Number.isFinite(longitude)||Math.abs(latitude)>90||Math.abs(longitude)>180)return null;
+ const locator=maiden(latitude,longitude);
+ const address=place.address||{};
+ const label=[address.city||address.town||address.village||address.municipality||place.name||city,address.country].filter(Boolean).join(', ');
+ return {locator,label};
+}
+async function logResolveDxCity(){
+ const city=$('log-dxplace').value.trim();
+ if(!city){logDxStatus('Inserisci una città per calcolare automaticamente il locator.');return}
+ const current=$('log-dxgrid').value.trim().toUpperCase();
+ if(current&&current!==logDxAutoGrid){
+  logDxStatus('Locator manuale mantenuto. Per calcolarlo dalla città, svuota il locator e conferma di nuovo la località.');
+  return;
+ }
+ const serial=++logDxLookupSerial;
+ const key=city.toLocaleLowerCase('it-IT').replace(/\s+/g,' ');
+ logDxStatus('Ricerca coordinate di '+city+'…');
+ try{
+  let found=logDxCityCache.get(key);
+  if(!found){
+   // Nominatim pubblico: una ricerca per località confermata, max 1 richiesta al secondo e cache di sessione.
+   const wait=Math.max(0,1000-(Date.now()-logDxLastSearchAt));
+   if(wait)await new Promise(resolve=>setTimeout(resolve,wait));
+   if(serial!==logDxLookupSerial)return;
+   logDxLastSearchAt=Date.now();
+   const url='https://nominatim.openstreetmap.org/search?format=jsonv2&addressdetails=1&limit=1&accept-language=it&q='+encodeURIComponent(city);
+   const response=await fetch(url,{signal:AbortSignal.timeout(12000),headers:{Accept:'application/json'}});
+   if(!response.ok)throw Error('HTTP '+response.status);
+   const places=await response.json();
+   found=Array.isArray(places)&&places.length?logDxLookupResult(places[0],city):null;
+   if(found)logDxCityCache.set(key,found);
+  }
+  if(serial!==logDxLookupSerial||$('log-dxplace').value.trim()!==city)return;
+  if(!found){
+   logDxStatus('Località non trovata. Specifica anche provincia o Paese, oppure inserisci il locator manualmente.');
+   return;
+  }
+  const gridNow=$('log-dxgrid').value.trim().toUpperCase();
+  if(gridNow&&gridNow!==logDxAutoGrid){
+   logDxStatus('Località trovata ('+found.label+'), ma il locator manuale è stato mantenuto.');
+   return;
+  }
+  $('log-dxgrid').value=found.locator;
+  logDxAutoGrid=found.locator;
+  logUpdateQrb();
+  logDxStatus('✓ Locator '+found.locator+' calcolato per '+found.label+'. Approssimazione al centro della località · © OpenStreetMap.');
+ }catch(error){
+  if(serial===logDxLookupSerial)logDxStatus('Ricerca località non disponibile. Inserisci il locator manualmente o riprova.');
+ }
+}
+$('log-dxplace').addEventListener('input',()=>{
+ logDxLookupSerial++;
+ if(logDxAutoGrid&&$('log-dxgrid').value.trim().toUpperCase()===logDxAutoGrid){
+  $('log-dxgrid').value='';logDxAutoGrid='';logUpdateQrb();
+ }
+ logDxStatus('Premi Invio o esci dal campo per calcolare il locator della località.');
+});
+$('log-dxplace').addEventListener('change',logResolveDxCity);
+$('log-dxplace').addEventListener('keydown',event=>{
+ if(event.key==='Enter'){event.preventDefault();event.currentTarget.blur()}
+});
+$('log-dxgrid').addEventListener('input',()=>{
+ logDxLookupSerial++;
+ logDxAutoGrid='';
+ logUpdateQrb();
+});
+$('log-dxgrid').addEventListener('change',()=>{
+ if(!$('log-dxgrid').value.trim()&&$('log-dxplace').value.trim())logResolveDxCity();
+});
 function logUpdateSelection(){
  const count=logSelected.size;
  $('log-selected-count').textContent=count+' QSO selezionati';
@@ -647,6 +727,7 @@ function logRestoreForm(snapshot){
  for(const id of logFormIds)if(Object.hasOwn(snapshot,id))$(id).value=snapshot[id];
 }
 function logEndEdit(clearSelection=false){
+ logDxResetLookup();
  const previous=logPreEditForm;
  logEditIndex=null;logPreEditForm=null;
  if(previous)logRestoreForm(previous);
@@ -660,6 +741,7 @@ function logEndEdit(clearSelection=false){
 }
 function logBeginEdit(){
  if(!logStorageReady||logEditIndex!==null||logSelected.size!==1)return;
+ logDxResetLookup();
  const index=logSelected.values().next().value,entry=logEntries[index];
  if(!entry)return;
  logPreEditForm=logFormSnapshot();logEditIndex=index;
@@ -770,7 +852,7 @@ function logSave(){
   $('log-message').textContent='✓ QSO '+call+' modificato e salvato. Nessun duplicato creato.';
   return;
  }
- logSelected.clear();
+ logSelected.clear();logDxResetLookup();
  $('log-message').textContent='✓ QSO '+call+' registrato nel browser alle '+entry.utc.slice(11,16)+' UTC.';
  $('log-call').value='';$('log-dxplace').value='';$('log-dxgrid').value='';$('log-notes').value='';
  $('log-call').focus();logRender();logUpdateInfo();logUpdateQrb();
