@@ -6,7 +6,7 @@ on:
       - 'scripts/collect_dx.py'
       - '.github/workflows/dx-spots.yml'
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '2-59/5 * * * *'
   workflow_dispatch:
 permissions:
   contents: write
@@ -23,6 +23,19 @@ jobs:
         run: python3 -m py_compile scripts/collect_dx.py
       - name: Raccogli spot pubblici
         run: python3 scripts/collect_dx.py
+      - name: Controlla stato delle fonti DX
+        run: |
+          python3 - <<'PY'
+          import json, sys
+          with open('data/dx-spots.json', encoding='utf-8') as f:
+              d = json.load(f)
+          print('Spot nuovi:', d.get('new_spots', 0))
+          print('Stato:', d.get('status'))
+          print('Fonti OK:', ', '.join(d.get('sources_ok', [])))
+          if d.get('status') == 'unavailable':
+              print('Nessuna fonte raggiungibile:', d.get('errors', []), file=sys.stderr)
+              sys.exit(1)
+          PY
       - name: Salva dati aggiornati
         run: |
           git config user.name "github-actions[bot]"
