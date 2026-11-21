@@ -64,6 +64,12 @@
 .log-table thead th{position:sticky;top:0;background:#151f30;z-index:1}
 @media(max-width:490px){.log-delete-row button{width:100%}}
 .log-frequency{color:#80e8cb;font-weight:700}
+.log-edit-utc{margin-top:12px}
+.log-edit-utc label{display:block;font-size:12px;color:#b7cbdc;margin-bottom:5px}
+.log-edit-utc input{width:100%;max-width:300px;background:#0b1522;border:1px solid #42596e;border-radius:8px;color:#edf5ff;padding:10px;font:inherit;font-size:14px;color-scheme:dark}
+.log-submit-buttons,.log-selection-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+#log-edit:not(:disabled){border-color:#5de0d2;color:#a9e7dd}
+@media(max-width:490px){.log-selection-actions{width:100%}.log-selection-actions button{flex:1}.log-submit-buttons{width:100%}.log-submit-buttons button{flex:1}}
 </style></head><body><main class="wrap"><header><div><div class="tag"><i class="dot"></i> RADIOAMATORI · HF</div><h1>Propagation <span>Live</span></h1><p class="sub">Monitor delle condizioni solari e geomagnetiche</p></div><button id="refresh">↻ Aggiorna dati</button></header><div id="status" class="status" role="status">Connessione alle fonti dati…</div><section class="view active" id="view-hf"><section class="panel" style="margin-top:14px;padding:12px"><div class="qthbar"><div class="qthbar"><button id="gps" type="button">📍 Rileva QTH GPS</button><input id="locator" aria-label="Locator Maidenhead" placeholder="Locator (es. JN45)" maxlength="8"><button id="apply-locator" type="button">Usa locator</button></div>
 <p id="qth-status" class="sub" role="status">Rileva GPS o inserisci il locator.</p></div></section><h2>Quando provare la propagazione · prossime 24 ore</h2><section class="panel">
 <p>Ogni banda mostra una <strong>finestra di prova in formato 24 ore</strong> (ora italiana). Quando disponibili, gli orari derivano dal modello per tratta ITU-R P.533; altrimenti sono stime solari esplicitamente indicate, <strong>non aperture garantite</strong>.</p>
@@ -73,11 +79,12 @@
 <div class="chart-wrap"><div id="chart-title" class="label">Tocca una banda per vedere l'andamento nelle prossime 24 ore</div><canvas id="prop-chart" aria-label="Andamento indicativo orario della propagazione"></canvas><div class="chart-legend">Scala relativa 0–100. Se disponibili, i valori P.533 descrivono l'affidabilità modellata su un percorso, non la certezza di un QSO; altrimenti il grafico è una stima solare. Gli 11 m, quando P.533 è disponibile, sono interpolati fra 12 m e 10 m: E sporadico non previsto.</div></div>
 <h2>Dettaglio finestre DX</h2><div class="dx-scroll"><table class="dx-table"><thead><tr><th>Banda</th><th>Orario HH:mm</th><th>Direzione di prova</th><th>Metodo</th></tr></thead><tbody id="dx-rows"><tr><td colspan="4">In attesa del QTH…</td></tr></tbody></table></div>
 <p class="dx-info">Il modello ITU-R P.533 (CQDX) è statistico e usa gli indici solari correnti, aggiornati dal servizio. Se non accessibile viene mostrata una fascia stimata da geometria giorno/notte e NOAA, senza attribuirle affidabilità misurata. Per aperture effettive: <a href="https://www.pskreporter.info/pskmap.html" target="_blank" rel="noopener">PSK Reporter</a>. Solo il locator a 4 caratteri è inviato al servizio di previsione; il GPS preciso resta nel browser.</p></section></section><section class="view" id="view-live"><h2>DX Live · frequenze da ascoltare</h2><section class="panel"><p>Spot reali letti direttamente da <a href="https://www.hamqth.com/" target="_blank" rel="noopener noreferrer">HamQTH.com</a> e <a href="https://skeds.sq3swg.com/api.html" target="_blank" rel="noopener noreferrer">SQ3SWG</a>, con dati GitHub di riserva. Frequenza, modo, nominativo e ora; nessuno spot simulato.</p><fieldset class="dx-band-filter"><legend>Bande</legend><div class="dx-band-options"><label><input type="checkbox" id="dx-band-all" checked> Tutte</label><label><input type="checkbox" class="dx-band-option" value="160"> 160 m</label><label><input type="checkbox" class="dx-band-option" value="80"> 80 m</label><label><input type="checkbox" class="dx-band-option" value="60"> 60 m</label><label><input type="checkbox" class="dx-band-option" value="40"> 40 m</label><label><input type="checkbox" class="dx-band-option" value="30"> 30 m</label><label><input type="checkbox" class="dx-band-option" value="20"> 20 m</label><label><input type="checkbox" class="dx-band-option" value="17"> 17 m</label><label><input type="checkbox" class="dx-band-option" value="15"> 15 m</label><label><input type="checkbox" class="dx-band-option" value="12"> 12 m</label><label><input type="checkbox" class="dx-band-option" value="11"> 11 m · CB</label><label><input type="checkbox" class="dx-band-option" value="10"> 10 m</label></div></fieldset><div class="qthbar" id="dx-filter"><button type="button" class="dx-filter active" data-mode="all">Tutti</button><button type="button" class="dx-filter" data-mode="SSB">SSB</button><button type="button" class="dx-filter" data-mode="CW">CW</button><button type="button" class="dx-filter" data-mode="FT8">FT8</button></div><div class="dx-advanced" aria-label="Filtri avanzati DX Live"><div class="dx-country-grid"><div class="dx-country-field"><label id="dx-tx-label" for="dx-tx-toggle">Nazione TX</label><div class="dx-country-combo" data-role="tx"><button type="button" class="dx-country-toggle" id="dx-tx-toggle" aria-haspopup="listbox" aria-expanded="false" aria-controls="dx-tx-items"><span>Tutte le nazioni</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button><div class="dx-country-menu" hidden><input type="search" class="dx-country-search" placeholder="Cerca nazione…" aria-label="Cerca nazione tx" autocomplete="off"><div class="dx-country-items" id="dx-tx-items" role="listbox" aria-label="Nazione TX"></div></div></div></div><div class="dx-country-field"><label id="dx-rx-label" for="dx-rx-toggle">Nazione RX</label><div class="dx-country-combo" data-role="rx"><button type="button" class="dx-country-toggle" id="dx-rx-toggle" aria-haspopup="listbox" aria-expanded="false" aria-controls="dx-rx-items"><span>Tutte le nazioni</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button><div class="dx-country-menu" hidden><input type="search" class="dx-country-search" placeholder="Cerca nazione…" aria-label="Cerca nazione rx" autocomplete="off"><div class="dx-country-items" id="dx-rx-items" role="listbox" aria-label="Nazione RX"></div></div></div></div></div><div class="dx-advanced-checks"><label><input type="checkbox" id="dx-only-qth"> Solo spot con QTH visibile</label><label><input type="checkbox" id="dx-only-possible"> Solo collegamenti stimati possibili (✓)</label></div><div class="dx-advanced-footer"><span id="dx-results-count" aria-live="polite">In attesa degli spot…</span><button type="button" id="dx-reset-filters">↻ Azzera filtri</button></div><p class="dx-info" style="margin:10px 0 0">Nazioni stimate dal prefisso radioamatoriale, non dalla posizione reale. I filtri sono combinabili.</p></div><p class="dx-info" id="spot-state" role="status">Gli spot automatici non sono ancora disponibili: nessuna frequenza attiva viene inventata.</p><div class="dx-scroll"><table class="dx-table"><thead><tr><th>Frequenza</th><th>Modo</th><th>TX</th><th>RX</th><th>QTH spot</th><th>Possibile</th><th>Ora</th></tr></thead><tbody id="spot-rows"><tr><td colspan="7">Nessuno spot verificato disponibile.</td></tr></tbody></table></div><div class="links"><a href="https://www.dxwatch.com/" target="_blank" rel="noopener">DXWatch · cluster</a><a href="https://www.pskreporter.info/pskmap.html" target="_blank" rel="noopener">PSK Reporter · modi digitali</a></div><p class="dx-info">QTH spot: locator indicati nel commento del collegamento. ✓ = stima solare indicativa favorevole verso almeno uno dei due estremi, NON collegamento garantito. — = dati mancanti o stima non favorevole. I locator non sono sempre disponibili. TX = stazione segnalata in trasmissione; RX = stazione che ha pubblicato lo spot. La ricezione dal tuo QTH non è garantita. Gli 11 m richiedono fonti dedicate.</p></section></section><section class="view" id="view-data"><h2>Previsione geomagnetica · prossime 24 ore</h2><section class="panel"><div class="forecast-note"><strong>Previsione NOAA, non previsione di propagazione HF:</strong> Kp è previsto a intervalli di 3 ore e descrive l’attività geomagnetica. È utile per valutare possibili disturbi, ma non permette di sapere con affidabilità se una banda o un collegamento sarà aperto. Le stime orarie per banda qui sotto sono indicative. Per aperture osservate usa PSK Reporter o WSPR.</div><div id="forecast" class="forecast-grid"><span class="sub">Caricamento previsione NOAA…</span></div><div id="forecast-source" class="sub" style="margin-top:12px"></div></section><h2>Indici in tempo reale</h2><section class="grid"><article class="card"><div class="label">Solar Flux · SFI</div><div class="value" id="sfi">—</div><div class="unit">sfu · flusso 10,7 cm</div></article><article class="card"><div class="label">Indice planetario Kp</div><div class="value" id="kp">—</div><div class="unit" id="kpdesc">Attività geomagnetica</div></article><article class="card"><div class="label">Sunspot Number · SSN</div><div class="value" id="ssn">—</div><div class="unit">Macchie solari</div></article><article class="card"><div class="label">Indice A</div><div class="value" id="a">—</div><div class="unit">Attività geomagnetica giornaliera</div></article></section><section class="panel"><h2 style="margin-top:0">Dettagli e fonti</h2><div id="sources" class="sub">In attesa dei dati…</div><div class="links"><a href="https://www.spaceweather.gov/" target="_blank" rel="noopener">NOAA Space Weather</a><a href="https://www.swpc.noaa.gov/" target="_blank" rel="noopener">NOAA Solar Cycle</a><a href="https://www.pskreporter.info/pskmap.html" target="_blank" rel="noopener">PSK Reporter · aperture osservate</a></div></section></section><section class="view" id="view-log"><h2>Log QSO · registro collegamenti</h2>
-<section class="panel log-panel"><div class="log-heading">📻 Nuovo QSO</div>
+<section class="panel log-panel"><div class="log-heading" id="log-form-heading">📻 Nuovo QSO</div>
 <div class="log-fields three"><div class="log-call"><label for="log-call">Nominativo *</label><input id="log-call" placeholder="Es. JA6CNL" maxlength="20" autocomplete="off" style="text-transform:uppercase;font-weight:700"></div>
 <div><label for="log-freq">Frequenza MHz *</label><input id="log-freq" value="14.250" inputmode="decimal"></div>
 <div><label for="log-mode">Modo</label><select id="log-mode"><option>SSB</option><option>CW</option><option>FT8</option><option>FT4</option><option>RTTY</option><option>FM</option><option>AM</option></select></div></div>
 <div class="log-fields" style="margin-top:10px"><div><label for="log-rsts">RST inviato</label><input id="log-rsts" value="59" maxlength="12"></div><div><label for="log-rstr">RST ricevuto</label><input id="log-rstr" value="59" maxlength="12"></div></div>
+<div class="log-edit-utc" id="log-edit-utc-wrap" hidden><label for="log-edit-utc">Data e ora del QSO (UTC)</label><input type="datetime-local" id="log-edit-utc" step="1"><div class="log-hint">L'orario originale viene mantenuto se non lo modifichi.</div></div>
 </section>
 <section class="panel log-panel"><div class="log-header-row" style="margin-bottom:10px"><div class="log-heading" style="margin:0">📍 Mio QTH</div><button id="log-gps" type="button" class="log-primary">GPS</button></div>
 <div class="log-fields"><div><label for="log-myplace">Località</label><input id="log-myplace" placeholder="Comune" maxlength="120"></div><div><label for="log-mygrid">Locator Maidenhead</label><input id="log-mygrid" placeholder="Es. JN45AB" maxlength="8" style="text-transform:uppercase"></div><div><label for="log-lat">Latitudine</label><input id="log-lat" placeholder="—" inputmode="decimal"></div><div><label for="log-lon">Longitudine</label><input id="log-lon" placeholder="—" inputmode="decimal"></div></div>
@@ -85,11 +92,11 @@
 <section class="panel log-panel"><div class="log-heading">📡 QTH corrispondente</div><div class="log-fields"><div><label for="log-dxplace">Località</label><input id="log-dxplace" placeholder="Città / Paese" maxlength="120"></div><div><label for="log-dxgrid">Locator Maidenhead</label><input id="log-dxgrid" placeholder="Es. PM53AB" maxlength="8" style="text-transform:uppercase"></div></div>
 <div class="log-qrb-box"><div class="log-meta">Distanza stimata tra i QTH · QRB</div><strong id="log-qrb" aria-live="polite">—</strong><div class="log-hint">Distanza sulla superficie terrestre, calcolata dalle coordinate GPS o dal centro dei locator. Serve il locator del corrispondente.</div></div></section>
 <section class="panel log-panel"><label class="log-label" for="log-notes">Note (facoltative)</label><input class="log-notes" id="log-notes" placeholder="Nome, antenna, potenza…" maxlength="500">
-<div class="log-actions" style="margin-top:12px"><div><div class="log-meta" id="log-clock">Ora UTC automatica</div><div class="log-meta" id="log-band">Banda: 20 m</div></div><button type="button" class="log-primary" id="log-save">✓ Registra QSO</button></div>
+<div class="log-actions" style="margin-top:12px"><div><div class="log-meta" id="log-clock">Ora UTC automatica</div><div class="log-meta" id="log-band">Banda: 20 m</div></div><div class="log-submit-buttons"><button type="button" id="log-cancel-edit" hidden>Annulla modifica</button><button type="button" class="log-primary" id="log-save">✓ Registra QSO</button></div></div>
 <p class="log-message" id="log-message" role="status" aria-live="polite">Pronto per un nuovo QSO.</p></section>
 <section class="panel log-panel"><div class="log-header-row" style="margin-bottom:10px"><div class="log-heading" style="margin:0">Collegamenti registrati <span id="log-count" class="log-meta"></span></div><div class="log-export-actions"><button type="button" id="log-export-adif">↓ ADIF</button><button type="button" id="log-export-csv">↓ CSV</button></div></div>
 <div class="log-table-scroll"><table class="log-table"><thead><tr><th><input type="checkbox" id="log-select-all" aria-label="Seleziona tutti i QSO"></th><th>Data/ora UTC</th><th>Nominativo</th><th>Banda</th><th class="log-frequency">MHz</th><th>Modo</th><th>QTH DX</th><th>QRB</th></tr></thead><tbody id="log-rows"><tr><td colspan="8">Nessun QSO registrato.</td></tr></tbody></table></div>
-<div class="log-delete-row"><span class="log-meta" id="log-selected-count">0 QSO selezionati</span><button type="button" id="log-delete" class="log-danger" disabled>🗑 Elimina selezionati</button></div>
+<div class="log-delete-row"><span class="log-meta" id="log-selected-count">0 QSO selezionati</span><div class="log-selection-actions"><button type="button" id="log-edit" disabled>✎ Modifica selezionato</button><button type="button" id="log-delete" class="log-danger" disabled>🗑 Elimina selezionati</button></div></div>
 <p class="log-hint">Il registro è salvato <strong>solo in questo browser</strong>, non sincronizzato tra dispositivi. Esporta periodicamente un backup ADIF o CSV prima di eliminare i QSO; cancellando i dati del browser potresti perdere il registro.</p></section>
 </section><footer>Autoaggiornamento ogni 5 minuti. Le misure possono essere pubblicate con ritardo. Se un servizio non risponde, il dato resta non disponibile: nessun valore viene simulato. Per verificare aperture effettive usa PSK Reporter o WSPR.</footer></main><nav class="bottom-nav" aria-label="Sezioni del sito"><button class="nav-tab active" type="button" data-view="hf" aria-current="page"><span>◉</span>HF</button><button class="nav-tab" type="button" data-view="live"><span>📡</span>DX Live</button><button class="nav-tab" type="button" data-view="data"><span>⚙</span>Dati</button><button class="nav-tab" type="button" data-view="log"><span>📓</span>Log</button></nav><button id="mobile-refresh" class="mobile-refresh" type="button" aria-label="Aggiorna dati">↻ Aggiorna</button><script>
 const $=id=>document.getElementById(id);let busy=false;
@@ -528,7 +535,7 @@ $('dx-reset-filters').addEventListener('click',()=>{
 /* Log QSO locale. Solo il GPS richiesto dall’utente invia coordinate a OpenStreetMap per ricavare il comune. */
 const logStorageKey='hf_qso_log_v1',logStationKey='hf_qso_station_v1';
 const logStationIds=['log-myplace','log-mygrid','log-lat','log-lon'];
-let logEntries=[],logStorageReady=true;
+let logEntries=[],logStorageReady=true,logEditIndex=null,logPreEditForm=null;
 const logSelected=new Set();
 try{
  const raw=localStorage.getItem(logStorageKey);
@@ -553,7 +560,7 @@ try{
   for(const id of logStationIds)if(typeof station[id]==='string')$(id).value=station[id];
  }
 }catch(e){$('log-gps-status').textContent='QTH salvato non leggibile: inseriscilo nuovamente.'}
-logStationIds.forEach(id=>$(id).addEventListener('input',()=>{logSaveStation();logUpdateQrb()}));
+logStationIds.forEach(id=>$(id).addEventListener('input',()=>{if(logEditIndex===null)logSaveStation();logUpdateQrb()}));
 logFillFromHF();
 const logBandRanges=[
  ['160m',1.8,2],['80m',3.5,4],['60m',5.25,5.45],['40m',7,7.3],['30m',10.1,10.15],
@@ -563,7 +570,7 @@ const logBandRanges=[
 function logBand(freq){const row=logBandRanges.find(b=>freq>=b[1]&&freq<=b[2]);return row?row[0]:''}
 function logFrequency(){const raw=$('log-freq').value.trim().replace(',','.');return raw?Number(raw):NaN}
 function logUpdateInfo(){
- $('log-clock').textContent=new Date().toISOString().slice(0,16).replace('T',' ')+' UTC';
+ $('log-clock').textContent=logEditIndex===null?new Date().toISOString().slice(0,16).replace('T',' ')+' UTC':'Modifica QSO · orario UTC indicato sopra';
  $('log-band').textContent='Banda: '+(logBand(logFrequency())||'non riconosciuta');
 }
 $('log-freq').addEventListener('input',logUpdateInfo);
@@ -605,10 +612,11 @@ $('log-dxgrid').addEventListener('input',logUpdateQrb);
 function logUpdateSelection(){
  const count=logSelected.size;
  $('log-selected-count').textContent=count+' QSO selezionati';
- $('log-delete').disabled=!logStorageReady||count===0;
+ $('log-delete').disabled=!logStorageReady||count===0||logEditIndex!==null;
+ $('log-edit').disabled=!logStorageReady||count!==1||logEditIndex!==null;
  $('log-delete').textContent='🗑 Elimina selezionati'+(count?' ('+count+')':'');
  const all=$('log-select-all');
- all.disabled=logEntries.length===0;
+ all.disabled=logEntries.length===0||logEditIndex!==null;
  all.checked=logEntries.length>0&&count===logEntries.length;
  all.indeterminate=count>0&&count<logEntries.length;
 }
@@ -626,6 +634,57 @@ $('log-delete').addEventListener('click',()=>{
  catch(e){$('log-message').textContent='Eliminazione non riuscita: impossibile aggiornare la memoria locale.';return}
  logEntries=next;logSelected.clear();logRender();
  $('log-message').textContent='✓ Eliminati '+count+' QSO dal registro locale.';
+});
+
+
+const logFormIds=['log-call','log-freq','log-mode','log-rsts','log-rstr','log-myplace','log-mygrid','log-lat','log-lon','log-dxplace','log-dxgrid','log-notes'];
+function logFormSnapshot(){
+ const snapshot={};
+ for(const id of logFormIds)snapshot[id]=$(id).value;
+ return snapshot;
+}
+function logRestoreForm(snapshot){
+ for(const id of logFormIds)if(Object.hasOwn(snapshot,id))$(id).value=snapshot[id];
+}
+function logEndEdit(clearSelection=false){
+ const previous=logPreEditForm;
+ logEditIndex=null;logPreEditForm=null;
+ if(previous)logRestoreForm(previous);
+ $('log-form-heading').textContent='📻 Nuovo QSO';
+ $('log-edit-utc-wrap').hidden=true;
+ $('log-edit-utc').value='';
+ $('log-cancel-edit').hidden=true;
+ $('log-save').textContent='✓ Registra QSO';
+ if(clearSelection)logSelected.clear();
+ logRender();logUpdateInfo();logUpdateQrb();
+}
+function logBeginEdit(){
+ if(!logStorageReady||logEditIndex!==null||logSelected.size!==1)return;
+ const index=logSelected.values().next().value,entry=logEntries[index];
+ if(!entry)return;
+ logPreEditForm=logFormSnapshot();logEditIndex=index;
+ const fields={
+  'log-call':entry.call,'log-freq':entry.freq,'log-mode':entry.mode,
+  'log-rsts':entry.rstSent,'log-rstr':entry.rstRcvd,
+  'log-myplace':entry.myplace,'log-mygrid':entry.mygrid,'log-lat':entry.lat,'log-lon':entry.lon,
+  'log-dxplace':entry.dxplace,'log-dxgrid':entry.dxgrid,'log-notes':entry.notes
+ };
+ for(const [id,value] of Object.entries(fields))$(id).value=String(value??'');
+ const utc=String(entry.utc||'');
+ $('log-edit-utc').value=/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/.test(utc)?utc.slice(0,19):'';
+ $('log-edit-utc-wrap').hidden=false;
+ $('log-form-heading').textContent='✎ Modifica QSO · '+String(entry.call||'');
+ $('log-save').textContent='✓ Salva modifiche';
+ $('log-cancel-edit').hidden=false;
+ $('log-message').textContent='Modifica i dati del QSO selezionato, poi premi Salva modifiche. La data UTC originale è conservata se non la cambi.';
+ logRender();logUpdateInfo();logUpdateQrb();
+ $('log-call').scrollIntoView({behavior:'smooth',block:'center'});
+ $('log-call').focus();
+}
+$('log-edit').addEventListener('click',logBeginEdit);
+$('log-cancel-edit').addEventListener('click',()=>{
+ logEndEdit();
+ $('log-message').textContent='Modifica annullata: il QSO originale è rimasto invariato.';
 });
 
 function logDisplayFrequency(value){
@@ -649,7 +708,7 @@ function logRender(){
  for(let index=logEntries.length-1;index>=0;index--){
   const entry=logEntries[index],tr=document.createElement('tr'),tdCheck=document.createElement('td');
   const checkbox=document.createElement('input');
-  checkbox.type='checkbox';checkbox.checked=logSelected.has(index);
+  checkbox.type='checkbox';checkbox.checked=logSelected.has(index);checkbox.disabled=logEditIndex!==null;
   checkbox.setAttribute('aria-label','Seleziona QSO '+String(entry.call||'')+' '+String(entry.utc||''));
   checkbox.addEventListener('change',()=>{
    if(checkbox.checked)logSelected.add(index);else logSelected.delete(index);
@@ -670,6 +729,8 @@ function logRender(){
 }
 function logSave(){
  if(!logStorageReady){$('log-message').textContent='Archivio non disponibile: impossibile registrare.';return}
+ const editing=logEditIndex!==null,original=editing?logEntries[logEditIndex]:null;
+ if(editing&&!original){$('log-message').textContent='QSO da modificare non trovato. Annulla e riprova.';return}
  const call=$('log-call').value.trim().toUpperCase().replace(/\s/g,''),freq=logFrequency();
  const mygrid=$('log-mygrid').value.trim().toUpperCase(),dxgrid=$('log-dxgrid').value.trim().toUpperCase();
  const lat=$('log-lat').value.trim(),lon=$('log-lon').value.trim();
@@ -677,16 +738,39 @@ function logSave(){
  if(!Number.isFinite(freq)||freq<=0||freq>30000){$('log-message').textContent='Inserisci una frequenza MHz valida.';$('log-freq').focus();return}
  if(!logLocatorValid(mygrid)||!logLocatorValid(dxgrid)){$('log-message').textContent='Controlla i locator Maidenhead (4, 6 o 8 caratteri).';return}
  if(!logCoordinatesValid(lat,lon)){$('log-message').textContent='Controlla latitudine e longitudine del tuo QTH.';return}
+ let utc=new Date().toISOString();
+ if(editing){
+  utc=original.utc;
+  const originalUtc=String(original.utc||''),inputUtc=$('log-edit-utc').value.trim();
+  const displayedUtc=/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/.test(originalUtc)?originalUtc.slice(0,19):'';
+  if(!inputUtc&&displayedUtc){$('log-message').textContent='Inserisci la data e ora UTC del QSO, oppure annulla la modifica.';return}
+  if(inputUtc&&inputUtc!==displayedUtc){
+   if(!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2})?$/.test(inputUtc)){
+    $('log-message').textContent='Data e ora UTC non valide.';return;
+   }
+   const date=new Date(inputUtc+'Z');
+   if(Number.isNaN(date.getTime())||date.toISOString().slice(0,inputUtc.length)!==inputUtc){
+    $('log-message').textContent='Data e ora UTC non valide.';return;
+   }
+   utc=date.toISOString();
+  }
+ }
  const entry={
-  utc:new Date().toISOString(),call,freq:String(freq),band:logBand(freq),mode:$('log-mode').value,
+  utc,call,freq:String(freq),band:logBand(freq),mode:$('log-mode').value,
   rstSent:$('log-rsts').value.trim(),rstRcvd:$('log-rstr').value.trim(),
   myplace:$('log-myplace').value.trim(),mygrid,lat:lat.replace(',','.'),lon:lon.replace(',','.'),
   dxplace:$('log-dxplace').value.trim(),dxgrid,qrbKm:logComputeQrb(mygrid,dxgrid,lat,lon),notes:$('log-notes').value.trim()
  };
- const next=[...logEntries,entry];
+ const next=editing?logEntries.map((old,index)=>index===logEditIndex?{...old,...entry}:old):[...logEntries,entry];
  try{localStorage.setItem(logStorageKey,JSON.stringify(next))}
- catch(e){$('log-message').textContent='Salvataggio non riuscito (memoria browser non disponibile o piena). QSO non registrato.';return}
- logEntries=next;logSelected.clear();
+ catch(e){$('log-message').textContent='Salvataggio non riuscito (memoria browser non disponibile o piena). Nessuna modifica applicata.';return}
+ logEntries=next;
+ if(editing){
+  logEndEdit(true);
+  $('log-message').textContent='✓ QSO '+call+' modificato e salvato. Nessun duplicato creato.';
+  return;
+ }
+ logSelected.clear();
  $('log-message').textContent='✓ QSO '+call+' registrato nel browser alle '+entry.utc.slice(11,16)+' UTC.';
  $('log-call').value='';$('log-dxplace').value='';$('log-dxgrid').value='';$('log-notes').value='';
  $('log-call').focus();logRender();logUpdateInfo();logUpdateQrb();
@@ -701,7 +785,7 @@ $('log-gps').addEventListener('click',()=>{
   const {latitude,longitude,accuracy}=position.coords;
   $('log-lat').value=latitude.toFixed(5);$('log-lon').value=longitude.toFixed(5);
   $('log-mygrid').value=maiden(latitude,longitude);
-  logSaveStation();logUpdateQrb();
+  if(logEditIndex===null)logSaveStation();logUpdateQrb();
   const originalPlace=$('log-myplace').value;
   status.textContent='✓ GPS acquisito (±'+Math.round(accuracy)+' m). Ricerca comune…';
   try{
@@ -713,7 +797,7 @@ $('log-gps').addEventListener('click',()=>{
    const data=await response.json(),address=data&&data.address||{};
    const place=address.municipality||address.city||address.town||address.village||'';
    if(place&&$('log-myplace').value===originalPlace){
-    $('log-myplace').value=place;logSaveStation();
+    $('log-myplace').value=place;if(logEditIndex===null)logSaveStation();
     status.textContent='✓ GPS e comune acquisiti: '+place+' · precisione GPS ±'+Math.round(accuracy)+' m.';
    }else if(place){
     status.textContent='✓ GPS acquisito. Comune rilevato: '+place+'; mantenuta la località modificata manualmente.';
