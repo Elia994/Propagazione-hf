@@ -1,0 +1,45 @@
+name: Verifica JavaScript sito
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - '.github/workflows/validate-live.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - name: Estrai e verifica JavaScript incorporato
+        run: |
+          python3 - <<'PY'
+          import re
+          from pathlib import Path
+          html = Path('index.html').read_text(encoding='utf-8')
+          inline_scripts = re.findall(r'<script(?:\s[^>]*)?>(.*?)</script>', html, re.I | re.S)
+          if not inline_scripts:
+              raise SystemExit('ERRORE: nessuno script incorporato trovato')
+          Path('/tmp/propagazione-inline.js').write_text('\n'.join(inline_scripts), encoding='utf-8')
+          print('Script trovati:', len(inline_scripts))
+          PY
+          node --check /tmp/propagazione-inline.js
+      - name: Verifica configurazione DX Live
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          html = Path('index.html').read_text(encoding='utf-8')
+          expected = (
+              'https://www.hamqth.com/api/v2/spots?limit=200',
+              'https://skeds.sq3swg.com/api/v1/public/spots?band=hf&limit=200',
+              "fetchLiveJSON('data/dx-spots.json?t='+now)",
+              'loadLive();setInterval(loadLive,300000);',
+          )
+          missing = [item for item in expected if item not in html]
+          if missing:
+              raise SystemExit('Configurazione DX Live incompleta: ' + repr(missing))
+          print('Verifica DX Live completata')
+          PY
