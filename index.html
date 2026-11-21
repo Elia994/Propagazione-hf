@@ -115,6 +115,43 @@ document.querySelectorAll('.nav-tab').forEach(e=>e.addEventListener('click',()=>
 $('dx-band').addEventListener('change',e=>{liveBand=e.target.value;renderLive()});
 // Il campo comment può contenere un percorso (locator ↔ locator), non
 // necessariamente la posizione certificata dei singoli nominativi.
+// Paese ricavato dal prefisso radioamatoriale, non dal locator (che può attraversare confini).
+function dxCountry(call){
+ const c=String(call||'').toUpperCase().trim().split('/').find(x=>x)||'';
+ const prefixes=[
+  [/^(?:LZ)/,'Bulgaria'],[/^(?:F|TM|TO|TX)/,'Francia'],[/^(?:I|IK|IZ|IU|IW|IN|IS0)/,'Italia'],
+  [/^(?:DL|DA|DB|DC|DD|DE|DF|DG|DH|DJ|DK|DM|DN|DO|DP|DQ|DR)/,'Germania'],
+  [/^(?:EA|EB|EC|ED|EE|EF|EG|EH)/,'Spagna'],[/^(?:CT|CS|CR)/,'Portogallo'],
+  [/^(?:G|M|2E)/,'Regno Unito'],[/^(?:ON|OO|OP|OQ|OR|OS|OT)/,'Belgio'],
+  [/^(?:PA|PB|PC|PD|PE|PF|PG|PH|PI)/,'Paesi Bassi'],[/^(?:HB9)/,'Svizzera'],
+  [/^(?:OE)/,'Austria'],[/^(?:SP|SQ|SN|SO|HF)/,'Polonia'],[/^(?:OK|OL)/,'Repubblica Ceca'],
+  [/^(?:OM)/,'Slovacchia'],[/^(?:HA|HG)/,'Ungheria'],[/^(?:YO|YR)/,'Romania'],
+  [/^(?:SV|SX|SY|SZ)/,'Grecia'],[/^(?:TA|TB|TC|YM)/,'Turchia'],
+  [/^(?:9A)/,'Croazia'],[/^(?:S5)/,'Slovenia'],[/^(?:YU|YT)/,'Serbia'],
+  [/^(?:E7)/,'Bosnia-Erzegovina'],[/^(?:4O)/,'Montenegro'],[/^(?:Z3)/,'Macedonia del Nord'],
+  [/^(?:UR|US|UT|UU|UV|UW|UX|UY|UZ|EM|EN|EO)/,'Ucraina'],
+  [/^(?:LY)/,'Lituania'],[/^(?:YL)/,'Lettonia'],[/^(?:ES)/,'Estonia'],
+  [/^(?:OH|OF|OG|OI)/,'Finlandia'],[/^(?:SM|SA|SB|SC|SD|SE|SF|SG|SH|SI|SJ|SK|SL)/,'Svezia'],
+  [/^(?:LA|LB|LC|LD|LE|LF|LG|LH|LI|LJ|LK|LL|LM|LN)/,'Norvegia'],
+  [/^(?:OZ|OU|OV|OW|OX|OY)/,'Danimarca'],[/^(?:TF)/,'Islanda'],
+  [/^(?:K|N|W|AA|AB|AC|AD|AE|AF|AG|AI|AJ|AK|AL)/,'USA'],
+  [/^(?:VE|VA|VO|VY)/,'Canada'],[/^(?:PY|PP|PQ|PR|PS|PT|PU|PV|PW|PX|ZY|ZZ)/,'Brasile'],
+  [/^(?:LU|LW|AY|AZ)/,'Argentina'],[/^(?:CX)/,'Uruguay'],[/^(?:CE)/,'Cile'],
+  [/^(?:JA|JE|JF|JG|JH|JI|JJ|JK|JL|JM|JN|JO|JP|JQ|JR|JS|7J|7K|7L|7M|7N)/,'Giappone'],
+  [/^(?:VK)/,'Australia'],[/^(?:ZL)/,'Nuova Zelanda'],[/^(?:ZS|ZR|ZT|ZU)/,'Sudafrica'],
+  [/^(?:VU)/,'India'],[/^(?:BY|BA|BD|BG|BH|BI|BJ|BL|BM|BN|BO|BP|BQ|BR|BS|BT|BU|BV|BW|BX|HY|B[0-9])/,'Cina']
+ ];
+ return prefixes.find(([pattern])=>pattern.test(c))?.[1]||null;
+}
+function dxQthDisplay(spot,locators){
+ const tx=dxCountry(spot.dx),rx=dxCountry(spot.spotter);
+ if(locators.grids.length===2&&locators.display.includes(' → ')){
+  const parts=locators.display.split(' → ');
+  return parts[0]+(tx?' ('+tx+')':'')+' → '+parts[1]+(rx?' ('+rx+')':'');
+ }
+ if(locators.display==='—'&&tx&&rx)return '('+tx+') → ('+rx+')';
+ return locators.display;
+}
 function dxLocators(spot){
  const msg=String(spot.comment||'').toUpperCase();
  const grid='([A-R]{2}[0-9]{2}(?:[A-X]{2})?)';
@@ -151,7 +188,7 @@ function renderLive(){
  const list=liveSpots.filter(x=>(liveMode==='all'||x.mode===liveMode)&&(liveBand==='all'||(dxBandRanges[liveBand]&&Number(x.frequency_mhz)>=dxBandRanges[liveBand][0]&&Number(x.frequency_mhz)<=dxBandRanges[liveBand][1]))).slice(0,100);
  rows.replaceChildren(...list.map(x=>{
   const tr=document.createElement('tr'),locators=dxLocators(x),prop=dxPossible(x,locators);
-  const cells=[Number(x.frequency_mhz).toFixed(4)+' MHz',x.mode||'Non indicato',x.dx||'—',x.spotter||'—',locators.display,prop.label,new Date(x.timestamp).toLocaleString('it-IT',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Rome'})];
+  const cells=[Number(x.frequency_mhz).toFixed(4)+' MHz',x.mode||'Non indicato',x.dx||'—',x.spotter||'—',dxQthDisplay(x,locators),prop.label,new Date(x.timestamp).toLocaleString('it-IT',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Rome'})];
   cells.forEach((t,i)=>{const td=document.createElement('td');td.textContent=t;if(i===5){td.title=prop.tip;td.setAttribute('aria-label',prop.tip)}tr.append(td)});return tr
  }));
  if(!list.length){const tr=document.createElement('tr'),td=document.createElement('td');td.colSpan=7;td.textContent='Nessuno spot recente per questo filtro';tr.append(td);rows.append(tr)}
