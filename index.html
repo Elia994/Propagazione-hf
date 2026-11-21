@@ -54,6 +54,15 @@
 .log-export-actions{display:flex;gap:6px;flex-wrap:wrap}
 .log-export-actions button{padding:8px 10px;font-size:12px}
 @media(max-width:490px){.log-fields.three{grid-template-columns:repeat(2,minmax(0,1fr))}.log-fields.three .log-call{grid-column:span 2}.log-actions{align-items:stretch;flex-direction:column}.log-actions .log-primary{width:100%}}
+
+.log-qrb-box{background:#102d36;border:1px solid #356b6d;border-radius:10px;padding:13px;margin-top:12px}
+#log-qrb{display:block;color:#80e8cb;font-size:25px;margin:4px 0}
+.log-delete-row{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:12px}
+.log-danger{background:#602d35;border-color:#a55a64;color:#fff}
+.log-table input[type=checkbox]{accent-color:#5de0d2;width:16px;height:16px;cursor:pointer}
+.log-table-scroll{max-height:420px;overflow:auto}
+.log-table thead th{position:sticky;top:0;background:#151f30;z-index:1}
+@media(max-width:490px){.log-delete-row button{width:100%}}
 </style></head><body><main class="wrap"><header><div><div class="tag"><i class="dot"></i> RADIOAMATORI · HF</div><h1>Propagation <span>Live</span></h1><p class="sub">Monitor delle condizioni solari e geomagnetiche</p></div><button id="refresh">↻ Aggiorna dati</button></header><div id="status" class="status" role="status">Connessione alle fonti dati…</div><section class="view active" id="view-hf"><section class="panel" style="margin-top:14px;padding:12px"><div class="qthbar"><div class="qthbar"><button id="gps" type="button">📍 Rileva QTH GPS</button><input id="locator" aria-label="Locator Maidenhead" placeholder="Locator (es. JN45)" maxlength="8"><button id="apply-locator" type="button">Usa locator</button></div>
 <p id="qth-status" class="sub" role="status">Rileva GPS o inserisci il locator.</p></div></section><h2>Quando provare la propagazione · prossime 24 ore</h2><section class="panel">
 <p>Ogni banda mostra una <strong>finestra di prova in formato 24 ore</strong> (ora italiana). Quando disponibili, gli orari derivano dal modello per tratta ITU-R P.533; altrimenti sono stime solari esplicitamente indicate, <strong>non aperture garantite</strong>.</p>
@@ -69,16 +78,18 @@
 <div><label for="log-mode">Modo</label><select id="log-mode"><option>SSB</option><option>CW</option><option>FT8</option><option>FT4</option><option>RTTY</option><option>FM</option><option>AM</option></select></div></div>
 <div class="log-fields" style="margin-top:10px"><div><label for="log-rsts">RST inviato</label><input id="log-rsts" value="59" maxlength="12"></div><div><label for="log-rstr">RST ricevuto</label><input id="log-rstr" value="59" maxlength="12"></div></div>
 </section>
-<section class="panel log-panel"><div class="log-header-row" style="margin-bottom:10px"><div class="log-heading" style="margin:0">📍 Mio QTH</div><button id="log-gps" type="button" class="log-primary">◎ Usa GPS</button></div>
+<section class="panel log-panel"><div class="log-header-row" style="margin-bottom:10px"><div class="log-heading" style="margin:0">📍 Mio QTH</div><button id="log-gps" type="button" class="log-primary">GPS</button></div>
 <div class="log-fields"><div><label for="log-myplace">Località</label><input id="log-myplace" placeholder="Comune" maxlength="120"></div><div><label for="log-mygrid">Locator Maidenhead</label><input id="log-mygrid" placeholder="Es. JN45AB" maxlength="8" style="text-transform:uppercase"></div><div><label for="log-lat">Latitudine</label><input id="log-lat" placeholder="—" inputmode="decimal"></div><div><label for="log-lon">Longitudine</label><input id="log-lon" placeholder="—" inputmode="decimal"></div></div>
-<p id="log-gps-status" class="log-hint" role="status">GPS: compila coordinate e locator. Puoi anche inserire i dati manualmente.</p></section>
-<section class="panel log-panel"><div class="log-heading">📡 QTH corrispondente</div><div class="log-fields"><div><label for="log-dxplace">Località</label><input id="log-dxplace" placeholder="Città / Paese" maxlength="120"></div><div><label for="log-dxgrid">Locator Maidenhead</label><input id="log-dxgrid" placeholder="Es. PM53AB" maxlength="8" style="text-transform:uppercase"></div></div></section>
+<p id="log-gps-status" class="log-hint" role="status">GPS: rileva coordinate e locator e cerca il comune con OpenStreetMap. Puoi modificare tutti i campi manualmente.</p></section>
+<section class="panel log-panel"><div class="log-heading">📡 QTH corrispondente</div><div class="log-fields"><div><label for="log-dxplace">Località</label><input id="log-dxplace" placeholder="Città / Paese" maxlength="120"></div><div><label for="log-dxgrid">Locator Maidenhead</label><input id="log-dxgrid" placeholder="Es. PM53AB" maxlength="8" style="text-transform:uppercase"></div></div>
+<div class="log-qrb-box"><div class="log-meta">Distanza stimata tra i QTH · QRB</div><strong id="log-qrb" aria-live="polite">—</strong><div class="log-hint">Distanza sulla superficie terrestre, calcolata dalle coordinate GPS o dal centro dei locator. Serve il locator del corrispondente.</div></div></section>
 <section class="panel log-panel"><label class="log-label" for="log-notes">Note (facoltative)</label><input class="log-notes" id="log-notes" placeholder="Nome, antenna, potenza…" maxlength="500">
 <div class="log-actions" style="margin-top:12px"><div><div class="log-meta" id="log-clock">Ora UTC automatica</div><div class="log-meta" id="log-band">Banda: 20 m</div></div><button type="button" class="log-primary" id="log-save">✓ Registra QSO</button></div>
 <p class="log-message" id="log-message" role="status" aria-live="polite">Pronto per un nuovo QSO.</p></section>
-<section class="panel log-panel"><div class="log-header-row" style="margin-bottom:10px"><div class="log-heading" style="margin:0">Ultimi collegamenti <span id="log-count" class="log-meta"></span></div><div class="log-export-actions"><button type="button" id="log-export-adif">↓ ADIF</button><button type="button" id="log-export-csv">↓ CSV</button></div></div>
-<div class="log-table-scroll"><table class="log-table"><thead><tr><th>Data/ora UTC</th><th>Nominativo</th><th>Banda</th><th>Modo</th><th>QTH DX</th></tr></thead><tbody id="log-rows"><tr><td colspan="5">Nessun QSO registrato.</td></tr></tbody></table></div>
-<p class="log-hint">Il registro è salvato <strong>solo in questo browser</strong>, non sincronizzato tra dispositivi. Esporta periodicamente un backup ADIF o CSV; cancellando i dati del browser potresti perdere il registro.</p></section>
+<section class="panel log-panel"><div class="log-header-row" style="margin-bottom:10px"><div class="log-heading" style="margin:0">Collegamenti registrati <span id="log-count" class="log-meta"></span></div><div class="log-export-actions"><button type="button" id="log-export-adif">↓ ADIF</button><button type="button" id="log-export-csv">↓ CSV</button></div></div>
+<div class="log-table-scroll"><table class="log-table"><thead><tr><th><input type="checkbox" id="log-select-all" aria-label="Seleziona tutti i QSO"></th><th>Data/ora UTC</th><th>Nominativo</th><th>Banda</th><th>Modo</th><th>QTH DX</th><th>QRB</th></tr></thead><tbody id="log-rows"><tr><td colspan="7">Nessun QSO registrato.</td></tr></tbody></table></div>
+<div class="log-delete-row"><span class="log-meta" id="log-selected-count">0 QSO selezionati</span><button type="button" id="log-delete" class="log-danger" disabled>🗑 Elimina selezionati</button></div>
+<p class="log-hint">Il registro è salvato <strong>solo in questo browser</strong>, non sincronizzato tra dispositivi. Esporta periodicamente un backup ADIF o CSV prima di eliminare i QSO; cancellando i dati del browser potresti perdere il registro.</p></section>
 </section><footer>Autoaggiornamento ogni 5 minuti. Le misure possono essere pubblicate con ritardo. Se un servizio non risponde, il dato resta non disponibile: nessun valore viene simulato. Per verificare aperture effettive usa PSK Reporter o WSPR.</footer></main><nav class="bottom-nav" aria-label="Sezioni del sito"><button class="nav-tab active" type="button" data-view="hf" aria-current="page"><span>◉</span>HF</button><button class="nav-tab" type="button" data-view="live"><span>📡</span>DX Live</button><button class="nav-tab" type="button" data-view="data"><span>⚙</span>Dati</button><button class="nav-tab" type="button" data-view="log"><span>📓</span>Log</button></nav><button id="mobile-refresh" class="mobile-refresh" type="button" aria-label="Aggiorna dati">↻ Aggiorna</button><script>
 const $=id=>document.getElementById(id);let busy=false;
 function num(x){if(x===null||x===undefined||x==='')return null;const n=Number(x);return Number.isFinite(n)?n:null}
@@ -513,10 +524,11 @@ $('dx-reset-filters').addEventListener('click',()=>{
  renderLive();
 });
 
-/* Log QSO locale: nessun dato viene inviato a server o servizi terzi. */
+/* Log QSO locale. Solo il GPS richiesto dall’utente invia coordinate a OpenStreetMap per ricavare il comune. */
 const logStorageKey='hf_qso_log_v1',logStationKey='hf_qso_station_v1';
 const logStationIds=['log-myplace','log-mygrid','log-lat','log-lon'];
 let logEntries=[],logStorageReady=true;
+const logSelected=new Set();
 try{
  const raw=localStorage.getItem(logStorageKey);
  if(raw!==null){const parsed=JSON.parse(raw);if(!Array.isArray(parsed))throw Error('Formato archivio non valido');logEntries=parsed}
@@ -540,7 +552,7 @@ try{
   for(const id of logStationIds)if(typeof station[id]==='string')$(id).value=station[id];
  }
 }catch(e){$('log-gps-status').textContent='QTH salvato non leggibile: inseriscilo nuovamente.'}
-logStationIds.forEach(id=>$(id).addEventListener('input',logSaveStation));
+logStationIds.forEach(id=>$(id).addEventListener('input',()=>{logSaveStation();logUpdateQrb()}));
 logFillFromHF();
 const logBandRanges=[
  ['160m',1.8,2],['80m',3.5,4],['60m',5.25,5.45],['40m',7,7.3],['30m',10.1,10.15],
@@ -565,23 +577,85 @@ function logCoordinatesValid(lat,lon){
  const a=Number(lat.replace(',','.')),b=Number(lon.replace(',','.'));
  return Number.isFinite(a)&&Number.isFinite(b)&&Math.abs(a)<=90&&Math.abs(b)<=180;
 }
+
+function logComputeQrb(mygrid,dxgrid,lat,lon){
+ const remote=parseLocator(String(dxgrid||'').trim());
+ if(!remote)return null;
+ let mine=parseLocator(String(mygrid||'').trim());
+ const latText=String(lat||'').trim().replace(',','.'),lonText=String(lon||'').trim().replace(',','.');
+ if(latText&&lonText){
+  const a=Number(latText),b=Number(lonText);
+  if(Number.isFinite(a)&&Number.isFinite(b)&&Math.abs(a)<=90&&Math.abs(b)<=180)mine={lat:a,lon:b};
+ }
+ if(!mine)return null;
+ const rad=Math.PI/180;
+ const dlat=(remote.lat-mine.lat)*rad,dlon=(remote.lon-mine.lon)*rad;
+ const hav=Math.sin(dlat/2)**2+Math.cos(mine.lat*rad)*Math.cos(remote.lat*rad)*Math.sin(dlon/2)**2;
+ return Math.round(6371*2*Math.asin(Math.min(1,Math.sqrt(Math.max(0,hav)))));
+}
+function logEntryQrb(entry){
+ return Number.isFinite(entry.qrbKm)?entry.qrbKm:logComputeQrb(entry.mygrid,entry.dxgrid,entry.lat,entry.lon);
+}
+function logUpdateQrb(){
+ const km=logComputeQrb($('log-mygrid').value,$('log-dxgrid').value,$('log-lat').value,$('log-lon').value);
+ $('log-qrb').textContent=km===null?'—':km.toLocaleString('it-IT')+' km';
+}
+$('log-dxgrid').addEventListener('input',logUpdateQrb);
+function logUpdateSelection(){
+ const count=logSelected.size;
+ $('log-selected-count').textContent=count+' QSO selezionati';
+ $('log-delete').disabled=!logStorageReady||count===0;
+ $('log-delete').textContent='🗑 Elimina selezionati'+(count?' ('+count+')':'');
+ const all=$('log-select-all');
+ all.disabled=logEntries.length===0;
+ all.checked=logEntries.length>0&&count===logEntries.length;
+ all.indeterminate=count>0&&count<logEntries.length;
+}
+$('log-select-all').addEventListener('change',event=>{
+ logSelected.clear();
+ if(event.target.checked)logEntries.forEach((_,index)=>logSelected.add(index));
+ logRender();
+});
+$('log-delete').addEventListener('click',()=>{
+ if(!logStorageReady||!logSelected.size)return;
+ const count=logSelected.size;
+ if(!confirm('Eliminare definitivamente '+count+' QSO selezionati? Prima puoi esportare un backup.'))return;
+ const next=logEntries.filter((_,index)=>!logSelected.has(index));
+ try{localStorage.setItem(logStorageKey,JSON.stringify(next))}
+ catch(e){$('log-message').textContent='Eliminazione non riuscita: impossibile aggiornare la memoria locale.';return}
+ logEntries=next;logSelected.clear();logRender();
+ $('log-message').textContent='✓ Eliminati '+count+' QSO dal registro locale.';
+});
+
 function logRender(){
  $('log-count').textContent='('+logEntries.length+')';
  $('log-export-adif').disabled=!logEntries.length;
  $('log-export-csv').disabled=!logEntries.length;
  const tbody=$('log-rows');tbody.replaceChildren();
  if(!logEntries.length){
-  const tr=document.createElement('tr'),td=document.createElement('td');td.colSpan=5;td.textContent='Nessun QSO registrato.';tr.append(td);tbody.append(tr);return;
+  const tr=document.createElement('tr'),td=document.createElement('td');
+  td.colSpan=7;td.textContent='Nessun QSO registrato.';tr.append(td);tbody.append(tr);
+  logUpdateSelection();return;
  }
- for(const entry of logEntries.slice(-50).reverse()){
-  const tr=document.createElement('tr');
+ for(let index=logEntries.length-1;index>=0;index--){
+  const entry=logEntries[index],tr=document.createElement('tr'),tdCheck=document.createElement('td');
+  const checkbox=document.createElement('input');
+  checkbox.type='checkbox';checkbox.checked=logSelected.has(index);
+  checkbox.setAttribute('aria-label','Seleziona QSO '+String(entry.call||'')+' '+String(entry.utc||''));
+  checkbox.addEventListener('change',()=>{
+   if(checkbox.checked)logSelected.add(index);else logSelected.delete(index);
+   logUpdateSelection();
+  });
+  tdCheck.append(checkbox);tr.append(tdCheck);
   const date=new Date(entry.utc);
   const when=Number.isNaN(date.getTime())?'—':date.toLocaleString('it-IT',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit',timeZone:'UTC'});
-  [when,entry.call||'—',entry.band||'—',entry.mode||'—',entry.dxplace||entry.dxgrid||'—'].forEach(value=>{
+  const qrb=logEntryQrb(entry);
+  [when,entry.call||'—',entry.band||'—',entry.mode||'—',entry.dxplace||entry.dxgrid||'—',qrb===null?'—':qrb.toLocaleString('it-IT')+' km'].forEach(value=>{
    const td=document.createElement('td');td.textContent=value;tr.append(td);
   });
   tbody.append(tr);
  }
+ logUpdateSelection();
 }
 function logSave(){
  if(!logStorageReady){$('log-message').textContent='Archivio non disponibile: impossibile registrare.';return}
@@ -596,15 +670,15 @@ function logSave(){
   utc:new Date().toISOString(),call,freq:String(freq),band:logBand(freq),mode:$('log-mode').value,
   rstSent:$('log-rsts').value.trim(),rstRcvd:$('log-rstr').value.trim(),
   myplace:$('log-myplace').value.trim(),mygrid,lat:lat.replace(',','.'),lon:lon.replace(',','.'),
-  dxplace:$('log-dxplace').value.trim(),dxgrid,notes:$('log-notes').value.trim()
+  dxplace:$('log-dxplace').value.trim(),dxgrid,qrbKm:logComputeQrb(mygrid,dxgrid,lat,lon),notes:$('log-notes').value.trim()
  };
  const next=[...logEntries,entry];
  try{localStorage.setItem(logStorageKey,JSON.stringify(next))}
  catch(e){$('log-message').textContent='Salvataggio non riuscito (memoria browser non disponibile o piena). QSO non registrato.';return}
- logEntries=next;
+ logEntries=next;logSelected.clear();
  $('log-message').textContent='✓ QSO '+call+' registrato nel browser alle '+entry.utc.slice(11,16)+' UTC.';
  $('log-call').value='';$('log-dxplace').value='';$('log-dxgrid').value='';$('log-notes').value='';
- $('log-call').focus();logRender();logUpdateInfo();
+ $('log-call').focus();logRender();logUpdateInfo();logUpdateQrb();
 }
 $('log-save').addEventListener('click',logSave);
 $('log-call').addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();logSave()}});
@@ -612,12 +686,32 @@ $('log-gps').addEventListener('click',()=>{
  const button=$('log-gps'),status=$('log-gps-status');
  if(!navigator.geolocation){status.textContent='Geolocalizzazione non supportata: inserisci il locator manualmente.';return}
  button.disabled=true;status.textContent='Richiesta posizione GPS in corso…';
- navigator.geolocation.getCurrentPosition(position=>{
+ navigator.geolocation.getCurrentPosition(async position=>{
   const {latitude,longitude,accuracy}=position.coords;
   $('log-lat').value=latitude.toFixed(5);$('log-lon').value=longitude.toFixed(5);
   $('log-mygrid').value=maiden(latitude,longitude);
-  status.textContent='✓ Posizione acquisita · precisione dichiarata ±'+Math.round(accuracy)+' m. Località compilabile manualmente.';
-  logSaveStation();button.disabled=false;
+  logSaveStation();logUpdateQrb();
+  const originalPlace=$('log-myplace').value;
+  status.textContent='✓ GPS acquisito (±'+Math.round(accuracy)+' m). Ricerca comune…';
+  try{
+   // Una richiesta esplicita per clic; coordinate inviate al geocoder OSM soltanto per ricavare il comune.
+   const url='https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat='+encodeURIComponent(latitude)+
+    '&lon='+encodeURIComponent(longitude)+'&zoom=10&addressdetails=1&accept-language=it';
+   const response=await fetch(url,{signal:AbortSignal.timeout(12000),headers:{Accept:'application/json'}});
+   if(!response.ok)throw Error('HTTP '+response.status);
+   const data=await response.json(),address=data&&data.address||{};
+   const place=address.municipality||address.city||address.town||address.village||'';
+   if(place&&$('log-myplace').value===originalPlace){
+    $('log-myplace').value=place;logSaveStation();
+    status.textContent='✓ GPS e comune acquisiti: '+place+' · precisione GPS ±'+Math.round(accuracy)+' m.';
+   }else if(place){
+    status.textContent='✓ GPS acquisito. Comune rilevato: '+place+'; mantenuta la località modificata manualmente.';
+   }else{
+    status.textContent='✓ GPS acquisito. Comune non individuato: compilalo manualmente.';
+   }
+  }catch(e){
+   status.textContent='✓ GPS acquisito. Comune non disponibile dal servizio cartografico: inseriscilo manualmente.';
+  }finally{button.disabled=false}
  },error=>{
   status.textContent=error.code===1?'Accesso GPS negato o bloccato.':error.code===3?'GPS: tempo scaduto. Riprova.':'Posizione GPS non disponibile.';
   button.disabled=false;
@@ -642,7 +736,7 @@ $('log-export-adif').addEventListener('click',()=>{
    ['CALL',entry.call],['QSO_DATE',iso.slice(0,10).replace(/-/g,'')],['TIME_ON',iso.slice(11,16).replace(':','')],
    ['FREQ',entry.freq],['BAND',entry.band],['MODE',entry.mode],
    ['RST_SENT',entry.rstSent],['RST_RCVD',entry.rstRcvd],['MY_GRIDSQUARE',entry.mygrid],
-   ['GRIDSQUARE',entry.dxgrid],['MY_CITY',entry.myplace],['QTH',entry.dxplace],['COMMENT',entry.notes]
+   ['GRIDSQUARE',entry.dxgrid],['DISTANCE',logEntryQrb(entry)],['MY_CITY',entry.myplace],['QTH',entry.dxplace],['COMMENT',entry.notes]
   ];
   adif+=fields.map(([name,value])=>logAdifField(name,value)).join('')+'<EOR>\n';
  }
@@ -650,16 +744,16 @@ $('log-export-adif').addEventListener('click',()=>{
 });
 $('log-export-csv').addEventListener('click',()=>{
  if(!logEntries.length)return;
- const keys=['utc','call','freq','band','mode','rstSent','rstRcvd','myplace','mygrid','lat','lon','dxplace','dxgrid','notes'];
+ const keys=['utc','call','freq','band','mode','rstSent','rstRcvd','myplace','mygrid','lat','lon','dxplace','dxgrid','qrbKm','notes'];
  const safe=value=>{
   let text=String(value??'');
   if(/^[=+@]/.test(text)||(/^-/).test(text)&&!/^-[0-9]+(\.[0-9]+)?$/.test(text))text="'"+text;
   return '"'+text.replace(/"/g,'""')+'"';
  };
- const csv='\uFEFF'+keys.join(',')+'\r\n'+logEntries.map(entry=>keys.map(key=>safe(entry[key])).join(',')).join('\r\n')+'\r\n';
+ const csv='\uFEFF'+keys.join(',')+'\r\n'+logEntries.map(entry=>keys.map(key=>safe(key==='qrbKm'?logEntryQrb(entry):entry[key])).join(',')).join('\r\n')+'\r\n';
  logDownload('qso-log-'+new Date().toISOString().slice(0,10)+'.csv',csv,'text/csv;charset=utf-8');
 });
-logRender();logUpdateInfo();
+logRender();logUpdateInfo();logUpdateQrb();
 
 loadLive();setInterval(loadLive,300000);
 </script></body></html>
