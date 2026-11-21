@@ -145,12 +145,16 @@ function dxCountry(call){
 }
 function dxQthDisplay(spot,locators){
  const tx=dxCountry(spot.dx),rx=dxCountry(spot.spotter);
+ // Nei feed il percorso con due locator segue di norma RX (spotter) → TX (DX).
+ // Mostrare i ruoli esplicitamente evita di attribuire la nazione RX al nominativo TX.
  if(locators.grids.length===2&&locators.display.includes(' → ')){
   const parts=locators.display.split(' → ');
-  return parts[0]+(rx?' ('+rx+')':'')+' → '+parts[1]+(tx?' ('+tx+')':'');
+  return 'RX '+parts[0]+(rx?' ('+rx+')':'')+' → TX '+parts[1]+(tx?' ('+tx+')':'');
  }
- if(locators.display==='—'&&tx&&rx)return '('+tx+') → ('+rx+')';
- return locators.display;
+ if(locators.display==='—'&&(tx||rx))
+  return 'RX'+(rx?' ('+rx+')':'')+' → TX'+(tx?' ('+tx+')':'');
+ const labels=[rx?'RX ('+rx+')':null,tx?'TX ('+tx+')':null].filter(Boolean);
+ return locators.display+(labels.length?' · '+labels.join(' · '):'');
 }
 function dxLocators(spot){
  const msg=String(spot.comment||'').toUpperCase();
