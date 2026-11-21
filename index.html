@@ -63,6 +63,7 @@
 .log-table-scroll{max-height:420px;overflow:auto}
 .log-table thead th{position:sticky;top:0;background:#151f30;z-index:1}
 @media(max-width:490px){.log-delete-row button{width:100%}}
+.log-frequency{color:#80e8cb;font-weight:700}
 </style></head><body><main class="wrap"><header><div><div class="tag"><i class="dot"></i> RADIOAMATORI · HF</div><h1>Propagation <span>Live</span></h1><p class="sub">Monitor delle condizioni solari e geomagnetiche</p></div><button id="refresh">↻ Aggiorna dati</button></header><div id="status" class="status" role="status">Connessione alle fonti dati…</div><section class="view active" id="view-hf"><section class="panel" style="margin-top:14px;padding:12px"><div class="qthbar"><div class="qthbar"><button id="gps" type="button">📍 Rileva QTH GPS</button><input id="locator" aria-label="Locator Maidenhead" placeholder="Locator (es. JN45)" maxlength="8"><button id="apply-locator" type="button">Usa locator</button></div>
 <p id="qth-status" class="sub" role="status">Rileva GPS o inserisci il locator.</p></div></section><h2>Quando provare la propagazione · prossime 24 ore</h2><section class="panel">
 <p>Ogni banda mostra una <strong>finestra di prova in formato 24 ore</strong> (ora italiana). Quando disponibili, gli orari derivano dal modello per tratta ITU-R P.533; altrimenti sono stime solari esplicitamente indicate, <strong>non aperture garantite</strong>.</p>
@@ -87,7 +88,7 @@
 <div class="log-actions" style="margin-top:12px"><div><div class="log-meta" id="log-clock">Ora UTC automatica</div><div class="log-meta" id="log-band">Banda: 20 m</div></div><button type="button" class="log-primary" id="log-save">✓ Registra QSO</button></div>
 <p class="log-message" id="log-message" role="status" aria-live="polite">Pronto per un nuovo QSO.</p></section>
 <section class="panel log-panel"><div class="log-header-row" style="margin-bottom:10px"><div class="log-heading" style="margin:0">Collegamenti registrati <span id="log-count" class="log-meta"></span></div><div class="log-export-actions"><button type="button" id="log-export-adif">↓ ADIF</button><button type="button" id="log-export-csv">↓ CSV</button></div></div>
-<div class="log-table-scroll"><table class="log-table"><thead><tr><th><input type="checkbox" id="log-select-all" aria-label="Seleziona tutti i QSO"></th><th>Data/ora UTC</th><th>Nominativo</th><th>Banda</th><th>Modo</th><th>QTH DX</th><th>QRB</th></tr></thead><tbody id="log-rows"><tr><td colspan="7">Nessun QSO registrato.</td></tr></tbody></table></div>
+<div class="log-table-scroll"><table class="log-table"><thead><tr><th><input type="checkbox" id="log-select-all" aria-label="Seleziona tutti i QSO"></th><th>Data/ora UTC</th><th>Nominativo</th><th>Banda</th><th class="log-frequency">MHz</th><th>Modo</th><th>QTH DX</th><th>QRB</th></tr></thead><tbody id="log-rows"><tr><td colspan="8">Nessun QSO registrato.</td></tr></tbody></table></div>
 <div class="log-delete-row"><span class="log-meta" id="log-selected-count">0 QSO selezionati</span><button type="button" id="log-delete" class="log-danger" disabled>🗑 Elimina selezionati</button></div>
 <p class="log-hint">Il registro è salvato <strong>solo in questo browser</strong>, non sincronizzato tra dispositivi. Esporta periodicamente un backup ADIF o CSV prima di eliminare i QSO; cancellando i dati del browser potresti perdere il registro.</p></section>
 </section><footer>Autoaggiornamento ogni 5 minuti. Le misure possono essere pubblicate con ritardo. Se un servizio non risponde, il dato resta non disponibile: nessun valore viene simulato. Per verificare aperture effettive usa PSK Reporter o WSPR.</footer></main><nav class="bottom-nav" aria-label="Sezioni del sito"><button class="nav-tab active" type="button" data-view="hf" aria-current="page"><span>◉</span>HF</button><button class="nav-tab" type="button" data-view="live"><span>📡</span>DX Live</button><button class="nav-tab" type="button" data-view="data"><span>⚙</span>Dati</button><button class="nav-tab" type="button" data-view="log"><span>📓</span>Log</button></nav><button id="mobile-refresh" class="mobile-refresh" type="button" aria-label="Aggiorna dati">↻ Aggiorna</button><script>
@@ -627,6 +628,14 @@ $('log-delete').addEventListener('click',()=>{
  $('log-message').textContent='✓ Eliminati '+count+' QSO dal registro locale.';
 });
 
+function logDisplayFrequency(value){
+ const raw=String(value??'').trim().replace(',','.');
+ if(!raw)return '—';
+ const number=Number(raw);
+ if(!Number.isFinite(number)||number<=0)return '—';
+ const fraction=raw.split('.')[1]||'';
+ return number.toFixed(Math.max(3,Math.min(7,fraction.length)));
+}
 function logRender(){
  $('log-count').textContent='('+logEntries.length+')';
  $('log-export-adif').disabled=!logEntries.length;
@@ -634,7 +643,7 @@ function logRender(){
  const tbody=$('log-rows');tbody.replaceChildren();
  if(!logEntries.length){
   const tr=document.createElement('tr'),td=document.createElement('td');
-  td.colSpan=7;td.textContent='Nessun QSO registrato.';tr.append(td);tbody.append(tr);
+  td.colSpan=8;td.textContent='Nessun QSO registrato.';tr.append(td);tbody.append(tr);
   logUpdateSelection();return;
  }
  for(let index=logEntries.length-1;index>=0;index--){
@@ -650,8 +659,10 @@ function logRender(){
   const date=new Date(entry.utc);
   const when=Number.isNaN(date.getTime())?'—':date.toLocaleString('it-IT',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit',timeZone:'UTC'});
   const qrb=logEntryQrb(entry);
-  [when,entry.call||'—',entry.band||'—',entry.mode||'—',entry.dxplace||entry.dxgrid||'—',qrb===null?'—':qrb.toLocaleString('it-IT')+' km'].forEach(value=>{
-   const td=document.createElement('td');td.textContent=value;tr.append(td);
+  [when,entry.call||'—',entry.band||'—',logDisplayFrequency(entry.freq),entry.mode||'—',entry.dxplace||entry.dxgrid||'—',qrb===null?'—':qrb.toLocaleString('it-IT')+' km'].forEach((value,column)=>{
+   const td=document.createElement('td');td.textContent=value;
+   if(column===3)td.className='log-frequency';
+   tr.append(td);
   });
   tbody.append(tr);
  }
