@@ -156,16 +156,83 @@ function renderLive(){
  }));
  if(!list.length){const tr=document.createElement('tr'),td=document.createElement('td');td.colSpan=7;td.textContent='Nessuno spot recente per questo filtro';tr.append(td);rows.append(tr)}
 }
-async function loadLive(){
+// Feed CORS pubblici: il browser aggiorna DX Live anche quando GitHub Actions ritarda.
+const liveSources=[
+ {name:'HamQTH',url:'https://www.hamqth.com/api/v2/spots?limit=200'},
+ {name:'SQ3SWG',url:'https://skeds.sq3swg.com/api/v1/public/spots?band=hf&limit=200'}
+];
+const liveMaxAgeMs=2*60*60*1000;
+async function fetchLiveJSON(url){
+ const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),12000);
  try{
-  const response=await fetch('data/dx-spots.json?t='+Date.now(),{cache:'no-store'});
+  const response=await fetch(url,{cache:'no-store',signal:controller.signal});
   if(!response.ok)throw Error('HTTP '+response.status);
-  const data=await response.json(),checked=new Date(data.checked_at),age=Date.now()-checked.getTime();
-  liveSpots=Array.isArray(data.spots)?data.spots.filter(x=>Date.now()-new Date(x.timestamp).getTime()<7200000):[];
-  $('spot-state').textContent='Cluster: '+(data.status==='ok'?'spot ricevuti':data.status==='no_recent'?'nessuno spot recente':'fonti temporaneamente non raggiungibili')+' · ultimo controllo '+(isNaN(checked)?'sconosciuto':checked.toLocaleString('it-IT',{timeZone:'Europe/Rome'}))+' · '+(age>1200000?'dati non recenti':'aggiornamento server ogni ~5 minuti, soggetto a ritardi GitHub')+'. Spot non equivalgono a ricezione dal tuo QTH. La spunta è una stima, non una garanzia.';
-  renderLive();
- }catch(e){$('spot-state').textContent='Dati DX Live non disponibili: '+e.message;liveSpots=[];renderLive()}
+  return await response.json();
+ }finally{clearTimeout(timer)}
+}
+function normalizeLiveSpot(row,source,now){
+ if(!row||typeof row!=='object')return null;
+ const mhz=Number(source==='HamQTH'?row.freq:row.freqKHz)/1000;
+ const time=new Date(row.time),age=now-time.getTime();
+ const dx=String((source==='HamQTH'?row.dxcall:row.dx)||'').trim().slice(0,28);
+ if(!Number.isFinite(mhz)||mhz<1.8||mhz>30||!Number.isFinite(age)||age< -300000||age>liveMaxAgeMs||dx.length<2)return null;
+ const comment=String(row.comment||'').trim().slice(0,110);
+ const rawMode=String(row.mode||'').trim().toUpperCase();
+ const modeMatch=comment.toUpperCase().match(/\b(FT8|FT4|RTTY|PSK31|CW|SSB|USB|LSB|AM)\b/);
+ let mode=modeMatch?modeMatch[1]:rawMode;
+ if(mode==='USB'||mode==='LSB')mode='SSB';
+ if(!['FT8','FT4','RTTY','PSK31','CW','SSB','AM','DIGI'].includes(mode))mode='Non indicato';
+ return {frequency_mhz:Math.round(mhz*10000)/10000,mode,dx,
+  spotter:String(row.spotter||'').trim().slice(0,28),
+  utc:time.toISOString().slice(11,16).replace(':',''),
+  comment,source,timestamp:time.toISOString().slice(0,19)+'Z'};
+}
+function recentLiveSpots(spots,now){
+ return (Array.isArray(spots)?spots:[]).filter(x=>{
+  const age=now-new Date(x.timestamp).getTime();
+  return Number.isFinite(age)&&age>= -300000&&age<=liveMaxAgeMs;
+ });
+}
+async function loadLive(){
+ const now=Date.now();
+ const results=await Promise.allSettled([
+  ...liveSources.map(x=>fetchLiveJSON(x.url)),
+  fetchLiveJSON('data/dx-spots.json?t='+now)
+ ]);
+ const unique=new Map(),ok=[],failed=[];
+ for(let i=0;i<liveSources.length;i++){
+  const result=results[i],source=liveSources[i].name;
+  if(result.status!=='fulfilled'||!Array.isArray(result.value?.spots)){
+   failed.push(source);
+   continue;
+  }
+  ok.push(source);
+  for(const row of result.value.spots){
+   const spot=normalizeLiveSpot(row,source,now);
+   if(!spot)continue;
+   const key=[spot.dx,spot.frequency_mhz,spot.timestamp,spot.spotter].join('|');
+   unique.set(key,spot);
+  }
+ }
+ if(ok.length){
+  liveSpots=[...unique.values()].sort((a,b)=>b.timestamp.localeCompare(a.timestamp)).slice(0,250);
+  $('spot-state').textContent='Cluster: '+liveSpots.length+' spot recenti · fonti dirette: '+ok.join(', ')+
+   (failed.length?' · non raggiungibili: '+failed.join(', '):'')+
+   ' · ultimo controllo '+new Date(now).toLocaleString('it-IT',{timeZone:'Europe/Rome'})+
+   ' · aggiornamento ogni 5 minuti. Gli spot non garantiscono ricezione dal tuo QTH.';
+ }else if(results[2].status==='fulfilled'&&Array.isArray(results[2].value?.spots)){
+  const data=results[2].value,checked=new Date(data.checked_at),age=now-checked.getTime();
+  liveSpots=recentLiveSpots(data.spots,now);
+  $('spot-state').textContent='Fonti DX dirette non raggiungibili · dati di riserva GitHub'+
+   ' · ultimo controllo server '+(Number.isNaN(checked.getTime())?'sconosciuto':checked.toLocaleString('it-IT',{timeZone:'Europe/Rome'}))+
+   (age>1200000?' · ATTENZIONE: dati non aggiornati':' · dati recenti')+
+   ' · nuovo tentativo tra 5 minuti.';
+ }else{
+  liveSpots=[];
+  $('spot-state').textContent='DX Live non disponibile: fonti dirette e dati di riserva non raggiungibili. Nuovo tentativo tra 5 minuti.';
+ }
+ renderLive();
 }
 document.querySelectorAll('.dx-filter').forEach(b=>b.addEventListener('click',()=>{liveMode=b.dataset.mode;document.querySelectorAll('.dx-filter').forEach(x=>x.classList.toggle('active',x===b));renderLive()}));
-loadLive();setInterval(loadLive,60000);
+loadLive();setInterval(loadLive,300000);
 </script></body></html>
