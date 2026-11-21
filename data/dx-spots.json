@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-21T17:05:41Z",
+  "checked_at": "2026-11-21T17:05:52Z",
   "status": "ok",
   "new_spots": 399,
   "sources_ok": [
@@ -37,6 +37,16 @@
       "comment": "LZ-DX",
       "source": "SQ3SWG",
       "timestamp": "2026-11-21T17:05:01Z"
+    },
+    {
+      "frequency_mhz": 7.246,
+      "mode": "Non indicato",
+      "dx": "K9AJC",
+      "spotter": "NU4N",
+      "utc": "1705",
+      "comment": "US POTA 7680 MISSOURI",
+      "source": "HamQTH",
+      "timestamp": "2026-11-21T17:05:00Z"
     },
     {
       "frequency_mhz": 21.285,
@@ -2495,16 +2505,6 @@
       "spotter": "YT1WA",
       "utc": "1652",
       "comment": "CW",
-      "source": "HamQTH",
-      "timestamp": "2026-11-21T16:52:00Z"
-    },
-    {
-      "frequency_mhz": 28.074,
-      "mode": "FT8",
-      "dx": "CO8LY",
-      "spotter": "G0KTN",
-      "utc": "1652",
-      "comment": "IO81TI<>FL20CA FT8",
       "source": "HamQTH",
       "timestamp": "2026-11-21T16:52:00Z"
     }
