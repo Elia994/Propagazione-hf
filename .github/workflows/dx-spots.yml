@@ -1,5 +1,10 @@
 name: Aggiorna DX Cluster
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/collect_dx.py'
+      - '.github/workflows/dx-spots.yml'
   schedule:
     - cron: '*/5 * * * *'
   workflow_dispatch:
@@ -14,6 +19,8 @@ jobs:
     timeout-minutes: 4
     steps:
       - uses: actions/checkout@v4
+      - name: Verifica sintassi collector
+        run: python3 -m py_compile scripts/collect_dx.py
       - name: Raccogli spot pubblici
         run: python3 scripts/collect_dx.py
       - name: Salva dati aggiornati
