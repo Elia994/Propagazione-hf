@@ -108,5 +108,25 @@ async function loadIono(){if(!qth)return;try{const r=await fetch('https://skeds.
 $('refresh').addEventListener('click',update);$('mobile-refresh').addEventListener('click',update);bands(null,null);document.addEventListener('click',e=>{const card=e.target.closest('.band');if(!card)return;const names=['80 m','60 m','40 m','30 m','20 m','17 m','15 m','12 m','11 m','10 m'],mhz=[3.5,5.3,7.1,10.1,14.2,18.1,21.2,24.9,27,28.4],i=names.indexOf(card.querySelector('strong')?.textContent);if(i<0)return;document.querySelectorAll('.band').forEach(x=>x.classList.remove('selected'));card.classList.add('selected');selectedBand={name:names[i],mhz:mhz[i]};$('chart-title').textContent='Stima indicativa per '+selectedBand.name+' · prossime 24 ore';drawChart()});window.addEventListener('resize',drawChart);let qthRestored=false;try{const prev=localStorage.getItem('hf_locator');if(prev){const v=parseLocator(prev);if(v){setQth(v.lat,v.lon,'QTH memorizzato');qthRestored=true}}}catch(e){}if(!qthRestored&&navigator.geolocation){navigator.geolocation.getCurrentPosition(p=>setQth(p.coords.latitude,p.coords.longitude,'GPS'),()=>{}, {enableHighAccuracy:false,timeout:9000,maximumAge:600000})}update();setInterval(update,300000);
 
 function showView(view){if(!['hf','live','map','data'].includes(view))view='hf';document.querySelectorAll('.view').forEach(e=>e.classList.toggle('active',e.id==='view-'+view));document.querySelectorAll('.nav-tab').forEach(e=>{const active=e.dataset.view===view;e.classList.toggle('active',active);if(active)e.setAttribute('aria-current','page');else e.removeAttribute('aria-current')});try{history.replaceState(null,'','#'+view)}catch(e){}window.scrollTo({top:0,behavior:'instant'});if(view==='hf')requestAnimationFrame(drawChart)}
-document.querySelectorAll('.nav-tab').forEach(e=>e.addEventListener('click',()=>showView(e.dataset.view)));document.querySelectorAll('.dx-filter').forEach(e=>e.addEventListener('click',()=>{document.querySelectorAll('.dx-filter').forEach(x=>x.classList.toggle('active',x===e));$('spot-state').textContent='Filtro '+(e.dataset.mode==='all'?'tutte le modalità':e.dataset.mode)+': nessuno spot verificato disponibile.'}));if(['#hf','#live','#map','#data'].includes(location.hash))showView(location.hash.slice(1));
+document.querySelectorAll('.nav-tab').forEach(e=>e.addEventListener('click',()=>showView(e.dataset.view)));if(['#hf','#live','#map','#data'].includes(location.hash))showView(location.hash.slice(1));
+
+let liveSpots=[],liveMode='all';
+function renderLive(){
+ const rows=$('spot-rows'),state=$('spot-state');if(!rows||!state)return;
+ const list=liveSpots.filter(x=>liveMode==='all'||x.mode===liveMode).slice(0,100);
+ rows.replaceChildren(...list.map(x=>{const tr=document.createElement('tr');const cells=[Number(x.frequency_mhz).toFixed(4)+' MHz',x.mode||'Non indicato',x.dx,new Date(x.timestamp).toLocaleString('it-IT',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Rome'}),x.source];cells.forEach(t=>{const td=document.createElement('td');td.textContent=t;tr.append(td)});return tr}));
+ if(!list.length){const tr=document.createElement('tr'),td=document.createElement('td');td.colSpan=5;td.textContent='Nessuno spot recente per questo filtro';tr.append(td);rows.append(tr)}
+}
+async function loadLive(){
+ try{
+  const response=await fetch('data/dx-spots.json?t='+Date.now(),{cache:'no-store'});
+  if(!response.ok)throw Error('HTTP '+response.status);
+  const data=await response.json(),checked=new Date(data.checked_at),age=Date.now()-checked.getTime();
+  liveSpots=Array.isArray(data.spots)?data.spots.filter(x=>Date.now()-new Date(x.timestamp).getTime()<7200000):[];
+  $('spot-state').textContent='Cluster: '+(data.status==='ok'?'spot ricevuti':'fonte temporaneamente non disponibile')+' · ultimo controllo '+(isNaN(checked)?'sconosciuto':checked.toLocaleString('it-IT',{timeZone:'Europe/Rome'}))+' · '+(age>1200000?'dati non recenti':'aggiornamento server ogni ~5 minuti, soggetto a ritardi GitHub')+'. Spot non equivalgono a ricezione dal tuo QTH.';
+  renderLive();
+ }catch(e){$('spot-state').textContent='Dati DX Live non disponibili: '+e.message;liveSpots=[];renderLive()}
+}
+document.querySelectorAll('.dx-filter').forEach(b=>b.addEventListener('click',()=>{liveMode=b.dataset.mode;document.querySelectorAll('.dx-filter').forEach(x=>x.classList.toggle('active',x===b));renderLive()}));
+loadLive();setInterval(loadLive,60000);
 </script></body></html>
