@@ -1,57 +1,139 @@
 #!/usr/bin/env python3
-"""Collect public DX-cluster spots; never fabricate reception reports."""
-import datetime as dt, json, os, re, socket, time
+"""Read documented public HTTPS DX feeds and keep only verifiably recent spots."""
+import datetime as dt
+import json
+import math
+import re
+import urllib.request
 from pathlib import Path
-OUT=Path("data/dx-spots.json")
-PAT=re.compile(r"DX de\s+(\S+):\s+(\d+(?:\.\d+)?)\s+(\S+)\s+(.+?)\s+(\d{4})Z",re.I)
-def collect():
-    spots=[]; errors=[]
-    for host,port in [("dxc.nc7j.com",7373),("cluster.dl9gtb.de",8000)]:
-        try:
-            with socket.create_connection((host,port),timeout=12) as sock:
-                sock.settimeout(3)
-                sock.sendall(b"N0CALL-99\r\n")
-                until=time.monotonic()+40; buf=""
-                while time.monotonic()<until:
-                    try: data=sock.recv(8192)
-                    except socket.timeout: continue
-                    if not data: break
-                    buf+=data.decode("utf-8","replace")
-                    lines=buf.split("\n");buf=lines.pop()
-                    for line in lines:
-                        m=PAT.search(line)
-                        if not m: continue
-                        spotter,khz,dx,comment,utc=m.groups()
-                        freq=float(khz)/1000
-                        if not 1.8<=freq<=30: continue
-                        mode=next((x for x in ("FT8","FT4","RTTY","PSK31","CW","SSB","USB","LSB","AM") if re.search(r"\b"+x+r"\b",comment,re.I)),"Non indicato")
-                        spots.append(dict(frequency_mhz=round(freq,4),mode=mode,dx=dx,spotter=spotter,utc=utc,comment=comment.strip()[:110],source=host))
-                if spots: break
-        except (OSError,ValueError) as e: errors.append(host+": "+str(e)[:100])
-    return spots,errors
+
+OUTPUT = Path("data/dx-spots.json")
+UTC = dt.timezone.utc
+MAX_AGE = dt.timedelta(hours=2)
+SOURCES = (
+    ("HamQTH", "https://www.hamqth.com/api/v2/spots?limit=200"),
+    ("SQ3SWG", "https://skeds.sq3swg.com/api/v1/public/spots?band=hf&limit=200"),
+)
+MODES = ("FT8", "FT4", "RTTY", "PSK31", "CW", "SSB", "USB", "LSB", "AM")
+
+
+def parse_time(value):
+    if not isinstance(value, str) or not value.strip():
+        return None
+    try:
+        t = dt.datetime.fromisoformat(value.strip().replace("Z", "+00:00"))
+        return t.replace(tzinfo=UTC) if t.tzinfo is None else t.astimezone(UTC)
+    except ValueError:
+        return None
+
+
+def infer_mode(value, comment):
+    raw = str(value or "").strip().upper()
+    msg = str(comment or "").upper()
+    for mode in MODES:
+        if re.search(r"\b" + mode + r"\b", msg):
+            return "SSB" if mode in ("USB", "LSB") else mode
+    if raw in MODES:
+        return "SSB" if raw in ("USB", "LSB") else raw
+    if raw == "DIGI":
+        return "DIGI"
+    return "Non indicato"
+
+
+def normalize(row, source, now):
+    try:
+        if source == "HamQTH":
+            frequency = row.get("freq")
+            dx = row.get("dxcall")
+            when = row.get("time")
+            mode = row.get("mode")
+        else:
+            frequency = row.get("freqKHz")
+            dx = row.get("dx")
+            when = row.get("time")
+            mode = None
+        t = parse_time(when)
+        mhz = float(frequency) / 1000
+        if not t or not math.isfinite(mhz) or not 1.8 <= mhz <= 30:
+            return None
+        if not dt.timedelta(minutes=-5) <= now - t <= MAX_AGE:
+            return None
+        if not isinstance(dx, str) or not (2 <= len(dx) <= 28):
+            return None
+        spotter = str(row.get("spotter") or "").strip()[:28]
+        comment = str(row.get("comment") or "").strip()[:110]
+        return {
+            "frequency_mhz": round(mhz, 4),
+            "mode": infer_mode(mode, comment),
+            "dx": dx.strip()[:28],
+            "spotter": spotter,
+            "utc": t.strftime("%H%M"),
+            "comment": comment,
+            "source": source,
+            "timestamp": t.isoformat(timespec="seconds").replace("+00:00", "Z"),
+        }
+    except (AttributeError, TypeError, ValueError, OverflowError):
+        return None
+
+
+def parse_response(payload, source, now):
+    if not isinstance(payload, dict) or not isinstance(payload.get("spots"), list):
+        raise ValueError("Formato JSON non riconosciuto")
+    return [spot for row in payload["spots"] if isinstance(row, dict)
+            if (spot := normalize(row, source, now)) is not None]
+
+
+def fetch_json(url):
+    req = urllib.request.Request(url, headers={
+        "User-Agent": "PropagationHF-DXCollector/1.0",
+        "Accept": "application/json",
+    })
+    with urllib.request.urlopen(req, timeout=15) as res:
+        return json.load(res)
+
+
 def main():
-    now=dt.datetime.now(dt.timezone.utc)
-    spots,errors=collect()
-    existing={}
-    if OUT.exists():
-        try: existing=json.loads(OUT.read_text())
-        except (ValueError,OSError): pass
-    previous=existing.get("spots",[])
-    for x in spots:
-        hhmm=x["utc"]; h,m=int(hhmm[:2]),int(hhmm[2:])
-        t=now.replace(hour=h,minute=m,second=0,microsecond=0)
-        if t>now+dt.timedelta(minutes=5):t-=dt.timedelta(days=1)
-        x["timestamp"]=t.isoformat().replace("+00:00","Z")
-    combined=spots+previous
-    unique={}
-    for x in combined:
+    now = dt.datetime.now(UTC)
+    incoming, errors, successful_sources = [], [], []
+    for name, url in SOURCES:
         try:
-            t=dt.datetime.fromisoformat(x["timestamp"].replace("Z","+00:00"))
-            if now-t>dt.timedelta(hours=2) or t>now+dt.timedelta(minutes=5):continue
-            key=(x["dx"],x["frequency_mhz"],x["timestamp"],x["spotter"])
-            unique[key]=x
-        except (KeyError,ValueError,TypeError):continue
-    result={"checked_at":now.isoformat().replace("+00:00","Z"),"status":"ok" if spots else "unavailable","new_spots":len(spots),"errors":errors,"spots":sorted(unique.values(),key=lambda x:x["timestamp"],reverse=True)[:250]}
-    OUT.parent.mkdir(exist_ok=True,parents=True)
-    OUT.write_text(json.dumps(result,ensure_ascii=False,indent=2)+"\n")
-if __name__=="__main__":main()
+            spots = parse_response(fetch_json(url), name, now)
+            incoming.extend(spots)
+            successful_sources.append(name)
+        except (OSError, ValueError) as exc:
+            errors.append(f"{name}: {str(exc)[:120]}")
+    previous = []
+    if OUTPUT.is_file():
+        try:
+            previous = json.loads(OUTPUT.read_text(encoding="utf-8")).get("spots", [])
+        except (OSError, ValueError, TypeError, AttributeError):
+            pass
+    unique = {}
+    for spot in incoming + previous:
+        if not isinstance(spot, dict):
+            continue
+        t = parse_time(spot.get("timestamp"))
+        if not t or not dt.timedelta(minutes=-5) <= now - t <= MAX_AGE:
+            continue
+        try:
+            key = (spot["dx"], float(spot["frequency_mhz"]),
+                   spot["timestamp"], spot.get("spotter", ""))
+        except (KeyError, ValueError, TypeError):
+            continue
+        unique[key] = spot
+    data = {
+        "checked_at": now.isoformat(timespec="seconds").replace("+00:00", "Z"),
+        "status": "ok" if incoming else ("no_recent" if successful_sources else "unavailable"),
+        "new_spots": len(incoming),
+        "sources_ok": successful_sources,
+        "errors": errors,
+        "spots": sorted(unique.values(), key=lambda item: item["timestamp"], reverse=True)[:250],
+    }
+    OUTPUT.parent.mkdir(parents=True, exist_ok=True)
+    OUTPUT.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print("DX check:", len(incoming), "new spots;", len(data["spots"]),
+          "total; sources:", successful_sources, "errors:", errors)
+
+
+if __name__ == "__main__":
+    main()
