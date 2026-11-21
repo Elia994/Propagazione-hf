@@ -64,6 +64,7 @@
 .log-table thead th{position:sticky;top:0;background:#151f30;z-index:1}
 @media(max-width:490px){.log-delete-row button{width:100%}}
 .log-frequency{color:#80e8cb;font-weight:700}
+#log-calc-qrb{display:block;margin:9px 0;padding:7px 11px;font-size:12px}
 .log-edit-utc{margin-top:12px}
 .log-edit-utc label{display:block;font-size:12px;color:#b7cbdc;margin-bottom:5px}
 .log-edit-utc input{width:100%;max-width:300px;background:#0b1522;border:1px solid #42596e;border-radius:8px;color:#edf5ff;padding:10px;font:inherit;font-size:14px;color-scheme:dark}
@@ -88,10 +89,11 @@
 </section>
 <section class="panel log-panel"><div class="log-header-row" style="margin-bottom:10px"><div class="log-heading" style="margin:0">📍 Mio QTH</div><button id="log-gps" type="button" class="log-primary">GPS</button></div>
 <div class="log-fields"><div><label for="log-myplace">Località</label><input id="log-myplace" placeholder="Comune" maxlength="120"></div><div><label for="log-mygrid">Locator Maidenhead</label><input id="log-mygrid" placeholder="Es. JN45AB" maxlength="8" style="text-transform:uppercase"></div><div><label for="log-lat">Latitudine</label><input id="log-lat" placeholder="—" inputmode="decimal"></div><div><label for="log-lon">Longitudine</label><input id="log-lon" placeholder="—" inputmode="decimal"></div></div>
+<p id="log-mylookup-status" class="log-hint" role="status" aria-live="polite">Inserisci il comune: il locator verrà calcolato quando premi Invio o esci dal campo. © OpenStreetMap.</p>
 <p id="log-gps-status" class="log-hint" role="status">GPS: rileva coordinate e locator e cerca il comune con OpenStreetMap. Puoi modificare tutti i campi manualmente.</p></section>
 <section class="panel log-panel"><div class="log-heading">📡 QTH corrispondente</div><div class="log-fields"><div><label for="log-dxplace">Località</label><input id="log-dxplace" placeholder="Città / Paese" maxlength="120"></div><div><label for="log-dxgrid">Locator Maidenhead</label><input id="log-dxgrid" placeholder="Es. PM53AB" maxlength="8" style="text-transform:uppercase"></div></div>
 <p class="log-hint" id="log-dxlookup-status" role="status" aria-live="polite">Scrivi città e, se necessario, Paese; premi Invio o esci dal campo per ottenere il locator automatico. Puoi sempre inserirlo manualmente. Ricerca: © OpenStreetMap.</p>
-<div class="log-qrb-box"><div class="log-meta">Distanza stimata tra i QTH · QRB</div><strong id="log-qrb" aria-live="polite">—</strong><div class="log-hint">Distanza sulla superficie terrestre, calcolata dalle coordinate GPS o dal centro dei locator. Serve il locator del corrispondente.</div></div></section>
+<div class="log-qrb-box"><div class="log-meta">Distanza stimata tra i QTH · QRB</div><strong id="log-qrb" aria-live="polite">—</strong><button type="button" id="log-calc-qrb" class="log-primary">↻ Calcola dai comuni</button><div class="log-hint">Distanza stimata in linea d’aria, calcolata dai centri delle città o dalle coordinate GPS/locator disponibili.</div></div></section>
 <section class="panel log-panel"><label class="log-label" for="log-notes">Note (facoltative)</label><input class="log-notes" id="log-notes" placeholder="Nome, antenna, potenza…" maxlength="500">
 <div class="log-actions" style="margin-top:12px"><div><div class="log-meta" id="log-clock">Ora UTC automatica</div><div class="log-meta" id="log-band">Banda: 20 m</div></div><div class="log-submit-buttons"><button type="button" id="log-cancel-edit" hidden>Annulla modifica</button><button type="button" class="log-primary" id="log-save">✓ Registra QSO</button></div></div>
 <p class="log-message" id="log-message" role="status" aria-live="polite">Pronto per un nuovo QSO.</p></section>
@@ -609,85 +611,127 @@ function logUpdateQrb(){
  const km=logComputeQrb($('log-mygrid').value,$('log-dxgrid').value,$('log-lat').value,$('log-lon').value);
  $('log-qrb').textContent=km===null?'—':km.toLocaleString('it-IT')+' km';
 }
-// Ricerca una sola volta al termine della digitazione (Invio/uscita dal campo), non autocomplete.
-const logDxCityCache=new Map();
-let logDxLookupSerial=0,logDxAutoGrid='',logDxLastSearchAt=0;
-function logDxStatus(message){$('log-dxlookup-status').textContent=message}
-function logDxResetLookup(){
- logDxLookupSerial++;
- logDxAutoGrid='';
- logDxStatus('Scrivi città e, se necessario, Paese; premi Invio o esci dal campo per ottenere il locator automatico. Puoi sempre inserirlo manualmente. Ricerca: © OpenStreetMap.');
+// Ricerca solo su conferma (Invio, uscita dal campo o pulsante); mai autocomplete.
+// Nominatim pubblico: cache e coda condivisa, una richiesta ogni 1,1 secondi.
+const logPlaceCache=new Map();
+const logPlaceStates={
+ my:{placeId:'log-myplace',gridId:'log-mygrid',statusId:'log-mylookup-status',serial:0,autoGrid:'',autoCoords:false,userGridEdited:false,userCoordsEdited:false},
+ dx:{placeId:'log-dxplace',gridId:'log-dxgrid',statusId:'log-dxlookup-status',serial:0,autoGrid:'',autoCoords:false,userGridEdited:false,userCoordsEdited:false}
+};
+let logGeocodeQueue=Promise.resolve(),logGeocodeNextAt=0;
+function logPlaceStatus(kind,message){$(logPlaceStates[kind].statusId).textContent=message}
+function logResetPlaceLookups(){
+ for(const kind of ['my','dx']){
+  const state=logPlaceStates[kind];
+  state.serial++;state.autoGrid='';state.autoCoords=false;
+  state.userGridEdited=false;state.userCoordsEdited=false;
+ }
+ logPlaceStatus('my','Inserisci il comune: il locator verrà calcolato quando premi Invio o esci dal campo. © OpenStreetMap.');
+ logPlaceStatus('dx','Inserisci città e Paese, poi premi Invio o esci dal campo. Locator automatico · © OpenStreetMap.');
 }
-function logDxLookupResult(place,city){
+function logGeocodeRequest(url,stillNeeded=()=>true){
+ const pending=logGeocodeQueue.then(async()=>{
+  if(!stillNeeded())return null;
+  const wait=Math.max(0,logGeocodeNextAt-Date.now());
+  if(wait)await new Promise(resolve=>setTimeout(resolve,wait));
+  if(!stillNeeded())return null;
+  logGeocodeNextAt=Date.now()+1100;
+  const response=await fetch(url,{signal:AbortSignal.timeout(12000),headers:{Accept:'application/json'}});
+  if(!response.ok)throw Error('Geocoding HTTP '+response.status);
+  return response.json();
+ });
+ logGeocodeQueue=pending.catch(()=>{});
+ return pending;
+}
+function logPlaceResult(place,requested){
  const latitude=Number(place.lat),longitude=Number(place.lon);
  if(!Number.isFinite(latitude)||!Number.isFinite(longitude)||Math.abs(latitude)>90||Math.abs(longitude)>180)return null;
- const locator=maiden(latitude,longitude);
  const address=place.address||{};
- const label=[address.city||address.town||address.village||address.municipality||place.name||city,address.country].filter(Boolean).join(', ');
- return {locator,label};
+ const label=[address.city||address.town||address.village||address.municipality||place.name||requested,address.country].filter(Boolean).join(', ');
+ return {latitude,longitude,locator:maiden(latitude,longitude),label};
 }
-async function logResolveDxCity(){
- const city=$('log-dxplace').value.trim();
- if(!city){logDxStatus('Inserisci una città per calcolare automaticamente il locator.');return}
- const current=$('log-dxgrid').value.trim().toUpperCase();
- if(current&&current!==logDxAutoGrid){
-  logDxStatus('Locator manuale mantenuto. Per calcolarlo dalla città, svuota il locator e conferma di nuovo la località.');
-  return;
+async function logResolvePlace(kind,force=false){
+ const state=logPlaceStates[kind],city=$(state.placeId).value.trim(),grid=$(state.gridId);
+ if(!city){logPlaceStatus(kind,'Inserisci una città, oppure usa un locator manuale.');return false}
+ if(!force&&state.userGridEdited&&grid.value.trim()){
+  logPlaceStatus(kind,'Locator manuale mantenuto. Per ricalcolarlo dalla città usa «Calcola dai comuni».');
+  return false;
  }
- const serial=++logDxLookupSerial;
- const key=city.toLocaleLowerCase('it-IT').replace(/\s+/g,' ');
- logDxStatus('Ricerca coordinate di '+city+'…');
+ const serial=++state.serial,active=()=>serial===state.serial&&$(state.placeId).value.trim()===city;
+ logPlaceStatus(kind,'Ricerca coordinate di '+city+'…');
  try{
-  let found=logDxCityCache.get(key);
-  if(!found){
-   // Nominatim pubblico: una ricerca per località confermata, max 1 richiesta al secondo e cache di sessione.
-   const wait=Math.max(0,1000-(Date.now()-logDxLastSearchAt));
-   if(wait)await new Promise(resolve=>setTimeout(resolve,wait));
-   if(serial!==logDxLookupSerial)return;
-   logDxLastSearchAt=Date.now();
+  const key=city.toLocaleLowerCase('it-IT').replace(/\s+/g,' ');
+  let result=logPlaceCache.get(key);
+  if(!result){
    const url='https://nominatim.openstreetmap.org/search?format=jsonv2&addressdetails=1&limit=1&accept-language=it&q='+encodeURIComponent(city);
-   const response=await fetch(url,{signal:AbortSignal.timeout(12000),headers:{Accept:'application/json'}});
-   if(!response.ok)throw Error('HTTP '+response.status);
-   const places=await response.json();
-   found=Array.isArray(places)&&places.length?logDxLookupResult(places[0],city):null;
-   if(found)logDxCityCache.set(key,found);
+   const places=await logGeocodeRequest(url,active);
+   if(!active())return false;
+   result=Array.isArray(places)&&places.length?logPlaceResult(places[0],city):null;
+   if(result)logPlaceCache.set(key,result);
   }
-  if(serial!==logDxLookupSerial||$('log-dxplace').value.trim()!==city)return;
-  if(!found){
-   logDxStatus('Località non trovata. Specifica anche provincia o Paese, oppure inserisci il locator manualmente.');
-   return;
+  if(!active())return false;
+  if(!result){logPlaceStatus(kind,'Località non trovata: specifica provincia/Paese o inserisci il locator manualmente.');return false}
+  if(!force&&state.userGridEdited&&grid.value.trim())return false;
+  grid.value=result.locator;state.autoGrid=result.locator;state.userGridEdited=false;
+  if(kind==='my'&&!state.userCoordsEdited){
+   $('log-lat').value=result.latitude.toFixed(6);
+   $('log-lon').value=result.longitude.toFixed(6);
+   state.autoCoords=true;
   }
-  const gridNow=$('log-dxgrid').value.trim().toUpperCase();
-  if(gridNow&&gridNow!==logDxAutoGrid){
-   logDxStatus('Località trovata ('+found.label+'), ma il locator manuale è stato mantenuto.');
-   return;
-  }
-  $('log-dxgrid').value=found.locator;
-  logDxAutoGrid=found.locator;
+  if(kind==='my'&&logEditIndex===null)logSaveStation();
   logUpdateQrb();
-  logDxStatus('✓ Locator '+found.locator+' calcolato per '+found.label+'. Approssimazione al centro della località · © OpenStreetMap.');
+  logPlaceStatus(kind,'✓ '+result.locator+' · '+result.label+' (centro città, posizione approssimativa) · © OpenStreetMap.');
+  return true;
  }catch(error){
-  if(serial===logDxLookupSerial)logDxStatus('Ricerca località non disponibile. Inserisci il locator manualmente o riprova.');
+  if(active())logPlaceStatus(kind,'Ricerca non disponibile. Riprova oppure inserisci il locator manualmente.');
+  return false;
  }
 }
-$('log-dxplace').addEventListener('input',()=>{
- logDxLookupSerial++;
- if(logDxAutoGrid&&$('log-dxgrid').value.trim().toUpperCase()===logDxAutoGrid){
-  $('log-dxgrid').value='';logDxAutoGrid='';logUpdateQrb();
- }
- logDxStatus('Premi Invio o esci dal campo per calcolare il locator della località.');
-});
-$('log-dxplace').addEventListener('change',logResolveDxCity);
-$('log-dxplace').addEventListener('keydown',event=>{
- if(event.key==='Enter'){event.preventDefault();event.currentTarget.blur()}
-});
-$('log-dxgrid').addEventListener('input',()=>{
- logDxLookupSerial++;
- logDxAutoGrid='';
- logUpdateQrb();
-});
-$('log-dxgrid').addEventListener('change',()=>{
- if(!$('log-dxgrid').value.trim()&&$('log-dxplace').value.trim())logResolveDxCity();
+for(const kind of ['my','dx']){
+ const state=logPlaceStates[kind],place=$(state.placeId),grid=$(state.gridId);
+ place.addEventListener('input',()=>{
+  state.serial++;
+  if(state.autoGrid&&grid.value.trim().toUpperCase()===state.autoGrid){grid.value='';state.autoGrid=''}
+  if(kind==='my'&&state.autoCoords){
+   $('log-lat').value='';$('log-lon').value='';state.autoCoords=false;
+  }
+  if(kind==='my'&&logEditIndex===null)logSaveStation();
+  logUpdateQrb();
+  logPlaceStatus(kind,'Premi Invio o esci dal campo per calcolare il locator. Puoi anche usare «Calcola dai comuni».');
+ });
+ let skipChange=false;
+ place.addEventListener('change',()=>{if(skipChange){skipChange=false;return}logResolvePlace(kind)});
+ place.addEventListener('keydown',event=>{
+  if(event.key==='Enter'){
+   event.preventDefault();skipChange=true;place.blur();skipChange=false;
+   logResolvePlace(kind);
+  }
+ });
+ grid.addEventListener('input',()=>{
+  state.serial++;state.autoGrid='';state.userGridEdited=!!grid.value.trim();
+  if(kind==='my'&&state.autoCoords){
+   $('log-lat').value='';$('log-lon').value='';state.autoCoords=false;
+   if(logEditIndex===null)logSaveStation();
+  }
+  logUpdateQrb();
+ });
+ grid.addEventListener('change',()=>{if(!grid.value.trim()&&place.value.trim())logResolvePlace(kind)});
+}
+for(const id of ['log-lat','log-lon']){
+ $(id).addEventListener('input',()=>{
+  const state=logPlaceStates.my;
+  state.userCoordsEdited=!!($('log-lat').value.trim()||$('log-lon').value.trim());
+  state.autoCoords=false;
+ });
+}
+$('log-calc-qrb').addEventListener('click',async()=>{
+ const button=$('log-calc-qrb');button.disabled=true;
+ try{
+  const kinds=['my','dx'].filter(kind=>$(logPlaceStates[kind].placeId).value.trim());
+  if(!kinds.length){logPlaceStatus('my','Inserisci almeno una città per calcolare il locator.');return}
+  await Promise.all(kinds.map(kind=>logResolvePlace(kind,true)));
+  logUpdateQrb();
+ }finally{button.disabled=false}
 });
 function logUpdateSelection(){
  const count=logSelected.size;
@@ -727,7 +771,7 @@ function logRestoreForm(snapshot){
  for(const id of logFormIds)if(Object.hasOwn(snapshot,id))$(id).value=snapshot[id];
 }
 function logEndEdit(clearSelection=false){
- logDxResetLookup();
+ logResetPlaceLookups();
  const previous=logPreEditForm;
  logEditIndex=null;logPreEditForm=null;
  if(previous)logRestoreForm(previous);
@@ -741,7 +785,7 @@ function logEndEdit(clearSelection=false){
 }
 function logBeginEdit(){
  if(!logStorageReady||logEditIndex!==null||logSelected.size!==1)return;
- logDxResetLookup();
+ logResetPlaceLookups();
  const index=logSelected.values().next().value,entry=logEntries[index];
  if(!entry)return;
  logPreEditForm=logFormSnapshot();logEditIndex=index;
@@ -852,7 +896,7 @@ function logSave(){
   $('log-message').textContent='✓ QSO '+call+' modificato e salvato. Nessun duplicato creato.';
   return;
  }
- logSelected.clear();logDxResetLookup();
+ logSelected.clear();logResetPlaceLookups();
  $('log-message').textContent='✓ QSO '+call+' registrato nel browser alle '+entry.utc.slice(11,16)+' UTC.';
  $('log-call').value='';$('log-dxplace').value='';$('log-dxgrid').value='';$('log-notes').value='';
  $('log-call').focus();logRender();logUpdateInfo();logUpdateQrb();
@@ -863,6 +907,7 @@ $('log-gps').addEventListener('click',()=>{
  const button=$('log-gps'),status=$('log-gps-status');
  if(!navigator.geolocation){status.textContent='Geolocalizzazione non supportata: inserisci il locator manualmente.';return}
  button.disabled=true;status.textContent='Richiesta posizione GPS in corso…';
+ const myState=logPlaceStates.my;myState.serial++;myState.autoGrid='';myState.autoCoords=false;myState.userGridEdited=false;myState.userCoordsEdited=false;
  navigator.geolocation.getCurrentPosition(async position=>{
   const {latitude,longitude,accuracy}=position.coords;
   $('log-lat').value=latitude.toFixed(5);$('log-lon').value=longitude.toFixed(5);
@@ -874,12 +919,11 @@ $('log-gps').addEventListener('click',()=>{
    // Una richiesta esplicita per clic; coordinate inviate al geocoder OSM soltanto per ricavare il comune.
    const url='https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat='+encodeURIComponent(latitude)+
     '&lon='+encodeURIComponent(longitude)+'&zoom=10&addressdetails=1&accept-language=it';
-   const response=await fetch(url,{signal:AbortSignal.timeout(12000),headers:{Accept:'application/json'}});
-   if(!response.ok)throw Error('HTTP '+response.status);
-   const data=await response.json(),address=data&&data.address||{};
+   const data=await logGeocodeRequest(url),address=data&&data.address||{};
    const place=address.municipality||address.city||address.town||address.village||'';
    if(place&&$('log-myplace').value===originalPlace){
     $('log-myplace').value=place;if(logEditIndex===null)logSaveStation();
+    logPlaceStatus('my','✓ Locator GPS '+$('log-mygrid').value+' · '+place+' (coordinate GPS, non centro città).');
     status.textContent='✓ GPS e comune acquisiti: '+place+' · precisione GPS ±'+Math.round(accuracy)+' m.';
    }else if(place){
     status.textContent='✓ GPS acquisito. Comune rilevato: '+place+'; mantenuta la località modificata manualmente.';
