@@ -147,7 +147,7 @@ function dxQthDisplay(spot,locators){
  const tx=dxCountry(spot.dx),rx=dxCountry(spot.spotter);
  if(locators.grids.length===2&&locators.display.includes(' → ')){
   const parts=locators.display.split(' → ');
-  return parts[0]+(tx?' ('+tx+')':'')+' → '+parts[1]+(rx?' ('+rx+')':'');
+  return parts[0]+(rx?' ('+rx+')':'')+' → '+parts[1]+(tx?' ('+tx+')':'');
  }
  if(locators.display==='—'&&tx&&rx)return '('+tx+') → ('+rx+')';
  return locators.display;
