@@ -7,13 +7,24 @@
 .dx-country-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .dx-country-field{display:flex;flex-direction:column;gap:6px;min-width:0}
 .dx-country-field label{font-size:13px;color:#9baec5}
-.dx-country-field input{width:100%;min-width:0;background:#0b1220;border:1px solid #3c6474;border-radius:9px;color:#eef6ff;padding:11px;font:inherit}
-.dx-country-field input::-webkit-search-cancel-button{cursor:pointer}
-.dx-band-filter{margin:12px 0;padding:12px 14px;border:1px solid #29364a;border-radius:12px;background:#101a2a;min-width:0}
-.dx-band-filter legend{color:#b8ccdf;font-size:13px;font-weight:700;padding:0 6px}
-.dx-band-options{display:flex;flex-wrap:wrap;gap:10px 16px}
-.dx-band-options label{display:inline-flex;align-items:center;gap:7px;white-space:nowrap;font-size:13px;cursor:pointer}
-.dx-band-options input{accent-color:#5de0d2;width:17px;height:17px;flex-shrink:0}
+.dx-country-combo{position:relative;min-width:0}
+.dx-country-toggle{display:flex;align-items:center;justify-content:space-between;gap:6px;width:100%;background:#0b1220;border:1px solid #3c6474;border-radius:9px;color:#eef6ff;padding:11px;font:inherit;text-align:left;cursor:pointer}
+.dx-country-toggle span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dx-country-toggle svg{flex-shrink:0}
+.dx-country-menu{position:absolute;top:calc(100% + 3px);left:0;right:0;z-index:10;background:#19283a;border:1px solid #496278;border-radius:9px;box-shadow:0 10px 25px #0009;padding:6px}
+.dx-country-menu[hidden]{display:none}
+.dx-country-search{width:100%;min-width:0;background:#0b1522;color:#eef6ff;border:1px solid #496278;border-radius:6px;padding:9px;font:inherit;font-size:12px;outline:none}
+.dx-country-search:focus{border-color:#5de0d2}
+.dx-country-items{max-height:175px;overflow-y:auto;margin-top:5px}
+.dx-country-option{display:block;width:100%;background:transparent;color:#eaf4ff;border:0;text-align:left;padding:8px;border-radius:5px;font-size:12px;cursor:pointer}
+.dx-country-option:hover,.dx-country-option:focus{background:#285267}
+.dx-country-empty{padding:8px;color:#9cb1c5;font-size:12px}
+.dx-advanced{position:relative;z-index:2}
+.dx-band-filter{margin:12px 0;padding:10px 11px;border:1px solid #29364a;border-radius:10px;background:#101a2a;min-width:0}
+.dx-band-filter legend{color:#b8ccdf;font-size:12px;font-weight:700;padding:0 6px}
+.dx-band-options{display:flex;flex-wrap:wrap;column-gap:11px;row-gap:5px}
+.dx-band-options label{display:inline-flex;align-items:center;gap:4px;white-space:nowrap;font-size:12px;cursor:pointer}
+.dx-band-options input{accent-color:#5de0d2;width:14px;height:14px;flex-shrink:0;margin:0}
 .dx-advanced-checks{display:flex;flex-wrap:wrap;gap:12px 18px;margin-top:14px}
 .dx-advanced-checks label{display:flex;gap:8px;align-items:center;font-size:13px;cursor:pointer}
 .dx-advanced-checks input{accent-color:#5de0d2;width:17px;height:17px;flex-shrink:0}
@@ -29,7 +40,7 @@
 <div id="bands" class="bands"></div>
 <div class="chart-wrap"><div id="chart-title" class="label">Tocca una banda per vedere l'andamento nelle prossime 24 ore</div><canvas id="prop-chart" aria-label="Andamento indicativo orario della propagazione"></canvas><div class="chart-legend">Scala relativa 0–100. Se disponibili, i valori P.533 descrivono l'affidabilità modellata su un percorso, non la certezza di un QSO; altrimenti il grafico è una stima solare. Gli 11 m, quando P.533 è disponibile, sono interpolati fra 12 m e 10 m: E sporadico non previsto.</div></div>
 <h2>Dettaglio finestre DX</h2><div class="dx-scroll"><table class="dx-table"><thead><tr><th>Banda</th><th>Orario HH:mm</th><th>Direzione di prova</th><th>Metodo</th></tr></thead><tbody id="dx-rows"><tr><td colspan="4">In attesa del QTH…</td></tr></tbody></table></div>
-<p class="dx-info">Il modello ITU-R P.533 (CQDX) è statistico e usa gli indici solari correnti, aggiornati dal servizio. Se non accessibile viene mostrata una fascia stimata da geometria giorno/notte e NOAA, senza attribuirle affidabilità misurata. Per aperture effettive: <a href="https://www.pskreporter.info/pskmap.html" target="_blank" rel="noopener">PSK Reporter</a>. Solo il locator a 4 caratteri è inviato al servizio di previsione; il GPS preciso resta nel browser.</p></section></section><section class="view" id="view-live"><h2>DX Live · frequenze da ascoltare</h2><section class="panel"><p>Spot reali letti direttamente da <a href="https://www.hamqth.com/" target="_blank" rel="noopener noreferrer">HamQTH.com</a> e <a href="https://skeds.sq3swg.com/api.html" target="_blank" rel="noopener noreferrer">SQ3SWG</a>, con dati GitHub di riserva. Frequenza, modo, nominativo e ora; nessuno spot simulato.</p><fieldset class="dx-band-filter"><legend>Bande</legend><div class="dx-band-options"><label><input type="checkbox" id="dx-band-all" checked> Tutte</label><label><input type="checkbox" class="dx-band-option" value="160"> 160 m</label><label><input type="checkbox" class="dx-band-option" value="80"> 80 m</label><label><input type="checkbox" class="dx-band-option" value="60"> 60 m</label><label><input type="checkbox" class="dx-band-option" value="40"> 40 m</label><label><input type="checkbox" class="dx-band-option" value="30"> 30 m</label><label><input type="checkbox" class="dx-band-option" value="20"> 20 m</label><label><input type="checkbox" class="dx-band-option" value="17"> 17 m</label><label><input type="checkbox" class="dx-band-option" value="15"> 15 m</label><label><input type="checkbox" class="dx-band-option" value="12"> 12 m</label><label><input type="checkbox" class="dx-band-option" value="11"> 11 m · CB</label><label><input type="checkbox" class="dx-band-option" value="10"> 10 m</label></div></fieldset><div class="qthbar" id="dx-filter"><button type="button" class="dx-filter active" data-mode="all">Tutti</button><button type="button" class="dx-filter" data-mode="SSB">SSB</button><button type="button" class="dx-filter" data-mode="CW">CW</button><button type="button" class="dx-filter" data-mode="FT8">FT8</button></div><div class="dx-advanced" aria-label="Filtri avanzati DX Live"><div class="dx-country-grid"><div class="dx-country-field"><label for="dx-tx-country">Nazione TX</label><input id="dx-tx-country" type="search" list="dx-tx-countries" placeholder="Tutte le nazioni" autocomplete="off" aria-label="Scrivi o scegli la nazione TX"><datalist id="dx-tx-countries"></datalist></div><div class="dx-country-field"><label for="dx-rx-country">Nazione RX</label><input id="dx-rx-country" type="search" list="dx-rx-countries" placeholder="Tutte le nazioni" autocomplete="off" aria-label="Scrivi o scegli la nazione RX"><datalist id="dx-rx-countries"></datalist></div></div><div class="dx-advanced-checks"><label><input type="checkbox" id="dx-only-qth"> Solo spot con QTH visibile</label><label><input type="checkbox" id="dx-only-possible"> Solo collegamenti stimati possibili (✓)</label></div><div class="dx-advanced-footer"><span id="dx-results-count" aria-live="polite">In attesa degli spot…</span><button type="button" id="dx-reset-filters">↻ Azzera filtri</button></div><p class="dx-info" style="margin:10px 0 0">Nazioni stimate dal prefisso radioamatoriale, non dalla posizione reale. I filtri sono combinabili.</p></div><p class="dx-info" id="spot-state" role="status">Gli spot automatici non sono ancora disponibili: nessuna frequenza attiva viene inventata.</p><div class="dx-scroll"><table class="dx-table"><thead><tr><th>Frequenza</th><th>Modo</th><th>TX</th><th>RX</th><th>QTH spot</th><th>Possibile</th><th>Ora</th></tr></thead><tbody id="spot-rows"><tr><td colspan="7">Nessuno spot verificato disponibile.</td></tr></tbody></table></div><div class="links"><a href="https://www.dxwatch.com/" target="_blank" rel="noopener">DXWatch · cluster</a><a href="https://www.pskreporter.info/pskmap.html" target="_blank" rel="noopener">PSK Reporter · modi digitali</a></div><p class="dx-info">QTH spot: locator indicati nel commento del collegamento. ✓ = stima solare indicativa favorevole verso almeno uno dei due estremi, NON collegamento garantito. — = dati mancanti o stima non favorevole. I locator non sono sempre disponibili. TX = stazione segnalata in trasmissione; RX = stazione che ha pubblicato lo spot. La ricezione dal tuo QTH non è garantita. Gli 11 m richiedono fonti dedicate.</p></section></section><section class="view" id="view-data"><h2>Previsione geomagnetica · prossime 24 ore</h2><section class="panel"><div class="forecast-note"><strong>Previsione NOAA, non previsione di propagazione HF:</strong> Kp è previsto a intervalli di 3 ore e descrive l’attività geomagnetica. È utile per valutare possibili disturbi, ma non permette di sapere con affidabilità se una banda o un collegamento sarà aperto. Le stime orarie per banda qui sotto sono indicative. Per aperture osservate usa PSK Reporter o WSPR.</div><div id="forecast" class="forecast-grid"><span class="sub">Caricamento previsione NOAA…</span></div><div id="forecast-source" class="sub" style="margin-top:12px"></div></section><h2>Indici in tempo reale</h2><section class="grid"><article class="card"><div class="label">Solar Flux · SFI</div><div class="value" id="sfi">—</div><div class="unit">sfu · flusso 10,7 cm</div></article><article class="card"><div class="label">Indice planetario Kp</div><div class="value" id="kp">—</div><div class="unit" id="kpdesc">Attività geomagnetica</div></article><article class="card"><div class="label">Sunspot Number · SSN</div><div class="value" id="ssn">—</div><div class="unit">Macchie solari</div></article><article class="card"><div class="label">Indice A</div><div class="value" id="a">—</div><div class="unit">Attività geomagnetica giornaliera</div></article></section><section class="panel"><h2 style="margin-top:0">Dettagli e fonti</h2><div id="sources" class="sub">In attesa dei dati…</div><div class="links"><a href="https://www.spaceweather.gov/" target="_blank" rel="noopener">NOAA Space Weather</a><a href="https://www.swpc.noaa.gov/" target="_blank" rel="noopener">NOAA Solar Cycle</a><a href="https://www.pskreporter.info/pskmap.html" target="_blank" rel="noopener">PSK Reporter · aperture osservate</a></div></section></section><footer>Autoaggiornamento ogni 5 minuti. Le misure possono essere pubblicate con ritardo. Se un servizio non risponde, il dato resta non disponibile: nessun valore viene simulato. Per verificare aperture effettive usa PSK Reporter o WSPR.</footer></main><nav class="bottom-nav" aria-label="Sezioni del sito"><button class="nav-tab active" type="button" data-view="hf" aria-current="page"><span>◉</span>HF</button><button class="nav-tab" type="button" data-view="live"><span>📡</span>DX Live</button><button class="nav-tab" type="button" data-view="data"><span>⚙</span>Dati</button></nav><button id="mobile-refresh" class="mobile-refresh" type="button" aria-label="Aggiorna dati">↻ Aggiorna</button><script>
+<p class="dx-info">Il modello ITU-R P.533 (CQDX) è statistico e usa gli indici solari correnti, aggiornati dal servizio. Se non accessibile viene mostrata una fascia stimata da geometria giorno/notte e NOAA, senza attribuirle affidabilità misurata. Per aperture effettive: <a href="https://www.pskreporter.info/pskmap.html" target="_blank" rel="noopener">PSK Reporter</a>. Solo il locator a 4 caratteri è inviato al servizio di previsione; il GPS preciso resta nel browser.</p></section></section><section class="view" id="view-live"><h2>DX Live · frequenze da ascoltare</h2><section class="panel"><p>Spot reali letti direttamente da <a href="https://www.hamqth.com/" target="_blank" rel="noopener noreferrer">HamQTH.com</a> e <a href="https://skeds.sq3swg.com/api.html" target="_blank" rel="noopener noreferrer">SQ3SWG</a>, con dati GitHub di riserva. Frequenza, modo, nominativo e ora; nessuno spot simulato.</p><fieldset class="dx-band-filter"><legend>Bande</legend><div class="dx-band-options"><label><input type="checkbox" id="dx-band-all" checked> Tutte</label><label><input type="checkbox" class="dx-band-option" value="160"> 160 m</label><label><input type="checkbox" class="dx-band-option" value="80"> 80 m</label><label><input type="checkbox" class="dx-band-option" value="60"> 60 m</label><label><input type="checkbox" class="dx-band-option" value="40"> 40 m</label><label><input type="checkbox" class="dx-band-option" value="30"> 30 m</label><label><input type="checkbox" class="dx-band-option" value="20"> 20 m</label><label><input type="checkbox" class="dx-band-option" value="17"> 17 m</label><label><input type="checkbox" class="dx-band-option" value="15"> 15 m</label><label><input type="checkbox" class="dx-band-option" value="12"> 12 m</label><label><input type="checkbox" class="dx-band-option" value="11"> 11 m · CB</label><label><input type="checkbox" class="dx-band-option" value="10"> 10 m</label></div></fieldset><div class="qthbar" id="dx-filter"><button type="button" class="dx-filter active" data-mode="all">Tutti</button><button type="button" class="dx-filter" data-mode="SSB">SSB</button><button type="button" class="dx-filter" data-mode="CW">CW</button><button type="button" class="dx-filter" data-mode="FT8">FT8</button></div><div class="dx-advanced" aria-label="Filtri avanzati DX Live"><div class="dx-country-grid"><div class="dx-country-field"><label id="dx-tx-label" for="dx-tx-toggle">Nazione TX</label><div class="dx-country-combo" data-role="tx"><button type="button" class="dx-country-toggle" id="dx-tx-toggle" aria-haspopup="listbox" aria-expanded="false" aria-controls="dx-tx-items"><span>Tutte le nazioni</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button><div class="dx-country-menu" hidden><input type="search" class="dx-country-search" placeholder="Cerca nazione…" aria-label="Cerca nazione tx" autocomplete="off"><div class="dx-country-items" id="dx-tx-items" role="listbox" aria-label="Nazione TX"></div></div></div></div><div class="dx-country-field"><label id="dx-rx-label" for="dx-rx-toggle">Nazione RX</label><div class="dx-country-combo" data-role="rx"><button type="button" class="dx-country-toggle" id="dx-rx-toggle" aria-haspopup="listbox" aria-expanded="false" aria-controls="dx-rx-items"><span>Tutte le nazioni</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button><div class="dx-country-menu" hidden><input type="search" class="dx-country-search" placeholder="Cerca nazione…" aria-label="Cerca nazione rx" autocomplete="off"><div class="dx-country-items" id="dx-rx-items" role="listbox" aria-label="Nazione RX"></div></div></div></div></div><div class="dx-advanced-checks"><label><input type="checkbox" id="dx-only-qth"> Solo spot con QTH visibile</label><label><input type="checkbox" id="dx-only-possible"> Solo collegamenti stimati possibili (✓)</label></div><div class="dx-advanced-footer"><span id="dx-results-count" aria-live="polite">In attesa degli spot…</span><button type="button" id="dx-reset-filters">↻ Azzera filtri</button></div><p class="dx-info" style="margin:10px 0 0">Nazioni stimate dal prefisso radioamatoriale, non dalla posizione reale. I filtri sono combinabili.</p></div><p class="dx-info" id="spot-state" role="status">Gli spot automatici non sono ancora disponibili: nessuna frequenza attiva viene inventata.</p><div class="dx-scroll"><table class="dx-table"><thead><tr><th>Frequenza</th><th>Modo</th><th>TX</th><th>RX</th><th>QTH spot</th><th>Possibile</th><th>Ora</th></tr></thead><tbody id="spot-rows"><tr><td colspan="7">Nessuno spot verificato disponibile.</td></tr></tbody></table></div><div class="links"><a href="https://www.dxwatch.com/" target="_blank" rel="noopener">DXWatch · cluster</a><a href="https://www.pskreporter.info/pskmap.html" target="_blank" rel="noopener">PSK Reporter · modi digitali</a></div><p class="dx-info">QTH spot: locator indicati nel commento del collegamento. ✓ = stima solare indicativa favorevole verso almeno uno dei due estremi, NON collegamento garantito. — = dati mancanti o stima non favorevole. I locator non sono sempre disponibili. TX = stazione segnalata in trasmissione; RX = stazione che ha pubblicato lo spot. La ricezione dal tuo QTH non è garantita. Gli 11 m richiedono fonti dedicate.</p></section></section><section class="view" id="view-data"><h2>Previsione geomagnetica · prossime 24 ore</h2><section class="panel"><div class="forecast-note"><strong>Previsione NOAA, non previsione di propagazione HF:</strong> Kp è previsto a intervalli di 3 ore e descrive l’attività geomagnetica. È utile per valutare possibili disturbi, ma non permette di sapere con affidabilità se una banda o un collegamento sarà aperto. Le stime orarie per banda qui sotto sono indicative. Per aperture osservate usa PSK Reporter o WSPR.</div><div id="forecast" class="forecast-grid"><span class="sub">Caricamento previsione NOAA…</span></div><div id="forecast-source" class="sub" style="margin-top:12px"></div></section><h2>Indici in tempo reale</h2><section class="grid"><article class="card"><div class="label">Solar Flux · SFI</div><div class="value" id="sfi">—</div><div class="unit">sfu · flusso 10,7 cm</div></article><article class="card"><div class="label">Indice planetario Kp</div><div class="value" id="kp">—</div><div class="unit" id="kpdesc">Attività geomagnetica</div></article><article class="card"><div class="label">Sunspot Number · SSN</div><div class="value" id="ssn">—</div><div class="unit">Macchie solari</div></article><article class="card"><div class="label">Indice A</div><div class="value" id="a">—</div><div class="unit">Attività geomagnetica giornaliera</div></article></section><section class="panel"><h2 style="margin-top:0">Dettagli e fonti</h2><div id="sources" class="sub">In attesa dei dati…</div><div class="links"><a href="https://www.spaceweather.gov/" target="_blank" rel="noopener">NOAA Space Weather</a><a href="https://www.swpc.noaa.gov/" target="_blank" rel="noopener">NOAA Solar Cycle</a><a href="https://www.pskreporter.info/pskmap.html" target="_blank" rel="noopener">PSK Reporter · aperture osservate</a></div></section></section><footer>Autoaggiornamento ogni 5 minuti. Le misure possono essere pubblicate con ritardo. Se un servizio non risponde, il dato resta non disponibile: nessun valore viene simulato. Per verificare aperture effettive usa PSK Reporter o WSPR.</footer></main><nav class="bottom-nav" aria-label="Sezioni del sito"><button class="nav-tab active" type="button" data-view="hf" aria-current="page"><span>◉</span>HF</button><button class="nav-tab" type="button" data-view="live"><span>📡</span>DX Live</button><button class="nav-tab" type="button" data-view="data"><span>⚙</span>Dati</button></nav><button id="mobile-refresh" class="mobile-refresh" type="button" aria-label="Aggiorna dati">↻ Aggiorna</button><script>
 const $=id=>document.getElementById(id);let busy=false;
 function num(x){if(x===null||x===undefined||x==='')return null;const n=Number(x);return Number.isFinite(n)?n:null}
 function set(id,n,digits=0){$(id).textContent=n===null?'—':n.toFixed(digits)}
@@ -265,23 +276,51 @@ function dxPossible(spot,locators){
  if(favorable.length)return {label:'✓',tip:'Stima solare indicativa favorevole verso '+favorable.map(x=>x.grid).join(' e ')+'. Nessuna garanzia di collegamento.'};
  return {label:'—',tip:'Nessun estremo con stima solare favorevole. Non esclude che il contatto sia possibile.'};
 }
-function refreshDxCountryOptions(){
- for(const [listId,field] of [['dx-tx-countries','dx'],['dx-rx-countries','spotter']]){
-  const list=$(listId);
-  const countries=[...new Set(liveSpots.map(spot=>dxCountry(spot[field])||'Non identificata'))]
-   .sort((a,b)=>a.localeCompare(b,'it'));
-  list.replaceChildren(...countries.map(country=>{
-   const option=document.createElement('option');option.value=country;return option;
-  }));
- }
-}
+const dxCountrySelections={tx:'',rx:''};
+const dxCountryChoices={tx:[],rx:[]};
+const dxCountryCombos=[...document.querySelectorAll('.dx-country-combo')];
 function dxCountryMatches(country,search){
  const normalize=value=>String(value).toLocaleLowerCase('it').normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();
  return normalize(country).includes(normalize(search));
 }
+function dxCloseCountryMenus(){
+ dxCountryCombos.forEach(combo=>{
+  combo.querySelector('.dx-country-menu').hidden=true;
+  combo.querySelector('.dx-country-toggle').setAttribute('aria-expanded','false');
+ });
+}
+function dxRenderCountryMenu(combo){
+ const role=combo.dataset.role,query=combo.querySelector('.dx-country-search').value.trim();
+ const items=combo.querySelector('.dx-country-items');
+ const available=['',...dxCountryChoices[role]];
+ if(dxCountrySelections[role]&&!available.includes(dxCountrySelections[role]))available.push(dxCountrySelections[role]);
+ const filtered=available.filter(value=>dxCountryMatches(value||'Tutte le nazioni',query));
+ items.replaceChildren();
+ if(!filtered.length){
+  const empty=document.createElement('div');empty.className='dx-country-empty';empty.textContent='Nessuna nazione trovata';items.append(empty);return;
+ }
+ for(const country of filtered){
+  const option=document.createElement('button');option.type='button';option.className='dx-country-option';
+  option.setAttribute('role','option');option.setAttribute('aria-selected',String(dxCountrySelections[role]===country));
+  option.textContent=country||'Tutte le nazioni';
+  option.addEventListener('click',()=>{
+   dxCountrySelections[role]=country;
+   combo.querySelector('.dx-country-toggle span').textContent=country||'Tutte le nazioni';
+   dxCloseCountryMenus();renderLive();
+  });
+  items.append(option);
+ }
+}
+function refreshDxCountryOptions(){
+ for(const [role,field] of [['tx','dx'],['rx','spotter']]){
+  dxCountryChoices[role]=[...new Set(liveSpots.map(spot=>dxCountry(spot[field])||'Non identificata'))]
+   .sort((a,b)=>a.localeCompare(b,'it'));
+ }
+ dxCountryCombos.forEach(combo=>{if(!combo.querySelector('.dx-country-menu').hidden)dxRenderCountryMenu(combo)});
+}
 function renderLive(){
  const rows=$('spot-rows'),state=$('spot-state');if(!rows||!state)return;
- const tx=$('dx-tx-country').value.trim(),rx=$('dx-rx-country').value.trim();
+ const tx=dxCountrySelections.tx,rx=dxCountrySelections.rx;
  const selectedBands=dxBandChoices.filter(x=>x.checked).map(x=>dxBandRanges[x.value]);
  const onlyQth=$('dx-only-qth').checked,onlyPossible=$('dx-only-possible').checked;
  const matched=[];
@@ -289,8 +328,8 @@ function renderLive(){
   if(liveMode!=='all'&&spot.mode!==liveMode)continue;
   const mhz=Number(spot.frequency_mhz);
   if(!dxBandAll.checked&&!selectedBands.some(range=>range&&mhz>=range[0]&&mhz<=range[1]))continue;
-  if(tx&&!dxCountryMatches(dxCountry(spot.dx)||'Non identificata',tx))continue;
-  if(rx&&!dxCountryMatches(dxCountry(spot.spotter)||'Non identificata',rx))continue;
+  if(tx&&(dxCountry(spot.dx)||'Non identificata')!==tx)continue;
+  if(rx&&(dxCountry(spot.spotter)||'Non identificata')!==rx)continue;
   const locators=dxLocators(spot);
   if(onlyQth&&!locators.grids.length)continue;
   const prop=dxPossible(spot,locators);
@@ -391,10 +430,44 @@ async function loadLive(){
  renderLive();
 }
 document.querySelectorAll('.dx-filter').forEach(b=>b.addEventListener('click',()=>{liveMode=b.dataset.mode;document.querySelectorAll('.dx-filter').forEach(x=>x.classList.toggle('active',x===b));renderLive()}));
-['dx-tx-country','dx-rx-country'].forEach(id=>$(id).addEventListener('input',renderLive));
+dxCountryCombos.forEach(combo=>{
+ const toggle=combo.querySelector('.dx-country-toggle'),menu=combo.querySelector('.dx-country-menu');
+ const search=combo.querySelector('.dx-country-search');
+ toggle.addEventListener('click',()=>{
+  const opening=menu.hidden;dxCloseCountryMenus();
+  if(opening){
+   menu.hidden=false;toggle.setAttribute('aria-expanded','true');
+   search.value='';dxRenderCountryMenu(combo);search.focus();
+  }
+ });
+ search.addEventListener('input',()=>dxRenderCountryMenu(combo));
+ search.addEventListener('keydown',event=>{
+  if(event.key==='Escape'){dxCloseCountryMenus();toggle.focus()}
+  else if(event.key==='ArrowDown'){
+   const first=combo.querySelector('.dx-country-option');if(first){event.preventDefault();first.focus()}
+  }else if(event.key==='Enter'){
+   const first=combo.querySelector('.dx-country-option');if(first){event.preventDefault();first.click()}
+  }
+ });
+ combo.querySelector('.dx-country-items').addEventListener('keydown',event=>{
+  if(event.key==='Escape'){dxCloseCountryMenus();toggle.focus();return}
+  if(event.key!=='ArrowDown'&&event.key!=='ArrowUp')return;
+  const buttons=[...combo.querySelectorAll('.dx-country-option')];
+  const i=buttons.indexOf(document.activeElement),next=buttons[i+(event.key==='ArrowDown'?1:-1)];
+  if(next){event.preventDefault();next.focus()}
+ });
+});
+document.addEventListener('pointerdown',event=>{
+ if(!event.target.closest('.dx-country-combo'))dxCloseCountryMenus();
+});
+document.addEventListener('keydown',event=>{
+ if(event.key==='Escape')dxCloseCountryMenus();
+});
 ['dx-only-qth','dx-only-possible'].forEach(id=>$(id).addEventListener('change',renderLive));
 $('dx-reset-filters').addEventListener('click',()=>{
- $('dx-tx-country').value='';$('dx-rx-country').value='';
+ dxCountrySelections.tx='';dxCountrySelections.rx='';
+ dxCountryCombos.forEach(combo=>{combo.querySelector('.dx-country-toggle span').textContent='Tutte le nazioni';combo.querySelector('.dx-country-search').value=''});
+ dxCloseCountryMenus();
  $('dx-only-qth').checked=false;$('dx-only-possible').checked=false;
  dxBandAll.checked=true;dxBandChoices.forEach(x=>x.checked=false);liveMode='all';
  document.querySelectorAll('.dx-filter').forEach(b=>b.classList.toggle('active',b.dataset.mode==='all'));
