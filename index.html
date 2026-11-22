@@ -118,7 +118,8 @@
 </section><section class="view" id="view-operators"><h2>Ricerca operatori</h2>
 <div class="panel"><form id="op-forward"><label for="op-call">Nominativo</label><div class="op-line"><input id="op-call" placeholder="Nominativo" required maxlength="20" autocapitalize="characters" spellcheck="false"><button>Cerca operatore</button></div></form><p id="op-profile" role="status">Cerca un nominativo per vedere il profilo.</p></div>
 <div class="panel"><h3>Ultimi collegamenti</h3><p id="op-activity">Fino a 10 QSO pubblicati dall’operatore su Club Log.</p><div id="op-qso"></div></div>
-<div class="panel"><h3>Dal nome al nominativo</h3><form id="op-reverse"><label for="op-name">Nome o cognome</label><div class="op-line"><input id="op-name" placeholder="Nome o cognome" required minlength="2"><button>Cerca nominativi</button></div></form><p>La ricerca comprende i nominativi presenti nell’indice Wikidata, anche storici, e i profili già trovati per nominativo in questo browser. Seleziona un risultato per consultarlo.</p><div id="op-matches" aria-live="polite"></div></div></section><footer>Autoaggiornamento ogni 5 minuti. Le misure possono essere pubblicate con ritardo. Se un servizio non risponde, il dato resta non disponibile: nessun valore viene simulato. Per verificare aperture effettive usa PSK Reporter o WSPR.<p>Sviluppatore: <strong>Elia Raffanini</strong></p></footer></main><nav class="bottom-nav" aria-label="Sezioni del sito"><button class="nav-tab active" type="button" data-view="hf" aria-current="page"><span>◉</span>HF</button><button class="nav-tab" type="button" data-view="live"><span>📡</span>DX Live</button><button class="nav-tab" type="button" data-view="data"><span>⚙</span>Dati</button><button class="nav-tab" type="button" data-view="log"><span>📓</span>Log</button><button class="nav-tab" type="button" data-view="operators"><span>⌕</span>Operatori</button></nav><button id="mobile-refresh" class="mobile-refresh" type="button" aria-label="Aggiorna dati">↻ Aggiorna</button><script>
+<div class="panel"><h3>Dal nome al nominativo</h3><form id="op-reverse"><label for="op-name">Nome o cognome</label><div class="op-line"><input id="op-name" placeholder="Nome o cognome" required minlength="2"><button>Cerca nominativi</button></div></form><p>La ricerca comprende i nominativi presenti nell’indice Wikidata, anche storici, e i profili già trovati per nominativo in questo browser. Seleziona un risultato per consultarlo.</p><div id="op-matches" aria-live="polite"></div></div>
+<div class="panel"><h3>Salva operatore</h3><form id="op-save"><div class="op-line"><input id="op-save-call" aria-label="Nominativo da salvare" placeholder="Nominativo" maxlength="20" required autocapitalize="characters" spellcheck="false"><input id="op-save-name" aria-label="Nome da salvare" placeholder="Nome o cognome" maxlength="120" required><button>Salva operatore</button></div></form><p id="op-save-status" role="status"></p></div></section><footer>Autoaggiornamento ogni 5 minuti. Le misure possono essere pubblicate con ritardo. Se un servizio non risponde, il dato resta non disponibile: nessun valore viene simulato. Per verificare aperture effettive usa PSK Reporter o WSPR.<p>Sviluppatore: <strong>Elia Raffanini</strong></p></footer></main><nav class="bottom-nav" aria-label="Sezioni del sito"><button class="nav-tab active" type="button" data-view="hf" aria-current="page"><span>◉</span>HF</button><button class="nav-tab" type="button" data-view="live"><span>📡</span>DX Live</button><button class="nav-tab" type="button" data-view="data"><span>⚙</span>Dati</button><button class="nav-tab" type="button" data-view="log"><span>📓</span>Log</button><button class="nav-tab" type="button" data-view="operators"><span>⌕</span>Operatori</button></nav><button id="mobile-refresh" class="mobile-refresh" type="button" aria-label="Aggiorna dati">↻ Aggiorna</button><script>
 const $=id=>document.getElementById(id);let busy=false;
 function num(x){if(x===null||x===undefined||x==='')return null;const n=Number(x);return Number.isFinite(n)?n:null}
 function set(id,n,digits=0){$(id).textContent=n===null?'—':n.toFixed(digits)}
@@ -761,6 +762,7 @@ async function logLookupCallbook(call,apply=true){
  try{
   const profile=await logFetchCallbook(call);if(!active())return;
   logCallbookState.record=profile;
+  if(profile)opRemember(profile,call);
   if(!profile){$('log-callbook-status').textContent='Nominativo assente nelle fonti consultate. Puoi compilare il QSO manualmente.';return}
   $('log-callbook-name').textContent=profile.name||'Non disponibile';
   $('log-callbook-place').textContent=profile.place||'Non disponibile';
@@ -1184,15 +1186,14 @@ const opSavedKey='hf_operator_profiles_v1';
 let opSaved=[];
 try{
  const saved=JSON.parse(localStorage.getItem(opSavedKey)||'[]');
- if(Array.isArray(saved))opSaved=saved.filter(row=>Array.isArray(row)&&row.length===3&&row.every(v=>typeof v==='string')).slice(-500);
+ if(Array.isArray(saved))opSaved=saved.filter(row=>Array.isArray(row)&&row.length===3&&row.every(v=>typeof v==='string'));
 }catch{}
 function opRemember(profile,call){
  if(!profile.name)return;
  const key=opNormalize(profile.name);
  opSaved=opSaved.filter(row=>row[1]!==call||opNormalize(row[0])!==key);
  opSaved.push([profile.name,call,profile.source]);
- opSaved=opSaved.slice(-500);
- try{localStorage.setItem(opSavedKey,JSON.stringify(opSaved))}catch{}
+ try{localStorage.setItem(opSavedKey,JSON.stringify(opSaved));return true}catch{return false}
 }
 let opRequest=0;
 function opNormalize(text){return text.normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim().toLowerCase()}
@@ -1268,6 +1269,14 @@ async function opSearch(call,known){
 }
 $('op-forward').onsubmit=e=>{e.preventDefault();opSearch($('op-call').value.trim().toUpperCase())};
 
+$('op-save').onsubmit=e=>{
+ e.preventDefault();
+ const call=logNormalizeCall($('op-save-call').value),name=$('op-save-name').value.trim();
+ const status=$('op-save-status');
+ if(!/^[A-Z0-9/]{3,20}$/.test(call)||!name){status.textContent='Inserisci nominativo e nome.';return}
+ status.textContent=opRemember({name,source:'Salvato a mano'},call)?'Operatore salvato in questo browser.':'Operatore disponibile solo fino alla chiusura della pagina.';
+ if($('op-name').value.trim())$('op-reverse').requestSubmit();
+};
 $('op-reverse').onsubmit=e=>{
  e.preventDefault();const words=opNormalize($('op-name').value).split(/\s+/).filter(Boolean);
  const result=$('op-matches');result.replaceChildren();
@@ -1279,8 +1288,7 @@ $('op-reverse').onsubmit=e=>{
  }
  const rows=[...matches.values()];
  result.textContent=rows.length?rows.length+' corrispondenze':'Nessuna corrispondenza in questo indice.';
- if(rows.length>100)result.textContent+=' · primi 100 risultati. Affina la ricerca.';
- for(const row of rows.slice(0,100)){const b=document.createElement('button');b.textContent=row[1]+' · '+row[0]+' · '+row[2];b.onclick=()=>{opSearch(row[1].toUpperCase(),row);$('op-forward').scrollIntoView({block:'center'})};result.append(b)}
+ for(const row of rows){const b=document.createElement('button');b.textContent=row[1]+' · '+row[0]+' · '+row[2];b.onclick=()=>{opSearch(row[1].toUpperCase(),row);$('op-forward').scrollIntoView({block:'center'})};result.append(b)}
 };
 
 </script></body></html>
