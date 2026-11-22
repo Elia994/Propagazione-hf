@@ -700,6 +700,16 @@ async function logFetchCallbook(call){
    if(profile){logCallbookCache.set(call,{record:profile,time:Date.now()});return profile;}
   }catch(error){unavailable.push('Callook');}
  }
+ try{
+  const data=await fetchWithTimeout('https://api.pota.app/stats/user/'+encodeURIComponent(call),9000);
+  if(logNormalizeCall(data?.callsign)!==call)throw Error('Profilo POTA non valido');
+  const name=typeof data.name==='string'?data.name.trim():'';
+  const place=typeof data.qth==='string'?data.qth.trim():'';
+  if(name||place){
+   const profile={call,name,place,grid:'',source:'Parks on the Air (POTA)'};
+   logCallbookCache.set(call,{record:profile,time:Date.now()});return profile;
+  }
+ }catch(error){if(error.message!=='HTTP 404')unavailable.push('POTA');}
  if(unavailable.length)throw Error(unavailable.join(', '));
  logCallbookCache.set(call,{record:null,time:Date.now()});return null;
 }
