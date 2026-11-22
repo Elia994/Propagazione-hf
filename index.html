@@ -78,6 +78,7 @@
 .log-profile-value small{display:block;color:#9cb4c7;font-size:11px;margin-bottom:3px}
 .log-profile-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:9px}
 .log-profile-actions button{padding:7px 10px;font-size:12px}
+.log-call-search{display:flex;flex-wrap:wrap;align-items:center;gap:6px}.log-call-search input{flex:1 1 8em;min-width:0}.log-call-search button{font-size:13px;padding:8px 10px}
 .log-callbook-status{font-size:11px;color:#9cb4c7}
 .log-history{margin-top:10px;padding-top:9px;border-top:1px solid #304355;font-size:12px;color:#cbd9e9}
 .log-history ul{margin:6px 0 0;padding-left:18px}
@@ -93,10 +94,10 @@
 <h2>Dettaglio finestre DX</h2><div class="dx-scroll"><table class="dx-table"><thead><tr><th>Banda</th><th>Orario HH:mm</th><th>Direzione di prova</th><th>Metodo</th></tr></thead><tbody id="dx-rows"><tr><td colspan="4">In attesa del QTH…</td></tr></tbody></table></div>
 <p class="dx-info">Il modello ITU-R P.533 (CQDX) è statistico e usa gli indici solari correnti, aggiornati dal servizio. Se non accessibile viene mostrata una fascia stimata da geometria giorno/notte e NOAA, senza attribuirle affidabilità misurata. Per aperture effettive: <a href="https://www.pskreporter.info/pskmap.html" target="_blank" rel="noopener">PSK Reporter</a>. Solo il locator a 4 caratteri è inviato al servizio di previsione; il GPS preciso resta nel browser.</p></section></section><section class="view" id="view-live"><h2>DX Live · frequenze da ascoltare</h2><section class="panel"><p>Spot reali letti direttamente da <a href="https://www.hamqth.com/" target="_blank" rel="noopener noreferrer">HamQTH.com</a> e <a href="https://skeds.sq3swg.com/api.html" target="_blank" rel="noopener noreferrer">SQ3SWG</a>, con dati GitHub di riserva. Frequenza, modo, nominativo e ora; nessuno spot simulato.</p><fieldset class="dx-band-filter"><legend>Bande</legend><div class="dx-band-options"><label><input type="checkbox" id="dx-band-all" checked> Tutte</label><label><input type="checkbox" class="dx-band-option" value="160"> 160 m</label><label><input type="checkbox" class="dx-band-option" value="80"> 80 m</label><label><input type="checkbox" class="dx-band-option" value="60"> 60 m</label><label><input type="checkbox" class="dx-band-option" value="40"> 40 m</label><label><input type="checkbox" class="dx-band-option" value="30"> 30 m</label><label><input type="checkbox" class="dx-band-option" value="20"> 20 m</label><label><input type="checkbox" class="dx-band-option" value="17"> 17 m</label><label><input type="checkbox" class="dx-band-option" value="15"> 15 m</label><label><input type="checkbox" class="dx-band-option" value="12"> 12 m</label><label><input type="checkbox" class="dx-band-option" value="11"> 11 m · CB</label><label><input type="checkbox" class="dx-band-option" value="10"> 10 m</label></div></fieldset><div class="qthbar" id="dx-filter"><button type="button" class="dx-filter active" data-mode="all">Tutti</button><button type="button" class="dx-filter" data-mode="SSB">SSB</button><button type="button" class="dx-filter" data-mode="CW">CW</button><button type="button" class="dx-filter" data-mode="FT8">FT8</button></div><div class="dx-advanced" aria-label="Filtri avanzati DX Live"><div class="dx-country-grid"><div class="dx-country-field"><label id="dx-tx-label" for="dx-tx-toggle">Nazione TX</label><div class="dx-country-combo" data-role="tx"><button type="button" class="dx-country-toggle" id="dx-tx-toggle" aria-haspopup="listbox" aria-expanded="false" aria-controls="dx-tx-items"><span>Tutte le nazioni</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button><div class="dx-country-menu" hidden><input type="search" class="dx-country-search" placeholder="Cerca nazione…" aria-label="Cerca nazione tx" autocomplete="off"><div class="dx-country-items" id="dx-tx-items" role="listbox" aria-label="Nazione TX"></div></div></div></div><div class="dx-country-field"><label id="dx-rx-label" for="dx-rx-toggle">Nazione RX</label><div class="dx-country-combo" data-role="rx"><button type="button" class="dx-country-toggle" id="dx-rx-toggle" aria-haspopup="listbox" aria-expanded="false" aria-controls="dx-rx-items"><span>Tutte le nazioni</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button><div class="dx-country-menu" hidden><input type="search" class="dx-country-search" placeholder="Cerca nazione…" aria-label="Cerca nazione rx" autocomplete="off"><div class="dx-country-items" id="dx-rx-items" role="listbox" aria-label="Nazione RX"></div></div></div></div></div><div class="dx-advanced-checks"><label><input type="checkbox" id="dx-only-qth"> Solo spot con QTH visibile</label><label><input type="checkbox" id="dx-only-possible"> Solo collegamenti stimati possibili (✓)</label></div><div class="dx-advanced-footer"><span id="dx-results-count" aria-live="polite">In attesa degli spot…</span><button type="button" id="dx-reset-filters">↻ Azzera filtri</button></div><p class="dx-info" style="margin:10px 0 0">Nazioni stimate dal prefisso radioamatoriale, non dalla posizione reale. I filtri sono combinabili.</p></div><p class="dx-info" id="spot-state" role="status">Gli spot automatici non sono ancora disponibili: nessuna frequenza attiva viene inventata.</p><div class="dx-scroll"><table class="dx-table"><thead><tr><th>Frequenza</th><th>Modo</th><th>TX</th><th>RX</th><th>QTH spot</th><th>Possibile</th><th>Ora</th></tr></thead><tbody id="spot-rows"><tr><td colspan="7">Nessuno spot verificato disponibile.</td></tr></tbody></table></div><div class="links"><a href="https://www.dxwatch.com/" target="_blank" rel="noopener">DXWatch · cluster</a><a href="https://www.pskreporter.info/pskmap.html" target="_blank" rel="noopener">PSK Reporter · modi digitali</a></div><p class="dx-info">QTH spot: locator indicati nel commento del collegamento. ✓ = stima solare indicativa favorevole verso almeno uno dei due estremi, NON collegamento garantito. — = dati mancanti o stima non favorevole. I locator non sono sempre disponibili. TX = stazione segnalata in trasmissione; RX = stazione che ha pubblicato lo spot. La ricezione dal tuo QTH non è garantita. Gli 11 m richiedono fonti dedicate.</p></section></section><section class="view" id="view-data"><h2>Previsione geomagnetica · prossime 24 ore</h2><section class="panel"><div class="forecast-note"><strong>Previsione NOAA, non previsione di propagazione HF:</strong> Kp è previsto a intervalli di 3 ore e descrive l’attività geomagnetica. È utile per valutare possibili disturbi, ma non permette di sapere con affidabilità se una banda o un collegamento sarà aperto. Le stime orarie per banda qui sotto sono indicative. Per aperture osservate usa PSK Reporter o WSPR.</div><div id="forecast" class="forecast-grid"><span class="sub">Caricamento previsione NOAA…</span></div><div id="forecast-source" class="sub" style="margin-top:12px"></div></section><h2>Indici in tempo reale</h2><section class="grid"><article class="card"><div class="label">Solar Flux · SFI</div><div class="value" id="sfi">—</div><div class="unit">sfu · flusso 10,7 cm</div></article><article class="card"><div class="label">Indice planetario Kp</div><div class="value" id="kp">—</div><div class="unit" id="kpdesc">Attività geomagnetica</div></article><article class="card"><div class="label">Sunspot Number · SSN</div><div class="value" id="ssn">—</div><div class="unit">Macchie solari</div></article><article class="card"><div class="label">Indice A</div><div class="value" id="a">—</div><div class="unit">Attività geomagnetica giornaliera</div></article></section><section class="panel"><h2 style="margin-top:0">Dettagli e fonti</h2><div id="sources" class="sub">In attesa dei dati…</div><div class="links"><a href="https://www.spaceweather.gov/" target="_blank" rel="noopener">NOAA Space Weather</a><a href="https://www.swpc.noaa.gov/" target="_blank" rel="noopener">NOAA Solar Cycle</a><a href="https://www.pskreporter.info/pskmap.html" target="_blank" rel="noopener">PSK Reporter · aperture osservate</a></div></section></section><section class="view" id="view-log"><h2>Log QSO · registro collegamenti</h2>
 <section class="panel log-panel"><div class="log-heading" id="log-form-heading">📻 Nuovo QSO</div>
-<div class="log-fields three"><div class="log-call"><label for="log-call">Nominativo *</label><input id="log-call" placeholder="Es. JA6CNL" maxlength="20" autocomplete="off" style="text-transform:uppercase;font-weight:700"></div>
+<div class="log-fields three"><div class="log-call"><label for="log-call">Nominativo *</label><div class="log-call-search"><input id="log-call" placeholder="Es. W1AW" maxlength="20" autocomplete="off" autocapitalize="characters" spellcheck="false" enterkeyhint="search" style="text-transform:uppercase;font-weight:700"><button type="button" id="log-find-operator" aria-controls="log-callbook-status">Cerca operatore</button></div></div>
 <div><label for="log-freq">Frequenza MHz *</label><input id="log-freq" value="14.250" inputmode="decimal"></div>
 <div><label for="log-mode">Modo</label><select id="log-mode"><option>SSB</option><option>CW</option><option>FT8</option><option>FT4</option><option>RTTY</option><option>FM</option><option>AM</option></select></div></div>
-<div class="log-profile" aria-label="Profilo registrato del corrispondente"><div class="log-profile-title">Profilo operatore · dati registrati</div><div class="log-profile-grid"><div class="log-profile-value"><small>Nome</small><span id="log-callbook-name">—</span></div><div class="log-profile-value"><small>QTH registrato</small><span id="log-callbook-place">—</span></div><div class="log-profile-value"><small>Locator registrato</small><span id="log-callbook-grid">—</span></div></div><div class="log-profile-actions"><button id="log-use-callbook-qth" type="button" disabled>Usa QTH registrato per questo QSO</button><span id="log-callbook-status" class="log-callbook-status" role="status" aria-live="polite">Inserisci un nominativo per cercare i dati disponibili. Fonte: HamDB.</span></div><div id="log-call-history" class="log-history" hidden></div></div>
+<div class="log-profile" aria-label="Profilo registrato del corrispondente"><div class="log-profile-title">Profilo operatore · dati registrati</div><div class="log-profile-grid"><div class="log-profile-value"><small>Nome</small><span id="log-callbook-name">—</span></div><div class="log-profile-value"><small>QTH registrato</small><span id="log-callbook-place">—</span></div><div class="log-profile-value"><small>Locator registrato</small><span id="log-callbook-grid">—</span></div></div><div class="log-profile-actions"><button id="log-use-callbook-qth" type="button" disabled>Usa QTH registrato per questo QSO</button><span id="log-callbook-status" class="log-callbook-status" role="status" aria-live="polite">Inserisci il nominativo e premi «Cerca operatore».</span></div><div id="log-call-history" class="log-history" hidden></div></div>
 <div class="log-fields" style="margin-top:10px"><div><label for="log-rsts">RST inviato</label><input id="log-rsts" value="59" maxlength="12"></div><div><label for="log-rstr">RST ricevuto</label><input id="log-rstr" value="59" maxlength="12"></div></div>
 <div class="log-edit-utc" id="log-edit-utc-wrap" hidden><label for="log-edit-utc">Data e ora del QSO (UTC)</label><input type="datetime-local" id="log-edit-utc" step="1"><div class="log-hint">L'orario originale viene mantenuto se non lo modifichi.</div></div>
 </section>
@@ -635,7 +636,7 @@ function logUpdateQrb(){
 }
 // Callbook: mostra il QTH registrato separatamente e lo usa solo come valore iniziale del QSO.
 // HamDB è un callbook pubblico con copertura geografica variabile; Callook integra i nominativi USA.
-const logCallbookState={serial:0,call:'',record:null,timer:null,placeOverride:false,gridOverride:false};
+const logCallbookState={serial:0,call:'',record:null,placeOverride:false,gridOverride:false};
 const logCallbookCache=new Map();
 function logNormalizeCall(value){return String(value||'').trim().toUpperCase().replace(/\s+/g,'')}
 function logCallbookHistory(call){
@@ -653,11 +654,11 @@ function logCallbookHistory(call){
  box.append(list);
 }
 function logCallbookReset(call=''){
- clearTimeout(logCallbookState.timer);logCallbookState.serial++;logCallbookState.call=call;logCallbookState.record=null;
+ logCallbookState.serial++;logCallbookState.call=call;logCallbookState.record=null;
  logCallbookState.placeOverride=false;logCallbookState.gridOverride=false;
  $('log-callbook-name').textContent='—';$('log-callbook-place').textContent='—';$('log-callbook-grid').textContent='—';
  $('log-use-callbook-qth').disabled=true;
- $('log-callbook-status').textContent=call?'Ricerca dati callbook…':'Inserisci un nominativo per cercare i dati disponibili. Fonte: HamDB.';
+ $('log-callbook-status').textContent=call?'Premi «Cerca operatore» per vedere i dati registrati.':'Inserisci il nominativo e premi «Cerca operatore».';
  logCallbookHistory(call);
 }
 function logHamdbProfile(data,call){
@@ -692,7 +693,7 @@ async function logFetchCallbook(call){
   const profile=logHamdbProfile(data,call);
   if(profile){logCallbookCache.set(call,{record:profile,time:Date.now()});return profile;}
  }catch(error){unavailable.push('HamDB');}
- if(/^(?:[KNW][0-9]|A[A-L][0-9])/.test(call)){
+ if(/^(?:[KNW][A-Z]?[0-9]|A[A-L][0-9])/.test(call)){
   try{
    const data=await fetchWithTimeout('https://callook.info/'+encodeURIComponent(call)+'/json',9000,{headers:{Accept:'application/json'}});
    const profile=logCallookProfile(data,call);
@@ -712,11 +713,11 @@ function logApplyCallbookQth(){
 }
 async function logLookupCallbook(call,apply=true){
  const serial=++logCallbookState.serial;logCallbookState.call=call;
- logCallbookState.timer=null;
  if(!/^[A-Z0-9/]{3,20}$/.test(call)){
   $('log-callbook-status').textContent='Completa il nominativo per avviare la ricerca.';
   return;
  }
+ $('log-callbook-status').textContent='Ricerca operatore '+call+'…';
  const active=()=>serial===logCallbookState.serial&&logNormalizeCall($('log-call').value)===call;
  try{
   const profile=await logFetchCallbook(call);if(!active())return;
@@ -743,7 +744,7 @@ async function logLookupCallbook(call,apply=true){
   if(active())$('log-callbook-status').textContent=error.message+' non disponibile (rete, CORS o servizio). Puoi compilare il QSO manualmente.';
  }
 }
-function logScheduleCallbookLookup(){
+function logSyncCallbookCall(){
  const call=logNormalizeCall($('log-call').value);
  if(call!==logCallbookState.call){
   const firstCall=!logCallbookState.call;
@@ -757,12 +758,15 @@ function logScheduleCallbookLookup(){
    $('log-dxplace').value='';$('log-dxgrid').value='';logUpdateQrb();
   }else{logCallbookState.placeOverride=true;logCallbookState.gridOverride=true;}
  }
- logCallbookHistory(call);
- clearTimeout(logCallbookState.timer);
- if(!call)return;
- logCallbookState.timer=setTimeout(()=>logLookupCallbook(call,logEditIndex===null),500);
+ return call;
 }
-$('log-call').addEventListener('input',logScheduleCallbookLookup);
+function logFindOperator(){
+ const call=logSyncCallbookCall();
+ logCallbookHistory(call);
+ return logLookupCallbook(call,logEditIndex===null);
+}
+$('log-call').addEventListener('input',logSyncCallbookCall);
+$('log-find-operator').addEventListener('click',logFindOperator);
 $('log-use-callbook-qth').addEventListener('click',logApplyCallbookQth);
 for(const id of ['log-dxplace','log-dxgrid'])$(id).addEventListener('input',()=>{
  if(id==='log-dxplace')logCallbookState.placeOverride=true;
@@ -1060,7 +1064,7 @@ function logSave(){
  $('log-call').focus();logRender();logUpdateInfo();logUpdateQrb();
 }
 $('log-save').addEventListener('click',logSave);
-$('log-call').addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();logSave()}});
+$('log-call').addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();logFindOperator()}});
 $('log-gps').addEventListener('click',()=>{
  const button=$('log-gps'),status=$('log-gps-status');
  if(!navigator.geolocation){status.textContent='Geolocalizzazione non supportata: inserisci il locator manualmente.';return}
