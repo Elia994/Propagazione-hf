@@ -85,7 +85,7 @@
 .log-history li{margin:4px 0}
 @media(max-width:490px){.log-profile-grid{grid-template-columns:1fr}.log-profile{padding:10px}}
 .prop-hour-area{position:relative}.prop-hour-area canvas{touch-action:pan-y;cursor:crosshair}#prop-hour{position:absolute;top:0;transform:translateX(-50%);padding:4px 6px;border-radius:5px;background:#183b4c;color:#eef6ff;white-space:nowrap;font-size:12px;pointer-events:none}#prop-hour::after{content:"";position:absolute;width:1px;height:204px;top:100%;left:50%;background:#5de0d2;opacity:.6}
-#view-operators{max-width:780px;margin:auto}#view-operators h3{margin-top:0}#view-operators label{font-weight:bold}.op-line{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.op-line input{flex:1;min-width:120px;background:#0b1524;color:white;border:1px solid #495d73;border-radius:10px;padding:12px;font-size:16px}.op-line button{color:#082826;background:#72dece}#op-matches button{display:block;width:100%;margin:7px 0;text-align:left}#op-qso iframe{width:100%;height:325px;background:#fff;border:0;border-radius:8px;margin-bottom:12px}</style></head><body><main class="wrap"><header><div><div class="tag"><i class="dot"></i> RADIOAMATORI · HF</div><h1>Propagation <span>Live</span></h1><p class="sub">Monitor delle condizioni solari e geomagnetiche</p></div><button id="refresh">↻ Aggiorna dati</button></header><div id="status" class="status" role="status">Connessione alle fonti dati…</div><section class="view active" id="view-hf"><section class="panel" style="margin-top:14px;padding:12px"><div class="qthbar"><div class="qthbar"><button id="gps" type="button">📍 Rileva QTH GPS</button><input id="locator" aria-label="Locator Maidenhead" placeholder="Locator (es. JN45)" maxlength="8"><button id="apply-locator" type="button">Usa locator</button></div>
+#view-operators{max-width:780px;margin:auto}#view-operators h3{margin-top:0}#view-operators label{font-weight:bold}.op-line{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.op-line input{flex:1;min-width:120px;background:#0b1524;color:white;border:1px solid #495d73;border-radius:10px;padding:12px;font-size:16px}.op-line button{color:#082826;background:#72dece}#op-matches button{display:block;width:100%;margin:7px 0;text-align:left}#op-qso iframe{width:100%;height:325px;background:#fff;border:0;border-radius:8px;margin-bottom:12px}.hf-clocks{display:flex;flex-wrap:wrap;gap:6px 22px;margin-top:12px;padding:10px 12px;border:1px solid #29364a;border-radius:10px;color:#99b8c5;font-size:13px}.hf-clocks time{color:#eef6ff;font-variant-numeric:tabular-nums;margin-left:4px}#op-qso{overflow-x:auto}</style></head><body><main class="wrap"><header><div><div class="tag"><i class="dot"></i> RADIOAMATORI · HF</div><h1>Propagation <span>Live</span></h1><p class="sub">Monitor delle condizioni solari e geomagnetiche</p></div><button id="refresh">↻ Aggiorna dati</button></header><div class="hf-clocks" role="group" aria-label="Orologi"><div>UTC <time id="hf-utc"></time></div><div>Locale <time id="hf-local"></time></div></div><div id="status" class="status" role="status">Connessione alle fonti dati…</div><section class="view active" id="view-hf"><section class="panel" style="margin-top:14px;padding:12px"><div class="qthbar"><div class="qthbar"><button id="gps" type="button">📍 Rileva QTH GPS</button><input id="locator" aria-label="Locator Maidenhead" placeholder="Locator (es. JN45)" maxlength="8"><button id="apply-locator" type="button">Usa locator</button></div>
 <p id="qth-status" class="sub" role="status">Rileva GPS o inserisci il locator.</p></div></section><h2>Quando provare la propagazione · prossime 24 ore</h2><section class="panel">
 
 <p id="dx-engine" class="dx-info" role="status">In attesa del QTH…</p>
@@ -1235,17 +1235,34 @@ async function opActivity(kind,call,request){
   const rows=data.filter(r=>!psk||String(r.senderCallsign).toUpperCase()===call).map(r=>{
    const t=psk?Number(r.flowStartSeconds)*1000:Date.parse(r.time);
    const mhz=Number(psk?r.frequency:r.freq)/(psk?1e6:1000);
-   return {t,fields:[Number.isFinite(t)?new Date(t).toISOString().slice(5,16).replace('T',' '):'—',psk?r.receiverCallsign:r.spotter,psk?r.receiverLocator:r.dxcall,mhz>0?mhz.toFixed(3):'—',r.mode]};
+   return {t,fields:[Number.isFinite(t)?new Date(t).toISOString().slice(5,16).replace('T',' '):'—',Number.isFinite(t)?localClock.format(t):'—',psk?r.receiverCallsign:r.spotter,psk?r.receiverLocator:r.dxcall,mhz>0?mhz.toFixed(3):'—',r.mode]};
   }).sort((a,b)=>b.t-a.t).slice(0,10);
   if(!rows.length){el.textContent=psk?'Nessuna ricezione segnalata nelle ultime 6 ore.':'Nessuno spot disponibile.';return}
   const table=document.createElement('table');table.className='log-table';
   const header=table.createTHead().insertRow();
-  for(const label of ['Data UTC',psk?'Ricevitore':'Segnalato da',psk?'Locator RX':'Stazione','MHz','Modo']){const th=document.createElement('th');th.textContent=label;header.append(th)}
+  for(const label of ['Data UTC','Data e ora locale',psk?'Ricevitore':'Segnalato da',psk?'Locator RX':'Stazione','MHz','Modo']){const th=document.createElement('th');th.textContent=label;header.append(th)}
   const body=table.createTBody();for(const row of rows){const tr=body.insertRow();for(const field of row.fields)tr.insertCell().textContent=field||'—'}
   el.replaceChildren(table);
  }catch{if(request===opRequest)el.textContent='Servizio temporaneamente non disponibile.'}
 }
 
+function stationClockFormat(zone){
+ return new Intl.DateTimeFormat('it-IT',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23',timeZone:zone});
+}
+const localClock=stationClockFormat(undefined),utcClock=stationClockFormat('UTC');
+function refreshClocks(){
+ const now=new Date();
+ for(const [id,fmt] of [['hf-utc',utcClock],['hf-local',localClock]]){
+  const el=$(id);el.textContent=fmt.format(now);el.dateTime=now.toISOString();
+ }
+}
+refreshClocks();setInterval(refreshClocks,1000);
+function contactLocalTime(raw){
+ const m=/^(\d{4}-\d{2}-\d{2})[ T](\d{2}:\d{2})(:\d{2})?\s*(Z|UTC|[+-]\d{2}:\d{2})?$/i.exec(raw);
+ if(!m)return '—';
+ const instant=Date.parse(m[1]+'T'+m[2]+(m[3]||':00')+(!m[4]||m[4]==='UTC'?'Z':m[4]));
+ return Number.isFinite(instant)?new Intl.DateTimeFormat('it-IT',{dateStyle:'short',timeStyle:m[3]?'medium':'short'}).format(instant):'—';
+}
 async function opLoadContacts(call,request){
  const status=$('op-activity');
  status.textContent='Ricerca dei collegamenti su Club Log…';
@@ -1267,10 +1284,11 @@ async function opLoadContacts(call,request){
   status.textContent='Ultimi QSO pubblicati da '+call+' su Club Log';
   const table=document.createElement('table');table.className='log-table';
   const header=table.createTHead().insertRow();
-  for(const label of ['Nominativo','Data','Banda','Modo']){const th=document.createElement('th');th.textContent=label;header.append(th)}
+  for(const label of ['Nominativo','Data Club Log','Data e ora locale','Banda','Modo']){const th=document.createElement('th');th.textContent=label;header.append(th)}
   const body=table.createTBody();
-  for(const record of records){const row=body.insertRow();for(const field of record.slice(0,4))row.insertCell().textContent=field}
+  for(const record of records){const row=body.insertRow();for(const field of [record[0],record[1],contactLocalTime(record[1]),record[2],record[3]])row.insertCell().textContent=field}
   $('op-qso').append(table);
+  if(records.some(r=>contactLocalTime(r[1])==='—'))status.textContent+=' · — indica che la fonte non fornisce un orario utilizzabile.';
  }catch{if(request===opRequest)status.textContent='Club Log al momento non raggiungibile. Riprova più tardi.'}
  finally{clearTimeout(timeout)}
 }
