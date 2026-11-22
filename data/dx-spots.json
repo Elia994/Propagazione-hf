@@ -1,7 +1,7 @@
 {
-  "checked_at": "2026-11-22T09:57:22Z",
+  "checked_at": "2026-11-22T17:36:36Z",
   "status": "ok",
-  "new_spots": 387,
+  "new_spots": 397,
   "sources_ok": [
     "HamQTH",
     "SQ3SWG"
@@ -9,2504 +9,2504 @@
   "errors": [],
   "spots": [
     {
-      "frequency_mhz": 21.0111,
-      "mode": "Non indicato",
-      "dx": "PY2XL",
-      "spotter": "IK3QAR",
-      "utc": "0957",
-      "comment": "LZ-DX",
+      "frequency_mhz": 14.0765,
+      "mode": "FT8",
+      "dx": "EA8DSX",
+      "spotter": "EA5BCO",
+      "utc": "1736",
+      "comment": "IM98PG<>IL18 FT8 FT8  Sent: -2",
       "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:57:23Z"
+      "timestamp": "2026-11-22T17:36:35Z"
     },
     {
-      "frequency_mhz": 21.213,
+      "frequency_mhz": 7.103,
       "mode": "Non indicato",
-      "dx": "LY2BIS",
-      "spotter": "PE1EWR",
-      "utc": "0957",
-      "comment": "LZ DX test",
+      "dx": "R6FMG",
+      "spotter": "RK3DQE",
+      "utc": "1736",
+      "comment": "tnx. qso",
       "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:57:21Z"
+      "timestamp": "2026-11-22T17:36:02Z"
     },
     {
-      "frequency_mhz": 28.47,
-      "mode": "Non indicato",
-      "dx": "UP0L",
-      "spotter": "IT9SAZ",
-      "utc": "0957",
-      "comment": "contest",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:57:10Z"
+      "frequency_mhz": 14.0765,
+      "mode": "FT8",
+      "dx": "EA8DSX",
+      "spotter": "EA5BCO",
+      "utc": "1736",
+      "comment": "IM98PG<>IL18 FT8 FT8  Sent: -20  Rcvd: +04",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:36:00Z"
     },
     {
-      "frequency_mhz": 14.001,
-      "mode": "Non indicato",
-      "dx": "SP9XCN",
-      "spotter": "EA3CWT",
-      "utc": "0957",
+      "frequency_mhz": 14.2022,
+      "mode": "SSB",
+      "dx": "K5EEE",
+      "spotter": "K1GMS",
+      "utc": "1736",
+      "comment": "USB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:36:00Z"
+    },
+    {
+      "frequency_mhz": 21.336,
+      "mode": "SSB",
+      "dx": "W1SJ",
+      "spotter": "W1SJ",
+      "utc": "1736",
+      "comment": "Vermont !",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:36:00Z"
+    },
+    {
+      "frequency_mhz": 7.155,
+      "mode": "SSB",
+      "dx": "CA2EBM",
+      "spotter": "CD4ACO",
+      "utc": "1736",
+      "comment": "POTA",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:36:00Z"
+    },
+    {
+      "frequency_mhz": 21.3151,
+      "mode": "SSB",
+      "dx": "N6OKU",
+      "spotter": "K3KU",
+      "utc": "1736",
       "comment": "",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:36:00Z"
+    },
+    {
+      "frequency_mhz": 14.265,
+      "mode": "SSB",
+      "dx": "AI0Y",
+      "spotter": "WO9B",
+      "utc": "1736",
+      "comment": "USB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:36:00Z"
+    },
+    {
+      "frequency_mhz": 21.3942,
+      "mode": "SSB",
+      "dx": "N4OX",
+      "spotter": "W1NV",
+      "utc": "1736",
+      "comment": "USB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:36:00Z"
+    },
+    {
+      "frequency_mhz": 14.34,
+      "mode": "SSB",
+      "dx": "ND8DX",
+      "spotter": "ND8DX",
+      "utc": "1736",
+      "comment": "SWEEPSTAKES",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:36:00Z"
+    },
+    {
+      "frequency_mhz": 7.214,
+      "mode": "SSB",
+      "dx": "WD0BGZ",
+      "spotter": "W8BI",
+      "utc": "1736",
+      "comment": "LSB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:36:00Z"
+    },
+    {
+      "frequency_mhz": 21.4181,
+      "mode": "SSB",
+      "dx": "K6AM",
+      "spotter": "W0ZC",
+      "utc": "1736",
+      "comment": "SDG",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:36:00Z"
+    },
+    {
+      "frequency_mhz": 7.103,
+      "mode": "SSB",
+      "dx": "R6FMG",
+      "spotter": "RK3DQE",
+      "utc": "1736",
+      "comment": "tnx. qso",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:36:00Z"
+    },
+    {
+      "frequency_mhz": 14.176,
+      "mode": "SSB",
+      "dx": "KS7T",
+      "spotter": "K0BF",
+      "utc": "1735",
+      "comment": "MT looking for ID",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:35:00Z"
+    },
+    {
+      "frequency_mhz": 21.447,
+      "mode": "SSB",
+      "dx": "N0MA",
+      "spotter": "W7II",
+      "utc": "1735",
+      "comment": "iowa",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:35:00Z"
+    },
+    {
+      "frequency_mhz": 21.3062,
+      "mode": "SSB",
+      "dx": "WX5S",
+      "spotter": "N6RO",
+      "utc": "1735",
+      "comment": "",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:35:00Z"
+    },
+    {
+      "frequency_mhz": 21.267,
+      "mode": "SSB",
+      "dx": "N5RZ",
+      "spotter": "N3DUE",
+      "utc": "1735",
+      "comment": "STX",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:35:00Z"
+    },
+    {
+      "frequency_mhz": 14.258,
+      "mode": "SSB",
+      "dx": "KM7W",
+      "spotter": "WA3AAN",
+      "utc": "1735",
+      "comment": "USB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:35:00Z"
+    },
+    {
+      "frequency_mhz": 14.3293,
+      "mode": "SSB",
+      "dx": "VE7NZ",
+      "spotter": "VE7NZ",
+      "utc": "1735",
+      "comment": "Sweepstakes",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:35:00Z"
+    },
+    {
+      "frequency_mhz": 28.074,
+      "mode": "DIGI",
+      "dx": "LU1FIV",
+      "spotter": "7Z1AO",
+      "utc": "1735",
+      "comment": "",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:35:00Z"
+    },
+    {
+      "frequency_mhz": 21.4232,
+      "mode": "SSB",
+      "dx": "KI1G",
+      "spotter": "KI1G",
+      "utc": "1735",
+      "comment": "RI",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:35:00Z"
+    },
+    {
+      "frequency_mhz": 14.252,
+      "mode": "SSB",
+      "dx": "K5TR",
+      "spotter": "WA3AAN",
+      "utc": "1735",
+      "comment": "USB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:35:00Z"
+    },
+    {
+      "frequency_mhz": 28.0113,
+      "mode": "CW",
+      "dx": "D44LZ",
+      "spotter": "VE3CWP",
+      "utc": "1735",
+      "comment": "",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:35:00Z"
+    },
+    {
+      "frequency_mhz": 18.1,
+      "mode": "DIGI",
+      "dx": "3B8/E70A",
+      "spotter": "VO1CH",
+      "utc": "1735",
+      "comment": "",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:35:00Z"
+    },
+    {
+      "frequency_mhz": 14.2468,
+      "mode": "SSB",
+      "dx": "N5UM",
+      "spotter": "WA3AAN",
+      "utc": "1735",
+      "comment": "USB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:35:00Z"
+    },
+    {
+      "frequency_mhz": 3.515,
+      "mode": "CW",
+      "dx": "SN0SK",
+      "spotter": "DF7FE",
+      "utc": "1734",
+      "comment": "CW",
       "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:57:09Z"
+      "timestamp": "2026-11-22T17:34:45Z"
+    },
+    {
+      "frequency_mhz": 14.286,
+      "mode": "Non indicato",
+      "dx": "W7RM",
+      "spotter": "DL3WB",
+      "utc": "1734",
+      "comment": "5/5 in Europe Germany Gd Dx 44",
+      "source": "SQ3SWG",
+      "timestamp": "2026-11-22T17:34:43Z"
     },
     {
       "frequency_mhz": 14.074,
+      "mode": "FT8",
+      "dx": "CT7AUT",
+      "spotter": "PD3WMA",
+      "utc": "1734",
+      "comment": "FT8",
+      "source": "SQ3SWG",
+      "timestamp": "2026-11-22T17:34:36Z"
+    },
+    {
+      "frequency_mhz": 7.0188,
       "mode": "Non indicato",
-      "dx": "OZ7DR",
-      "spotter": "IW2HWN",
-      "utc": "0957",
-      "comment": "73",
+      "dx": "EA1EYL",
+      "spotter": "IN3XSV",
+      "utc": "1734",
+      "comment": "",
       "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:57:09Z"
+      "timestamp": "2026-11-22T17:34:33Z"
     },
     {
-      "frequency_mhz": 14.0423,
-      "mode": "CW",
-      "dx": "EA5O",
-      "spotter": "DL1EJD",
-      "utc": "0957",
-      "comment": "CW",
+      "frequency_mhz": 14.0765,
+      "mode": "FT8",
+      "dx": "AA1NK",
+      "spotter": "EA5BCO",
+      "utc": "1734",
+      "comment": "IM98PG<>FN42 FT8 FT8  Sent: -0",
       "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:57:06Z"
+      "timestamp": "2026-11-22T17:34:03Z"
     },
     {
-      "frequency_mhz": 21.213,
+      "frequency_mhz": 21.437,
       "mode": "SSB",
-      "dx": "LY2BIS",
-      "spotter": "PE1EWR",
-      "utc": "0957",
-      "comment": "LZ DX test",
+      "dx": "ND7K",
+      "spotter": "W7II",
+      "utc": "1734",
+      "comment": "FRESH MEAT AZ",
       "source": "HamQTH",
-      "timestamp": "2026-11-22T09:57:00Z"
+      "timestamp": "2026-11-22T17:34:00Z"
+    },
+    {
+      "frequency_mhz": 21.323,
+      "mode": "SSB",
+      "dx": "NR4L",
+      "spotter": "NJ4P",
+      "utc": "1734",
+      "comment": "YL OP",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:34:00Z"
+    },
+    {
+      "frequency_mhz": 21.2576,
+      "mode": "SSB",
+      "dx": "KD4D",
+      "spotter": "KD4D",
+      "utc": "1734",
+      "comment": "SWEEPSTAKES",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:34:00Z"
+    },
+    {
+      "frequency_mhz": 21.2769,
+      "mode": "SSB",
+      "dx": "K5KU",
+      "spotter": "K5KU",
+      "utc": "1734",
+      "comment": "",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:34:00Z"
+    },
+    {
+      "frequency_mhz": 14.229,
+      "mode": "SSB",
+      "dx": "K6DAV",
+      "spotter": "N9ATF",
+      "utc": "1734",
+      "comment": "SS USB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:34:00Z"
+    },
+    {
+      "frequency_mhz": 14.162,
+      "mode": "SSB",
+      "dx": "NS0R",
+      "spotter": "K7WXB",
+      "utc": "1734",
+      "comment": "KS",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:34:00Z"
+    },
+    {
+      "frequency_mhz": 3.515,
+      "mode": "CW",
+      "dx": "SN0SK",
+      "spotter": "DF7FE",
+      "utc": "1734",
+      "comment": "CW",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:34:00Z"
+    },
+    {
+      "frequency_mhz": 14.286,
+      "mode": "SSB",
+      "dx": "W7RM",
+      "spotter": "DL3WB",
+      "utc": "1734",
+      "comment": "5/5 in Europe Germany Gd Dx 44",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:34:00Z"
+    },
+    {
+      "frequency_mhz": 14.074,
+      "mode": "FT8",
+      "dx": "CT7AUT",
+      "spotter": "PD3WMA",
+      "utc": "1734",
+      "comment": "FT8",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:34:00Z"
+    },
+    {
+      "frequency_mhz": 7.0188,
+      "mode": "CW",
+      "dx": "EA1EYL",
+      "spotter": "IN3XSV",
+      "utc": "1734",
+      "comment": "",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:34:00Z"
+    },
+    {
+      "frequency_mhz": 21.29,
+      "mode": "SSB",
+      "dx": "W7CXX",
+      "spotter": "KE2D",
+      "utc": "1734",
+      "comment": "USB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:34:00Z"
+    },
+    {
+      "frequency_mhz": 21.2839,
+      "mode": "SSB",
+      "dx": "N4ZZ",
+      "spotter": "N4ZZ",
+      "utc": "1734",
+      "comment": "",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:34:00Z"
+    },
+    {
+      "frequency_mhz": 21.383,
+      "mode": "SSB",
+      "dx": "N7JI",
+      "spotter": "WA4WR",
+      "utc": "1734",
+      "comment": "USB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:34:00Z"
+    },
+    {
+      "frequency_mhz": 14.171,
+      "mode": "SSB",
+      "dx": "AB5SE",
+      "spotter": "K0BF",
+      "utc": "1734",
+      "comment": "AR",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:34:00Z"
+    },
+    {
+      "frequency_mhz": 14.2255,
+      "mode": "SSB",
+      "dx": "W9QL",
+      "spotter": "W9QL",
+      "utc": "1734",
+      "comment": "",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:34:00Z"
+    },
+    {
+      "frequency_mhz": 21.012,
+      "mode": "CW",
+      "dx": "PR2EG",
+      "spotter": "PR2EG",
+      "utc": "1734",
+      "comment": "SACW TEST CW",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:34:00Z"
+    },
+    {
+      "frequency_mhz": 14.3031,
+      "mode": "SSB",
+      "dx": "NW0M",
+      "spotter": "WX3B",
+      "utc": "1734",
+      "comment": "USB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:34:00Z"
+    },
+    {
+      "frequency_mhz": 7.2171,
+      "mode": "Non indicato",
+      "dx": "WB2ZAB",
+      "spotter": "WB2ZAB",
+      "utc": "1734",
+      "comment": "",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:34:00Z"
+    },
+    {
+      "frequency_mhz": 7.027,
+      "mode": "Non indicato",
+      "dx": "VK9XY",
+      "spotter": "SP7Y",
+      "utc": "1733",
+      "comment": "up",
+      "source": "SQ3SWG",
+      "timestamp": "2026-11-22T17:33:54Z"
+    },
+    {
+      "frequency_mhz": 28.485,
+      "mode": "Non indicato",
+      "dx": "PY4DLN",
+      "spotter": "EA8UP",
+      "utc": "1733",
+      "comment": "cq cq dx",
+      "source": "SQ3SWG",
+      "timestamp": "2026-11-22T17:33:37Z"
+    },
+    {
+      "frequency_mhz": 14.288,
+      "mode": "Non indicato",
+      "dx": "EA8ED",
+      "spotter": "EA3DUR",
+      "utc": "1733",
+      "comment": "DIPLOMA ESCUDOS AUTONOMIAS",
+      "source": "SQ3SWG",
+      "timestamp": "2026-11-22T17:33:12Z"
+    },
+    {
+      "frequency_mhz": 14.0765,
+      "mode": "FT8",
+      "dx": "AA1NK",
+      "spotter": "EA5BCO",
+      "utc": "1733",
+      "comment": "IM98PG<>FN42 FT8 FT8  Sent: -08  Rcvd: -01",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:33:00Z"
+    },
+    {
+      "frequency_mhz": 14.2435,
+      "mode": "SSB",
+      "dx": "W7WA",
+      "spotter": "WA3AAN",
+      "utc": "1733",
+      "comment": "USB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:33:00Z"
+    },
+    {
+      "frequency_mhz": 7.027,
+      "mode": "CW",
+      "dx": "VK9XY",
+      "spotter": "SP7Y",
+      "utc": "1733",
+      "comment": "up",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:33:00Z"
+    },
+    {
+      "frequency_mhz": 28.0744,
+      "mode": "DIGI",
+      "dx": "CR7BUW",
+      "spotter": "WA4IAM",
+      "utc": "1733",
+      "comment": "",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:33:00Z"
+    },
+    {
+      "frequency_mhz": 14.241,
+      "mode": "SSB",
+      "dx": "KK4PJ",
+      "spotter": "WA3AAN",
+      "utc": "1733",
+      "comment": "USB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:33:00Z"
+    },
+    {
+      "frequency_mhz": 28.485,
+      "mode": "SSB",
+      "dx": "PY4DLN",
+      "spotter": "EA8UP",
+      "utc": "1733",
+      "comment": "cq cq dx",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:33:00Z"
+    },
+    {
+      "frequency_mhz": 21.3758,
+      "mode": "SSB",
+      "dx": "VE9XX",
+      "spotter": "WA4WR",
+      "utc": "1733",
+      "comment": "USB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:33:00Z"
+    },
+    {
+      "frequency_mhz": 14.3438,
+      "mode": "SSB",
+      "dx": "VE5SF",
+      "spotter": "WU8T",
+      "utc": "1733",
+      "comment": "USB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:33:00Z"
+    },
+    {
+      "frequency_mhz": 14.1838,
+      "mode": "SSB",
+      "dx": "NM5DX",
+      "spotter": "K1GMS",
+      "utc": "1733",
+      "comment": "USB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:33:00Z"
+    },
+    {
+      "frequency_mhz": 14.288,
+      "mode": "SSB",
+      "dx": "EA8ED",
+      "spotter": "EA3DUR",
+      "utc": "1733",
+      "comment": "DIPLOMA ESCUDOS AUTONOMIAS",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:33:00Z"
+    },
+    {
+      "frequency_mhz": 14.166,
+      "mode": "SSB",
+      "dx": "NS0R",
+      "spotter": "K6SEA",
+      "utc": "1733",
+      "comment": "",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:33:00Z"
+    },
+    {
+      "frequency_mhz": 21.3505,
+      "mode": "SSB",
+      "dx": "VE4SG",
+      "spotter": "N3DUE",
+      "utc": "1733",
+      "comment": "MB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:33:00Z"
+    },
+    {
+      "frequency_mhz": 7.24,
+      "mode": "SSB",
+      "dx": "AA5Z",
+      "spotter": "AA5Z",
+      "utc": "1733",
+      "comment": "CQ SS La  LSB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:33:00Z"
+    },
+    {
+      "frequency_mhz": 14.3339,
+      "mode": "SSB",
+      "dx": "N2FT",
+      "spotter": "N5SUJ",
+      "utc": "1733",
+      "comment": "VA",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:33:00Z"
+    },
+    {
+      "frequency_mhz": 14.168,
+      "mode": "SSB",
+      "dx": "N4YDU",
+      "spotter": "K7WXB",
+      "utc": "1733",
+      "comment": "NC",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:33:00Z"
+    },
+    {
+      "frequency_mhz": 28.074,
+      "mode": "FT8",
+      "dx": "LU1FIV",
+      "spotter": "IU1LEB",
+      "utc": "1732",
+      "comment": "CQ FT8",
+      "source": "SQ3SWG",
+      "timestamp": "2026-11-22T17:32:48Z"
+    },
+    {
+      "frequency_mhz": 7.135,
+      "mode": "Non indicato",
+      "dx": "EH5CCE",
+      "spotter": "EA5OK",
+      "utc": "1732",
+      "comment": "DIPLOMA COMPOSITORES CLASICOS",
+      "source": "SQ3SWG",
+      "timestamp": "2026-11-22T17:32:14Z"
+    },
+    {
+      "frequency_mhz": 28.074,
+      "mode": "FT8",
+      "dx": "LU1FIV",
+      "spotter": "IU1LEB",
+      "utc": "1732",
+      "comment": "CQ FT8",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:32:00Z"
+    },
+    {
+      "frequency_mhz": 21.27,
+      "mode": "SSB",
+      "dx": "KH7X",
+      "spotter": "NY1U",
+      "utc": "1732",
+      "comment": "SS AZ",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:32:00Z"
+    },
+    {
+      "frequency_mhz": 21.3125,
+      "mode": "SSB",
+      "dx": "W1XX",
+      "spotter": "W1XX",
+      "utc": "1732",
+      "comment": "SS RI",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:32:00Z"
+    },
+    {
+      "frequency_mhz": 21.337,
+      "mode": "SSB",
+      "dx": "K9PW",
+      "spotter": "K9PW",
+      "utc": "1732",
+      "comment": "",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:32:00Z"
+    },
+    {
+      "frequency_mhz": 14.2328,
+      "mode": "SSB",
+      "dx": "K7JQ",
+      "spotter": "WA3AAN",
+      "utc": "1732",
+      "comment": "USB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:32:00Z"
+    },
+    {
+      "frequency_mhz": 14.18,
+      "mode": "SSB",
+      "dx": "K9KE",
+      "spotter": "K1GMS",
+      "utc": "1732",
+      "comment": "USB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:32:00Z"
+    },
+    {
+      "frequency_mhz": 28.0113,
+      "mode": "CW",
+      "dx": "D44LZ",
+      "spotter": "N8ZI",
+      "utc": "1732",
+      "comment": "fb signal",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:32:00Z"
+    },
+    {
+      "frequency_mhz": 21.4029,
+      "mode": "SSB",
+      "dx": "W6LD",
+      "spotter": "KJ5BIN",
+      "utc": "1732",
+      "comment": "USB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:32:00Z"
+    },
+    {
+      "frequency_mhz": 7.135,
+      "mode": "SSB",
+      "dx": "EH5CCE",
+      "spotter": "EA5OK",
+      "utc": "1732",
+      "comment": "DIPLOMA COMPOSITORES CLASICOS",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:32:00Z"
+    },
+    {
+      "frequency_mhz": 18.07,
+      "mode": "CW",
+      "dx": "N1IYH",
+      "spotter": "WP3Y",
+      "utc": "1732",
+      "comment": "599 IN COAMO, PUERTO RICO",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:32:00Z"
+    },
+    {
+      "frequency_mhz": 21.4262,
+      "mode": "SSB",
+      "dx": "K6YLH",
+      "spotter": "K6YLH",
+      "utc": "1732",
+      "comment": "November Sweepstakes",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:32:00Z"
+    },
+    {
+      "frequency_mhz": 14.2172,
+      "mode": "SSB",
+      "dx": "VE7LFN",
+      "spotter": "N8YXR",
+      "utc": "1732",
+      "comment": "USB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:32:00Z"
+    },
+    {
+      "frequency_mhz": 14.165,
+      "mode": "SSB",
+      "dx": "NF6P",
+      "spotter": "K0BF",
+      "utc": "1732",
+      "comment": "WCF",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:32:00Z"
+    },
+    {
+      "frequency_mhz": 14.2051,
+      "mode": "SSB",
+      "dx": "W3IDT",
+      "spotter": "W3IDT",
+      "utc": "1732",
+      "comment": "SWEEPSTAKES",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:32:00Z"
+    },
+    {
+      "frequency_mhz": 28.209,
+      "mode": "Non indicato",
+      "dx": "K5RWK",
+      "spotter": "EA1AIW",
+      "utc": "1732",
+      "comment": "BEACON",
+      "source": "SQ3SWG",
+      "timestamp": "2026-11-22T17:32:00Z"
+    },
+    {
+      "frequency_mhz": 21.37,
+      "mode": "SSB",
+      "dx": "N1RM",
+      "spotter": "N1RM",
+      "utc": "1731",
+      "comment": "",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:31:00Z"
+    },
+    {
+      "frequency_mhz": 14.276,
+      "mode": "SSB",
+      "dx": "K3DNE",
+      "spotter": "WX3B",
+      "utc": "1731",
+      "comment": "SC USB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:31:00Z"
+    },
+    {
+      "frequency_mhz": 28.0744,
+      "mode": "DIGI",
+      "dx": "EA8AQP",
+      "spotter": "WA4IAM",
+      "utc": "1731",
+      "comment": "",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:31:00Z"
+    },
+    {
+      "frequency_mhz": 21.385,
+      "mode": "SSB",
+      "dx": "KM7W",
+      "spotter": "KM7W",
+      "utc": "1731",
+      "comment": "ARRL Sweepstakes SSB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:31:00Z"
+    },
+    {
+      "frequency_mhz": 21.4029,
+      "mode": "SSB",
+      "dx": "W6LG",
+      "spotter": "K3KU",
+      "utc": "1731",
+      "comment": "",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:31:00Z"
+    },
+    {
+      "frequency_mhz": 14.168,
+      "mode": "SSB",
+      "dx": "N4YDU",
+      "spotter": "K1GMS",
+      "utc": "1731",
+      "comment": "USB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:31:00Z"
+    },
+    {
+      "frequency_mhz": 21.3507,
+      "mode": "SSB",
+      "dx": "VE4SG",
+      "spotter": "7Z1AO",
+      "utc": "1731",
+      "comment": "VE4SG 15M SSB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:31:00Z"
+    },
+    {
+      "frequency_mhz": 7.03,
+      "mode": "CW",
+      "dx": "PP5NK",
+      "spotter": "PY2IQ",
+      "utc": "1731",
+      "comment": "SACW TEST CW",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:31:00Z"
+    },
+    {
+      "frequency_mhz": 7.028,
+      "mode": "CW",
+      "dx": "HA8EV",
+      "spotter": "ZS1C",
+      "utc": "1731",
+      "comment": "loud in ZS1  CW",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:31:00Z"
+    },
+    {
+      "frequency_mhz": 14.3339,
+      "mode": "SSB",
+      "dx": "N2FT",
+      "spotter": "KA4RRU",
+      "utc": "1731",
+      "comment": "USB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:31:00Z"
+    },
+    {
+      "frequency_mhz": 21.2829,
+      "mode": "SSB",
+      "dx": "K3TW",
+      "spotter": "K7QA",
+      "utc": "1731",
+      "comment": "USB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:31:00Z"
+    },
+    {
+      "frequency_mhz": 7.1772,
+      "mode": "SSB",
+      "dx": "KC9IL",
+      "spotter": "N5RP",
+      "utc": "1731",
+      "comment": "SS IL",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:31:00Z"
+    },
+    {
+      "frequency_mhz": 14.161,
+      "mode": "SSB",
+      "dx": "KA6BIM",
+      "spotter": "K0BF",
+      "utc": "1731",
+      "comment": "OR",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:31:00Z"
+    },
+    {
+      "frequency_mhz": 7.14,
+      "mode": "Non indicato",
+      "dx": "GW1KGR",
+      "spotter": "LB9KJ",
+      "utc": "1730",
+      "comment": "",
+      "source": "SQ3SWG",
+      "timestamp": "2026-11-22T17:30:27Z"
+    },
+    {
+      "frequency_mhz": 14.252,
+      "mode": "SSB",
+      "dx": "K5TR",
+      "spotter": "ON4VMA",
+      "utc": "1730",
+      "comment": "USB",
+      "source": "SQ3SWG",
+      "timestamp": "2026-11-22T17:30:15Z"
+    },
+    {
+      "frequency_mhz": 14.222,
+      "mode": "SSB",
+      "dx": "WQ6L",
+      "spotter": "WA3AAN",
+      "utc": "1730",
+      "comment": "USB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:30:00Z"
+    },
+    {
+      "frequency_mhz": 21.437,
+      "mode": "SSB",
+      "dx": "ND7K",
+      "spotter": "N6WIN",
+      "utc": "1730",
+      "comment": "",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:30:00Z"
+    },
+    {
+      "frequency_mhz": 7.0475,
+      "mode": "FT4",
+      "dx": "VK9XY",
+      "spotter": "JR6RRD",
+      "utc": "1730",
+      "comment": "FT4 -2dB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:30:00Z"
+    },
+    {
+      "frequency_mhz": 21.4029,
+      "mode": "SSB",
+      "dx": "W6LD",
+      "spotter": "KB0V",
+      "utc": "1730",
+      "comment": "USB SCV",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:30:00Z"
+    },
+    {
+      "frequency_mhz": 7.1665,
+      "mode": "SSB",
+      "dx": "WA2CP",
+      "spotter": "WA2CP",
+      "utc": "1730",
+      "comment": "",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:30:00Z"
+    },
+    {
+      "frequency_mhz": 7.14,
+      "mode": "SSB",
+      "dx": "GW1KGR",
+      "spotter": "LB9KJ",
+      "utc": "1730",
+      "comment": "",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:30:00Z"
+    },
+    {
+      "frequency_mhz": 14.1559,
+      "mode": "SSB",
+      "dx": "W4NF",
+      "spotter": "W4NF",
+      "utc": "1730",
+      "comment": "",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:30:00Z"
+    },
+    {
+      "frequency_mhz": 14.165,
+      "mode": "SSB",
+      "dx": "NF6P",
+      "spotter": "K1GMS",
+      "utc": "1730",
+      "comment": "USB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:30:00Z"
+    },
+    {
+      "frequency_mhz": 14.252,
+      "mode": "SSB",
+      "dx": "K5TR",
+      "spotter": "ON4VMA",
+      "utc": "1730",
+      "comment": "USB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:30:00Z"
+    },
+    {
+      "frequency_mhz": 7.174,
+      "mode": "SSB",
+      "dx": "W8PEN",
+      "spotter": "N5RP",
+      "utc": "1730",
+      "comment": "SS LSB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:30:00Z"
+    },
+    {
+      "frequency_mhz": 14.158,
+      "mode": "SSB",
+      "dx": "KV7N",
+      "spotter": "K0BF",
+      "utc": "1730",
+      "comment": "ID",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:30:00Z"
+    },
+    {
+      "frequency_mhz": 7.126,
+      "mode": "Non indicato",
+      "dx": "M1JOK",
+      "spotter": "PD7V",
+      "utc": "1729",
+      "comment": "THNX VISIT MY QRZ PAGE PLEASE",
+      "source": "SQ3SWG",
+      "timestamp": "2026-11-22T17:29:36Z"
+    },
+    {
+      "frequency_mhz": 28.485,
+      "mode": "Non indicato",
+      "dx": "PY4DLN",
+      "spotter": "EA7LQK",
+      "utc": "1729",
+      "comment": "PHO tnx 73",
+      "source": "SQ3SWG",
+      "timestamp": "2026-11-22T17:29:31Z"
+    },
+    {
+      "frequency_mhz": 1.84,
+      "mode": "FT8",
+      "dx": "F8STC",
+      "spotter": "F8STC",
+      "utc": "1729",
+      "comment": "FT8",
+      "source": "SQ3SWG",
+      "timestamp": "2026-11-22T17:29:24Z"
+    },
+    {
+      "frequency_mhz": 1.84,
+      "mode": "FT8",
+      "dx": "DK0GV",
+      "spotter": "DF7AA",
+      "utc": "1729",
+      "comment": "ft8 80th of Lower Saxony",
+      "source": "SQ3SWG",
+      "timestamp": "2026-11-22T17:29:08Z"
+    },
+    {
+      "frequency_mhz": 21.3506,
+      "mode": "SSB",
+      "dx": "VE4SG",
+      "spotter": "N6WIN",
+      "utc": "1729",
+      "comment": "",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:29:00Z"
+    },
+    {
+      "frequency_mhz": 7.1772,
+      "mode": "SSB",
+      "dx": "KC9IL",
+      "spotter": "W8BI",
+      "utc": "1729",
+      "comment": "LSB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:29:00Z"
+    },
+    {
+      "frequency_mhz": 14.3262,
+      "mode": "SSB",
+      "dx": "K6LL",
+      "spotter": "K6LL",
+      "utc": "1729",
+      "comment": "USB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:29:00Z"
+    },
+    {
+      "frequency_mhz": 7.025,
+      "mode": "CW",
+      "dx": "PY2DMX",
+      "spotter": "PY2IQ",
+      "utc": "1729",
+      "comment": "SACW TEST CW",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:29:00Z"
+    },
+    {
+      "frequency_mhz": 14.3438,
+      "mode": "SSB",
+      "dx": "VE5SF",
+      "spotter": "WA1ZYX",
+      "utc": "1729",
+      "comment": "SK",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:29:00Z"
+    },
+    {
+      "frequency_mhz": 21.295,
+      "mode": "SSB",
+      "dx": "K6AO",
+      "spotter": "NC6R",
+      "utc": "1729",
+      "comment": "YL  in SV",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:29:00Z"
+    },
+    {
+      "frequency_mhz": 7.126,
+      "mode": "SSB",
+      "dx": "M1JOK",
+      "spotter": "PD7V",
+      "utc": "1729",
+      "comment": "THNX VISIT MY QRZ PAGE PLEASE",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:29:00Z"
+    },
+    {
+      "frequency_mhz": 28.485,
+      "mode": "SSB",
+      "dx": "PY4DLN",
+      "spotter": "EA7LQK",
+      "utc": "1729",
+      "comment": "PHO tnx 73",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:29:00Z"
+    },
+    {
+      "frequency_mhz": 14.219,
+      "mode": "SSB",
+      "dx": "KT4Q",
+      "spotter": "WA3AAN",
+      "utc": "1729",
+      "comment": "USB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:29:00Z"
+    },
+    {
+      "frequency_mhz": 1.84,
+      "mode": "FT8",
+      "dx": "F8STC",
+      "spotter": "F8STC",
+      "utc": "1729",
+      "comment": "FT8",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:29:00Z"
+    },
+    {
+      "frequency_mhz": 14.262,
+      "mode": "SSB",
+      "dx": "N2BJ",
+      "spotter": "AD7N",
+      "utc": "1729",
+      "comment": "USB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:29:00Z"
+    },
+    {
+      "frequency_mhz": 21.4029,
+      "mode": "SSB",
+      "dx": "NX6T",
+      "spotter": "NX6T",
+      "utc": "1729",
+      "comment": "ARRL Sweepstakes SSB ORG",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:29:00Z"
+    },
+    {
+      "frequency_mhz": 21.2802,
+      "mode": "SSB",
+      "dx": "K9CT",
+      "spotter": "K9CT",
+      "utc": "1729",
+      "comment": "SS IL",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:29:00Z"
+    },
+    {
+      "frequency_mhz": 21.347,
+      "mode": "SSB",
+      "dx": "AD1C",
+      "spotter": "WA4WR",
+      "utc": "1729",
+      "comment": "USB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:29:00Z"
+    },
+    {
+      "frequency_mhz": 7.02,
+      "mode": "CW",
+      "dx": "ZZ2T",
+      "spotter": "PY2IQ",
+      "utc": "1729",
+      "comment": "SACW TEST CW",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:29:00Z"
+    },
+    {
+      "frequency_mhz": 1.84,
+      "mode": "FT8",
+      "dx": "DK0GV",
+      "spotter": "DF7AA",
+      "utc": "1729",
+      "comment": "ft8 80th of Lower Saxony",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:29:00Z"
+    },
+    {
+      "frequency_mhz": 7.17,
+      "mode": "SSB",
+      "dx": "K0PG",
+      "spotter": "N5RP",
+      "utc": "1729",
+      "comment": "SS LSB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:29:00Z"
+    },
+    {
+      "frequency_mhz": 21.391,
+      "mode": "SSB",
+      "dx": "N0MA",
+      "spotter": "W7II",
+      "utc": "1729",
+      "comment": "iowa",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:29:00Z"
+    },
+    {
+      "frequency_mhz": 14.0956,
+      "mode": "Non indicato",
+      "dx": "UR2680YL",
+      "spotter": "UR2680YL",
+      "utc": "1728",
+      "comment": "SWL DigiClub University",
+      "source": "SQ3SWG",
+      "timestamp": "2026-11-22T17:28:59Z"
+    },
+    {
+      "frequency_mhz": 1.85,
+      "mode": "Non indicato",
+      "dx": "OE5TOP",
+      "spotter": "SV2JAO",
+      "utc": "1728",
+      "comment": "cq",
+      "source": "SQ3SWG",
+      "timestamp": "2026-11-22T17:28:37Z"
+    },
+    {
+      "frequency_mhz": 28.074,
+      "mode": "FT8",
+      "dx": "N5IF",
+      "spotter": "G0KTN",
+      "utc": "1728",
+      "comment": "IO81TI<>EM11IG FT8",
+      "source": "SQ3SWG",
+      "timestamp": "2026-11-22T17:28:20Z"
+    },
+    {
+      "frequency_mhz": 14.0956,
+      "mode": "Non indicato",
+      "dx": "F4WCV",
+      "spotter": "UR2680YL",
+      "utc": "1728",
+      "comment": "WSPR sign -27",
+      "source": "SQ3SWG",
+      "timestamp": "2026-11-22T17:28:14Z"
+    },
+    {
+      "frequency_mhz": 14.199,
+      "mode": "SSB",
+      "dx": "KI2D",
+      "spotter": "KI2D",
+      "utc": "1728",
+      "comment": "ARRL SS Phone",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:28:00Z"
+    },
+    {
+      "frequency_mhz": 14.2145,
+      "mode": "SSB",
+      "dx": "N9MSG",
+      "spotter": "WA3AAN",
+      "utc": "1728",
+      "comment": "USB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:28:00Z"
+    },
+    {
+      "frequency_mhz": 14.0956,
+      "mode": "DIGI",
+      "dx": "UR2680YL",
+      "spotter": "UR2680YL",
+      "utc": "1728",
+      "comment": "SWL DigiClub University",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:28:00Z"
+    },
+    {
+      "frequency_mhz": 18.095,
+      "mode": "CW",
+      "dx": "3X4U",
+      "spotter": "3X4U",
+      "utc": "1728",
+      "comment": "rockall.be DXpedition Guinea",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:28:00Z"
+    },
+    {
+      "frequency_mhz": 21.3084,
+      "mode": "SSB",
+      "dx": "K7ST",
+      "spotter": "N6WIN",
+      "utc": "1728",
+      "comment": "",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:28:00Z"
+    },
+    {
+      "frequency_mhz": 14.213,
+      "mode": "SSB",
+      "dx": "KG8CW",
+      "spotter": "WA3AAN",
+      "utc": "1728",
+      "comment": "USB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:28:00Z"
+    },
+    {
+      "frequency_mhz": 14.1508,
+      "mode": "SSB",
+      "dx": "AC0W",
+      "spotter": "K0BF",
+      "utc": "1728",
+      "comment": "MN",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:28:00Z"
+    },
+    {
+      "frequency_mhz": 14.3234,
+      "mode": "SSB",
+      "dx": "N0UR",
+      "spotter": "N1TB",
+      "utc": "1728",
+      "comment": "USB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:28:00Z"
+    },
+    {
+      "frequency_mhz": 1.85,
+      "mode": "SSB",
+      "dx": "OE5TOP",
+      "spotter": "SV2JAO",
+      "utc": "1728",
+      "comment": "cq",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:28:00Z"
+    },
+    {
+      "frequency_mhz": 14.267,
+      "mode": "SSB",
+      "dx": "KE2AY",
+      "spotter": "W4TM",
+      "utc": "1728",
+      "comment": "",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:28:00Z"
+    },
+    {
+      "frequency_mhz": 21.3059,
+      "mode": "SSB",
+      "dx": "WX5S",
+      "spotter": "N6WIN",
+      "utc": "1728",
+      "comment": "",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:28:00Z"
+    },
+    {
+      "frequency_mhz": 28.074,
+      "mode": "FT8",
+      "dx": "N5IF",
+      "spotter": "G0KTN",
+      "utc": "1728",
+      "comment": "IO81TI<>EM11IG FT8",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:28:00Z"
+    },
+    {
+      "frequency_mhz": 14.21,
+      "mode": "SSB",
+      "dx": "WD9CIR",
+      "spotter": "WA3AAN",
+      "utc": "1728",
+      "comment": "USB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:28:00Z"
+    },
+    {
+      "frequency_mhz": 14.0956,
+      "mode": "DIGI",
+      "dx": "F4WCV",
+      "spotter": "UR2680YL",
+      "utc": "1728",
+      "comment": "WSPR sign -27",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:28:00Z"
+    },
+    {
+      "frequency_mhz": 14.3035,
+      "mode": "SSB",
+      "dx": "WX3B",
+      "spotter": "AD7N",
+      "utc": "1728",
+      "comment": "USB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:28:00Z"
+    },
+    {
+      "frequency_mhz": 7.1165,
+      "mode": "Non indicato",
+      "dx": "C37NL",
+      "spotter": "OE5PZE",
+      "utc": "1727",
+      "comment": "59",
+      "source": "SQ3SWG",
+      "timestamp": "2026-11-22T17:27:57Z"
+    },
+    {
+      "frequency_mhz": 28.074,
+      "mode": "FT8",
+      "dx": "LU1FIV",
+      "spotter": "G0KTN",
+      "utc": "1727",
+      "comment": "IO81TI<>FF98GR FT8",
+      "source": "SQ3SWG",
+      "timestamp": "2026-11-22T17:27:45Z"
+    },
+    {
+      "frequency_mhz": 10.136,
+      "mode": "Non indicato",
+      "dx": "VK9XY",
+      "spotter": "HA5CPN",
+      "utc": "1727",
+      "comment": "FT8_-15_R-19",
+      "source": "SQ3SWG",
+      "timestamp": "2026-11-22T17:27:15Z"
+    },
+    {
+      "frequency_mhz": 7.1165,
+      "mode": "SSB",
+      "dx": "C37NL",
+      "spotter": "OE5PZE",
+      "utc": "1727",
+      "comment": "59",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:27:00Z"
+    },
+    {
+      "frequency_mhz": 21.3445,
+      "mode": "SSB",
+      "dx": "N5LFE",
+      "spotter": "WA4WR",
+      "utc": "1727",
+      "comment": "USB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:27:00Z"
+    },
+    {
+      "frequency_mhz": 7.033,
+      "mode": "CW",
+      "dx": "PY4XX",
+      "spotter": "PY2IQ",
+      "utc": "1727",
+      "comment": "SACW TEST CW",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:27:00Z"
+    },
+    {
+      "frequency_mhz": 21.255,
+      "mode": "SSB",
+      "dx": "NH6Y",
+      "spotter": "N2TX",
+      "utc": "1727",
+      "comment": "**NLI Section** Rare",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:27:00Z"
+    },
+    {
+      "frequency_mhz": 14.0334,
+      "mode": "CW",
+      "dx": "7X4MW",
+      "spotter": "VE3CWP",
+      "utc": "1727",
+      "comment": "",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:27:00Z"
+    },
+    {
+      "frequency_mhz": 28.074,
+      "mode": "FT8",
+      "dx": "LU1FIV",
+      "spotter": "G0KTN",
+      "utc": "1727",
+      "comment": "IO81TI<>FF98GR FT8",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:27:00Z"
+    },
+    {
+      "frequency_mhz": 21.4289,
+      "mode": "SSB",
+      "dx": "ND4Y",
+      "spotter": "ND4Y",
+      "utc": "1727",
+      "comment": "KY",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:27:00Z"
     },
     {
       "frequency_mhz": 28.47,
       "mode": "SSB",
-      "dx": "UP0L",
-      "spotter": "IT9SAZ",
-      "utc": "0957",
-      "comment": "contest",
+      "dx": "CE6YUS",
+      "spotter": "PP5DKD",
+      "utc": "1727",
+      "comment": "73",
       "source": "HamQTH",
-      "timestamp": "2026-11-22T09:57:00Z"
+      "timestamp": "2026-11-22T17:27:00Z"
     },
     {
-      "frequency_mhz": 14.001,
-      "mode": "CW",
-      "dx": "SP9XCN",
-      "spotter": "EA3CWT",
-      "utc": "0957",
+      "frequency_mhz": 14.265,
+      "mode": "SSB",
+      "dx": "AI0Y",
+      "spotter": "N5SUJ",
+      "utc": "1727",
+      "comment": "ND",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:27:00Z"
+    },
+    {
+      "frequency_mhz": 14.292,
+      "mode": "SSB",
+      "dx": "N1IPB",
+      "spotter": "N1IPB",
+      "utc": "1727",
+      "comment": "QRV",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:27:00Z"
+    },
+    {
+      "frequency_mhz": 14.2966,
+      "mode": "SSB",
+      "dx": "K6LL",
+      "spotter": "K6LL",
+      "utc": "1727",
       "comment": "",
       "source": "HamQTH",
-      "timestamp": "2026-11-22T09:57:00Z"
+      "timestamp": "2026-11-22T17:27:00Z"
+    },
+    {
+      "frequency_mhz": 21.3811,
+      "mode": "SSB",
+      "dx": "WC6H",
+      "spotter": "N6WIN",
+      "utc": "1727",
+      "comment": "",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:27:00Z"
+    },
+    {
+      "frequency_mhz": 10.136,
+      "mode": "DIGI",
+      "dx": "VK9XY",
+      "spotter": "HA5CPN",
+      "utc": "1727",
+      "comment": "FT8_-15_R-19",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:27:00Z"
+    },
+    {
+      "frequency_mhz": 21.267,
+      "mode": "SSB",
+      "dx": "N5RZ",
+      "spotter": "N1RM",
+      "utc": "1727",
+      "comment": "USB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:27:00Z"
+    },
+    {
+      "frequency_mhz": 14.222,
+      "mode": "SSB",
+      "dx": "WQ6L",
+      "spotter": "K9PW",
+      "utc": "1727",
+      "comment": "",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:27:00Z"
+    },
+    {
+      "frequency_mhz": 7.015,
+      "mode": "CW",
+      "dx": "PD00DOG",
+      "spotter": "PD0YL",
+      "utc": "1726",
+      "comment": "CW SES YL Monica",
+      "source": "SQ3SWG",
+      "timestamp": "2026-11-22T17:26:45Z"
+    },
+    {
+      "frequency_mhz": 28.074,
+      "mode": "FT8",
+      "dx": "VE1JCC",
+      "spotter": "G0KTN",
+      "utc": "1726",
+      "comment": "IO81TI<>FN76 FT8",
+      "source": "SQ3SWG",
+      "timestamp": "2026-11-22T17:26:22Z"
+    },
+    {
+      "frequency_mhz": 21.3596,
+      "mode": "SSB",
+      "dx": "K6YT",
+      "spotter": "W0YK",
+      "utc": "1726",
+      "comment": "",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:26:00Z"
+    },
+    {
+      "frequency_mhz": 7.015,
+      "mode": "CW",
+      "dx": "PR2EG",
+      "spotter": "PY2IQ",
+      "utc": "1726",
+      "comment": "SACW TEST CW",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:26:00Z"
+    },
+    {
+      "frequency_mhz": 7.015,
+      "mode": "CW",
+      "dx": "PD00DOG",
+      "spotter": "PD0YL",
+      "utc": "1726",
+      "comment": "CW SES YL Monica",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:26:00Z"
+    },
+    {
+      "frequency_mhz": 18.07,
+      "mode": "CW",
+      "dx": "EA1CKO",
+      "spotter": "WP3Y",
+      "utc": "1726",
+      "comment": "599 IN PR QSO TNX 73",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:26:00Z"
+    },
+    {
+      "frequency_mhz": 21.323,
+      "mode": "SSB",
+      "dx": "NR4L",
+      "spotter": "W7II",
+      "utc": "1726",
+      "comment": "YL go go go",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:26:00Z"
+    },
+    {
+      "frequency_mhz": 21.262,
+      "mode": "SSB",
+      "dx": "VA1MM",
+      "spotter": "N6WIN",
+      "utc": "1726",
+      "comment": "",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:26:00Z"
+    },
+    {
+      "frequency_mhz": 21.3201,
+      "mode": "SSB",
+      "dx": "N1LN",
+      "spotter": "N1LN",
+      "utc": "1726",
+      "comment": "USB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:26:00Z"
+    },
+    {
+      "frequency_mhz": 14.1723,
+      "mode": "SSB",
+      "dx": "N4ZZ",
+      "spotter": "N4ZZ",
+      "utc": "1726",
+      "comment": "",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:26:00Z"
+    },
+    {
+      "frequency_mhz": 28.074,
+      "mode": "FT8",
+      "dx": "VE1JCC",
+      "spotter": "G0KTN",
+      "utc": "1726",
+      "comment": "IO81TI<>FN76 FT8",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:26:00Z"
+    },
+    {
+      "frequency_mhz": 21.4262,
+      "mode": "SSB",
+      "dx": "K6YLH",
+      "spotter": "K6YLH",
+      "utc": "1726",
+      "comment": "November Sweepstakes",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:26:00Z"
+    },
+    {
+      "frequency_mhz": 14.162,
+      "mode": "SSB",
+      "dx": "NS0R",
+      "spotter": "NS0R",
+      "utc": "1726",
+      "comment": "",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:26:00Z"
+    },
+    {
+      "frequency_mhz": 14.019,
+      "mode": "CW",
+      "dx": "IV3ZXF",
+      "spotter": "W6SDM",
+      "utc": "1726",
+      "comment": "CDM I*",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:26:00Z"
+    },
+    {
+      "frequency_mhz": 21.2979,
+      "mode": "SSB",
+      "dx": "K0AJW",
+      "spotter": "N3DUE",
+      "utc": "1726",
+      "comment": "ND",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:26:00Z"
+    },
+    {
+      "frequency_mhz": 21.341,
+      "mode": "SSB",
+      "dx": "K0EU",
+      "spotter": "K0EU",
+      "utc": "1726",
+      "comment": "",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:26:00Z"
     },
     {
       "frequency_mhz": 14.074,
+      "mode": "FT8",
+      "dx": "K6MNO",
+      "spotter": "IZ0MIO",
+      "utc": "1725",
+      "comment": "FT8 -18db",
+      "source": "SQ3SWG",
+      "timestamp": "2026-11-22T17:25:47Z"
+    },
+    {
+      "frequency_mhz": 10.1364,
+      "mode": "FT8",
+      "dx": "EB3DBR",
+      "spotter": "US6UZ",
+      "utc": "1725",
+      "comment": "FT8 -9 dB tnx QSO",
+      "source": "SQ3SWG",
+      "timestamp": "2026-11-22T17:25:40Z"
+    },
+    {
+      "frequency_mhz": 3.717,
+      "mode": "Non indicato",
+      "dx": "IU2EZO",
+      "spotter": "IU3FVJ",
+      "utc": "1725",
+      "comment": "IONOTEST",
+      "source": "SQ3SWG",
+      "timestamp": "2026-11-22T17:25:40Z"
+    },
+    {
+      "frequency_mhz": 3.5125,
+      "mode": "Non indicato",
+      "dx": "S580ZRS",
+      "spotter": "IW6DRH",
+      "utc": "1725",
+      "comment": "CQ,73",
+      "source": "SQ3SWG",
+      "timestamp": "2026-11-22T17:25:40Z"
+    },
+    {
+      "frequency_mhz": 7.045,
+      "mode": "RTTY",
+      "dx": "IY5PIS",
+      "spotter": "IU5TUD",
+      "utc": "1725",
+      "comment": "Coltano Marconi 1911 RTTY",
+      "source": "SQ3SWG",
+      "timestamp": "2026-11-22T17:25:30Z"
+    },
+    {
+      "frequency_mhz": 7.074,
+      "mode": "Non indicato",
+      "dx": "R6YG",
+      "spotter": "R6YG",
+      "utc": "1725",
+      "comment": "Miller-DX-Club member",
+      "source": "SQ3SWG",
+      "timestamp": "2026-11-22T17:25:28Z"
+    },
+    {
+      "frequency_mhz": 28.0754,
+      "mode": "FT8",
+      "dx": "LU1FIV",
+      "spotter": "G4CJC",
+      "utc": "1725",
+      "comment": "FT8",
+      "source": "SQ3SWG",
+      "timestamp": "2026-11-22T17:25:24Z"
+    },
+    {
+      "frequency_mhz": 14.074,
+      "mode": "FT8",
+      "dx": "K6MNO",
+      "spotter": "IZ0MIO",
+      "utc": "1725",
+      "comment": "FT8 -18db",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:25:00Z"
+    },
+    {
+      "frequency_mhz": 10.1364,
+      "mode": "FT8",
+      "dx": "EB3DBR",
+      "spotter": "US6UZ",
+      "utc": "1725",
+      "comment": "FT8 -9 dB tnx QSO",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:25:00Z"
+    },
+    {
+      "frequency_mhz": 3.5125,
+      "mode": "CW",
+      "dx": "S580ZRS",
+      "spotter": "IW6DRH",
+      "utc": "1725",
+      "comment": "CQ,73",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:25:00Z"
+    },
+    {
+      "frequency_mhz": 3.717,
+      "mode": "SSB",
+      "dx": "IU2EZO",
+      "spotter": "IU3FVJ",
+      "utc": "1725",
+      "comment": "IONOTEST",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:25:00Z"
+    },
+    {
+      "frequency_mhz": 21.024,
+      "mode": "CW",
+      "dx": "LS2D",
+      "spotter": "PY2ATN",
+      "utc": "1725",
+      "comment": "CW",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:25:00Z"
+    },
+    {
+      "frequency_mhz": 14.241,
+      "mode": "SSB",
+      "dx": "KK4PJ",
+      "spotter": "WU8T",
+      "utc": "1725",
+      "comment": "USB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:25:00Z"
+    },
+    {
+      "frequency_mhz": 7.045,
+      "mode": "RTTY",
+      "dx": "IY5PIS",
+      "spotter": "IU5TUD",
+      "utc": "1725",
+      "comment": "Coltano Marconi 1911 RTTY",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:25:00Z"
+    },
+    {
+      "frequency_mhz": 7.074,
       "mode": "DIGI",
-      "dx": "OZ7DR",
-      "spotter": "IW2HWN",
-      "utc": "0957",
-      "comment": "73",
+      "dx": "R6YG",
+      "spotter": "R6YG",
+      "utc": "1725",
+      "comment": "Miller-DX-Club member",
       "source": "HamQTH",
-      "timestamp": "2026-11-22T09:57:00Z"
+      "timestamp": "2026-11-22T17:25:00Z"
     },
     {
-      "frequency_mhz": 14.0423,
-      "mode": "CW",
-      "dx": "EA5O",
-      "spotter": "DL1EJD",
-      "utc": "0957",
-      "comment": "CW",
+      "frequency_mhz": 28.0754,
+      "mode": "FT8",
+      "dx": "LU1FIV",
+      "spotter": "G4CJC",
+      "utc": "1725",
+      "comment": "FT8",
       "source": "HamQTH",
-      "timestamp": "2026-11-22T09:57:00Z"
+      "timestamp": "2026-11-22T17:25:00Z"
     },
     {
-      "frequency_mhz": 3.7012,
+      "frequency_mhz": 14.34,
       "mode": "SSB",
-      "dx": "S57TW",
-      "spotter": "S52K",
-      "utc": "0956",
-      "comment": "LSB",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:56:58Z"
-    },
-    {
-      "frequency_mhz": 14.0205,
-      "mode": "CW",
-      "dx": "IZ3ETC",
-      "spotter": "EA7GZQ",
-      "utc": "0956",
-      "comment": "CW",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:56:49Z"
-    },
-    {
-      "frequency_mhz": 28.0199,
-      "mode": "Non indicato",
-      "dx": "UD8A",
-      "spotter": "YT1XC",
-      "utc": "0956",
-      "comment": "",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:56:48Z"
-    },
-    {
-      "frequency_mhz": 3.6879,
-      "mode": "SSB",
-      "dx": "S51TX",
-      "spotter": "S58W",
-      "utc": "0956",
-      "comment": "LSB",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:56:43Z"
-    },
-    {
-      "frequency_mhz": 7.143,
-      "mode": "Non indicato",
-      "dx": "SP3BLZ",
-      "spotter": "SQ5WH",
-      "utc": "0956",
-      "comment": "PGA- Mi02, POTA: PL1818,1850,2",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:56:39Z"
-    },
-    {
-      "frequency_mhz": 14.086,
-      "mode": "Non indicato",
-      "dx": "3X4U",
-      "spotter": "IZ4ORF",
-      "utc": "0956",
-      "comment": "up",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:56:31Z"
-    },
-    {
-      "frequency_mhz": 14.0398,
-      "mode": "CW",
-      "dx": "SN2S",
-      "spotter": "DL1EJD",
-      "utc": "0956",
-      "comment": "CW",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:56:20Z"
-    },
-    {
-      "frequency_mhz": 14.0002,
-      "mode": "Non indicato",
-      "dx": "YO/LZ4UU",
-      "spotter": "EA3CWT",
-      "utc": "0956",
-      "comment": "",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:56:12Z"
-    },
-    {
-      "frequency_mhz": 7.1391,
-      "mode": "SSB",
-      "dx": "PB40EUD",
-      "spotter": "DA2E",
-      "utc": "0956",
-      "comment": "SSB 30 dB CQ",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:56:06Z"
-    },
-    {
-      "frequency_mhz": 7.118,
-      "mode": "SSB",
-      "dx": "EC4S",
-      "spotter": "EA5SD",
-      "utc": "0956",
-      "comment": "SSB",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:56:04Z"
-    },
-    {
-      "frequency_mhz": 3.7012,
-      "mode": "SSB",
-      "dx": "S57TW",
-      "spotter": "S52K",
-      "utc": "0956",
-      "comment": "LSB",
+      "dx": "ND8DX",
+      "spotter": "ND8DX",
+      "utc": "1725",
+      "comment": "SWEEPSTAKES",
       "source": "HamQTH",
-      "timestamp": "2026-11-22T09:56:00Z"
+      "timestamp": "2026-11-22T17:25:00Z"
     },
     {
-      "frequency_mhz": 14.0205,
-      "mode": "CW",
-      "dx": "IZ3ETC",
-      "spotter": "EA7GZQ",
-      "utc": "0956",
-      "comment": "CW",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:56:00Z"
-    },
-    {
-      "frequency_mhz": 28.0199,
-      "mode": "CW",
-      "dx": "UD8A",
-      "spotter": "YT1XC",
-      "utc": "0956",
+      "frequency_mhz": 14.3065,
+      "mode": "SSB",
+      "dx": "W4MLB",
+      "spotter": "W4TM",
+      "utc": "1725",
       "comment": "",
       "source": "HamQTH",
-      "timestamp": "2026-11-22T09:56:00Z"
+      "timestamp": "2026-11-22T17:25:00Z"
     },
     {
-      "frequency_mhz": 3.6879,
+      "frequency_mhz": 21.3293,
       "mode": "SSB",
-      "dx": "S51TX",
-      "spotter": "S58W",
-      "utc": "0956",
-      "comment": "LSB",
+      "dx": "K7CW",
+      "spotter": "N5RP",
+      "utc": "1725",
+      "comment": "SS USB",
       "source": "HamQTH",
-      "timestamp": "2026-11-22T09:56:00Z"
+      "timestamp": "2026-11-22T17:25:00Z"
     },
     {
-      "frequency_mhz": 7.143,
+      "frequency_mhz": 14.2032,
       "mode": "SSB",
-      "dx": "SP3BLZ",
-      "spotter": "SQ5WH",
-      "utc": "0956",
-      "comment": "PGA- Mi02, POTA: PL1818,1850,2680",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:56:00Z"
-    },
-    {
-      "frequency_mhz": 28.432,
-      "mode": "SSB",
-      "dx": "DR1D",
-      "spotter": "VK2XZ",
-      "utc": "0956",
-      "comment": "USB Loud",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:56:00Z"
-    },
-    {
-      "frequency_mhz": 14.086,
-      "mode": "DIGI",
-      "dx": "3X4U",
-      "spotter": "IZ4ORF",
-      "utc": "0956",
-      "comment": "up",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:56:00Z"
-    },
-    {
-      "frequency_mhz": 14.0398,
-      "mode": "CW",
-      "dx": "SN2S",
-      "spotter": "DL1EJD",
-      "utc": "0956",
-      "comment": "CW",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:56:00Z"
-    },
-    {
-      "frequency_mhz": 14.0002,
-      "mode": "CW",
-      "dx": "YO/LZ4UU",
-      "spotter": "EA3CWT",
-      "utc": "0956",
+      "dx": "WH7Z",
+      "spotter": "K9PW",
+      "utc": "1725",
       "comment": "",
       "source": "HamQTH",
-      "timestamp": "2026-11-22T09:56:00Z"
+      "timestamp": "2026-11-22T17:25:00Z"
     },
     {
-      "frequency_mhz": 7.1391,
+      "frequency_mhz": 14.2023,
       "mode": "SSB",
-      "dx": "PB40EUD",
-      "spotter": "DA2E",
-      "utc": "0956",
-      "comment": "SSB 30 dB CQ",
+      "dx": "K5EEE",
+      "spotter": "WA3AAN",
+      "utc": "1725",
+      "comment": "USB",
       "source": "HamQTH",
-      "timestamp": "2026-11-22T09:56:00Z"
+      "timestamp": "2026-11-22T17:25:00Z"
     },
     {
-      "frequency_mhz": 7.118,
+      "frequency_mhz": 21.378,
       "mode": "SSB",
-      "dx": "EC4S",
-      "spotter": "EA5SD",
-      "utc": "0956",
-      "comment": "SSB",
+      "dx": "K1JB",
+      "spotter": "KV0I",
+      "utc": "1725",
+      "comment": "USB",
       "source": "HamQTH",
-      "timestamp": "2026-11-22T09:56:00Z"
+      "timestamp": "2026-11-22T17:25:00Z"
     },
     {
-      "frequency_mhz": 14.0197,
+      "frequency_mhz": 14.2169,
+      "mode": "SSB",
+      "dx": "VE7LFN",
+      "spotter": "K4QQG",
+      "utc": "1725",
+      "comment": "BC",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:25:00Z"
+    },
+    {
+      "frequency_mhz": 7.02,
       "mode": "CW",
-      "dx": "HG5E",
-      "spotter": "EA7GZQ",
-      "utc": "0955",
-      "comment": "CW",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:55:56Z"
-    },
-    {
-      "frequency_mhz": 7.0475,
-      "mode": "Non indicato",
-      "dx": "EA7HMK",
-      "spotter": "EA7IS",
-      "utc": "0955",
-      "comment": "Tres referencia--",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:55:52Z"
-    },
-    {
-      "frequency_mhz": 7.0941,
-      "mode": "SSB",
-      "dx": "PD1ABO",
-      "spotter": "DA2E",
-      "utc": "0955",
-      "comment": "SSB 18 dB CQ",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:55:42Z"
-    },
-    {
-      "frequency_mhz": 14.005,
-      "mode": "Non indicato",
-      "dx": "LY2DX",
-      "spotter": "EA3CWT",
-      "utc": "0955",
-      "comment": "",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:55:27Z"
-    },
-    {
-      "frequency_mhz": 21.252,
-      "mode": "Non indicato",
-      "dx": "SQ5EBL",
-      "spotter": "LZ5T",
-      "utc": "0955",
-      "comment": "LZ DX",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:55:22Z"
-    },
-    {
-      "frequency_mhz": 7.165,
-      "mode": "Non indicato",
-      "dx": "SQ9WDR/P",
-      "spotter": "SP6EFY",
-      "utc": "0955",
-      "comment": "FF",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:55:16Z"
-    },
-    {
-      "frequency_mhz": 3.662,
-      "mode": "SSB",
-      "dx": "S58M",
-      "spotter": "S52K",
-      "utc": "0955",
-      "comment": "LSB",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:55:14Z"
-    },
-    {
-      "frequency_mhz": 21.0067,
-      "mode": "Non indicato",
-      "dx": "PA3AAV",
-      "spotter": "IK3QAR",
-      "utc": "0955",
-      "comment": "LZ-DX",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:55:02Z"
-    },
-    {
-      "frequency_mhz": 14.0197,
-      "mode": "CW",
-      "dx": "HG5E",
-      "spotter": "EA7GZQ",
-      "utc": "0955",
-      "comment": "CW",
+      "dx": "ZZ2T",
+      "spotter": "PR2TW",
+      "utc": "1725",
+      "comment": "CQ SAcW CW",
       "source": "HamQTH",
-      "timestamp": "2026-11-22T09:55:00Z"
+      "timestamp": "2026-11-22T17:25:00Z"
     },
     {
-      "frequency_mhz": 7.0475,
-      "mode": "DIGI",
-      "dx": "EA7HMK",
-      "spotter": "EA7IS",
-      "utc": "0955",
-      "comment": "Tres referencia--",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:55:00Z"
-    },
-    {
-      "frequency_mhz": 7.067,
+      "frequency_mhz": 14.267,
       "mode": "SSB",
-      "dx": "EA2CKT",
-      "spotter": "EA4GJP",
-      "utc": "0955",
-      "comment": "5/9  DME-26126  ELO-0184",
+      "dx": "KE2AY",
+      "spotter": "N2TX",
+      "utc": "1725",
+      "comment": "**NLI Section** Rare",
       "source": "HamQTH",
-      "timestamp": "2026-11-22T09:55:00Z"
+      "timestamp": "2026-11-22T17:25:00Z"
     },
     {
-      "frequency_mhz": 7.0941,
+      "frequency_mhz": 21.287,
       "mode": "SSB",
-      "dx": "PD1ABO",
-      "spotter": "DA2E",
-      "utc": "0955",
-      "comment": "SSB 18 dB CQ",
+      "dx": "W6AFA",
+      "spotter": "N3DUE",
+      "utc": "1724",
+      "comment": "LAX",
       "source": "HamQTH",
-      "timestamp": "2026-11-22T09:55:00Z"
+      "timestamp": "2026-11-22T17:24:00Z"
     },
     {
-      "frequency_mhz": 14.005,
-      "mode": "CW",
-      "dx": "LY2DX",
-      "spotter": "EA3CWT",
-      "utc": "0955",
+      "frequency_mhz": 21.323,
+      "mode": "SSB",
+      "dx": "NR4L",
+      "spotter": "NJ4P",
+      "utc": "1724",
+      "comment": "YL OP",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:24:00Z"
+    },
+    {
+      "frequency_mhz": 21.4,
+      "mode": "SSB",
+      "dx": "KA0WWT",
+      "spotter": "KA0WWT",
+      "utc": "1724",
+      "comment": "NV",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:24:00Z"
+    },
+    {
+      "frequency_mhz": 28.4505,
+      "mode": "SSB",
+      "dx": "K3KU",
+      "spotter": "K3KU",
+      "utc": "1724",
       "comment": "",
       "source": "HamQTH",
-      "timestamp": "2026-11-22T09:55:00Z"
+      "timestamp": "2026-11-22T17:24:00Z"
     },
     {
-      "frequency_mhz": 21.252,
+      "frequency_mhz": 14.2145,
       "mode": "SSB",
-      "dx": "SQ5EBL",
-      "spotter": "LZ5T",
-      "utc": "0955",
-      "comment": "LZ DX",
+      "dx": "N9MSG",
+      "spotter": "N9MSG",
+      "utc": "1724",
+      "comment": "SS IL",
       "source": "HamQTH",
-      "timestamp": "2026-11-22T09:55:00Z"
+      "timestamp": "2026-11-22T17:24:00Z"
     },
     {
-      "frequency_mhz": 28.497,
+      "frequency_mhz": 24.945,
       "mode": "SSB",
-      "dx": "DK3EE",
-      "spotter": "VK3EY",
-      "utc": "0955",
+      "dx": "K8UA",
+      "spotter": "VE7WJ",
+      "utc": "1724",
+      "comment": "",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:24:00Z"
+    },
+    {
+      "frequency_mhz": 7.153,
+      "mode": "SSB",
+      "dx": "EG7MNSF",
+      "spotter": "EA7BNL",
+      "utc": "1724",
+      "comment": "N",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:24:00Z"
+    },
+    {
+      "frequency_mhz": 24.916,
+      "mode": "FT8",
+      "dx": "HC2GRC",
+      "spotter": "KD2TOM",
+      "utc": "1724",
+      "comment": "FT8",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:24:00Z"
+    },
+    {
+      "frequency_mhz": 14.195,
+      "mode": "SSB",
+      "dx": "N7MZW",
+      "spotter": "WA3AAN",
+      "utc": "1724",
+      "comment": "USB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:24:00Z"
+    },
+    {
+      "frequency_mhz": 14.074,
+      "mode": "FT8",
+      "dx": "K6XX",
+      "spotter": "IZ0MIO",
+      "utc": "1723",
+      "comment": "FT8 -05db",
+      "source": "SQ3SWG",
+      "timestamp": "2026-11-22T17:23:54Z"
+    },
+    {
+      "frequency_mhz": 14.0765,
+      "mode": "FT8",
+      "dx": "EI5DS",
+      "spotter": "EA5BCO",
+      "utc": "1723",
+      "comment": "IM98PG<>IO63 FT8 FT8  Sent: -1",
+      "source": "SQ3SWG",
+      "timestamp": "2026-11-22T17:23:32Z"
+    },
+    {
+      "frequency_mhz": 10.136,
+      "mode": "FT8",
+      "dx": "4Z4WD",
+      "spotter": "OK2LI",
+      "utc": "1723",
+      "comment": "FT8 -09 tnx 73!",
+      "source": "SQ3SWG",
+      "timestamp": "2026-11-22T17:23:15Z"
+    },
+    {
+      "frequency_mhz": 14.074,
+      "mode": "FT8",
+      "dx": "K6XX",
+      "spotter": "IZ0MIO",
+      "utc": "1723",
+      "comment": "FT8 -05db",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:23:00Z"
+    },
+    {
+      "frequency_mhz": 14.2736,
+      "mode": "SSB",
+      "dx": "K4OV",
+      "spotter": "K4OV",
+      "utc": "1723",
+      "comment": "USB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:23:00Z"
+    },
+    {
+      "frequency_mhz": 21.4232,
+      "mode": "SSB",
+      "dx": "KI1G",
+      "spotter": "KI1G",
+      "utc": "1723",
+      "comment": "RI",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:23:00Z"
+    },
+    {
+      "frequency_mhz": 14.1776,
+      "mode": "SSB",
+      "dx": "K2AD",
+      "spotter": "K9PW",
+      "utc": "1723",
+      "comment": "",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:23:00Z"
+    },
+    {
+      "frequency_mhz": 21.23,
+      "mode": "SSB",
+      "dx": "N0MA",
+      "spotter": "W7II",
+      "utc": "1723",
+      "comment": "iowa",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:23:00Z"
+    },
+    {
+      "frequency_mhz": 14.161,
+      "mode": "SSB",
+      "dx": "KA6BIM",
+      "spotter": "K9PW",
+      "utc": "1723",
+      "comment": "",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:23:00Z"
+    },
+    {
+      "frequency_mhz": 21.282,
+      "mode": "SSB",
+      "dx": "NW0M",
+      "spotter": "K6NO",
+      "utc": "1723",
+      "comment": "",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:23:00Z"
+    },
+    {
+      "frequency_mhz": 14.0765,
+      "mode": "FT8",
+      "dx": "EI5DS",
+      "spotter": "EA5BCO",
+      "utc": "1723",
+      "comment": "IM98PG<>IO63 FT8 FT8  Sent: -13  Rcvd: +04",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:23:00Z"
+    },
+    {
+      "frequency_mhz": 21.4113,
+      "mode": "SSB",
+      "dx": "W4NF",
+      "spotter": "W4NF",
+      "utc": "1723",
+      "comment": "",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:23:00Z"
+    },
+    {
+      "frequency_mhz": 21.435,
+      "mode": "SSB",
+      "dx": "N2OEF",
+      "spotter": "AD1C",
+      "utc": "1723",
+      "comment": "DE DE DE",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:23:00Z"
+    },
+    {
+      "frequency_mhz": 21.3721,
+      "mode": "SSB",
+      "dx": "NX9T",
+      "spotter": "KG0ED",
+      "utc": "1723",
+      "comment": "USB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:23:00Z"
+    },
+    {
+      "frequency_mhz": 10.136,
+      "mode": "FT8",
+      "dx": "4Z4WD",
+      "spotter": "OK2LI",
+      "utc": "1723",
+      "comment": "FT8 -09 tnx 73!",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:23:00Z"
+    },
+    {
+      "frequency_mhz": 14.1925,
+      "mode": "SSB",
+      "dx": "K2KR",
+      "spotter": "WA3AAN",
+      "utc": "1723",
+      "comment": "USB",
+      "source": "HamQTH",
+      "timestamp": "2026-11-22T17:23:00Z"
+    },
+    {
+      "frequency_mhz": 28.485,
+      "mode": "Non indicato",
+      "dx": "PY4DLN",
+      "spotter": "IU2MCW/P",
+      "utc": "1722",
+      "comment": "cq dx",
+      "source": "SQ3SWG",
+      "timestamp": "2026-11-22T17:22:32Z"
+    },
+    {
+      "frequency_mhz": 1.8237,
+      "mode": "Non indicato",
+      "dx": "NL7M",
+      "spotter": "SM2CEW",
+      "utc": "1722",
       "comment": "CQ",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:55:00Z"
-    },
-    {
-      "frequency_mhz": 7.165,
-      "mode": "SSB",
-      "dx": "SQ9WDR/P",
-      "spotter": "SP6EFY",
-      "utc": "0955",
-      "comment": "FF",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:55:00Z"
-    },
-    {
-      "frequency_mhz": 3.662,
-      "mode": "SSB",
-      "dx": "S58M",
-      "spotter": "S52K",
-      "utc": "0955",
-      "comment": "LSB",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:55:00Z"
-    },
-    {
-      "frequency_mhz": 21.0067,
-      "mode": "CW",
-      "dx": "PA3AAV",
-      "spotter": "IK3QAR",
-      "utc": "0955",
-      "comment": "LZ-DX",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:55:00Z"
-    },
-    {
-      "frequency_mhz": 7.1331,
-      "mode": "SSB",
-      "dx": "ON4BW",
-      "spotter": "DA2E",
-      "utc": "0954",
-      "comment": "SSB 23 dB CQ",
       "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:54:54Z"
+      "timestamp": "2026-11-22T17:22:29Z"
     },
     {
-      "frequency_mhz": 14.2106,
+      "frequency_mhz": 14.0956,
       "mode": "Non indicato",
-      "dx": "SQ8LUU",
-      "spotter": "DB6VP",
-      "utc": "0954",
+      "dx": "EA3AGU",
+      "spotter": "UR2680YL",
+      "utc": "1722",
+      "comment": "WSPR sign -27",
+      "source": "SQ3SWG",
+      "timestamp": "2026-11-22T17:22:29Z"
+    },
+    {
+      "frequency_mhz": 7.156,
+      "mode": "Non indicato",
+      "dx": "F8CHM",
+      "spotter": "OE5PZE",
+      "utc": "1722",
+      "comment": "59 tnx Jean",
+      "source": "SQ3SWG",
+      "timestamp": "2026-11-22T17:22:18Z"
+    },
+    {
+      "frequency_mhz": 3.732,
+      "mode": "Non indicato",
+      "dx": "SP8SAN",
+      "spotter": "SQ5TA",
+      "utc": "1722",
       "comment": "",
       "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:54:54Z"
+      "timestamp": "2026-11-22T17:22:05Z"
     },
     {
-      "frequency_mhz": 14.0117,
-      "mode": "CW",
-      "dx": "LZ1PJ",
-      "spotter": "G3ESE",
-      "utc": "0954",
-      "comment": "LZ DX Contest CW",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:54:52Z"
-    },
-    {
-      "frequency_mhz": 14.188,
+      "frequency_mhz": 14.288,
       "mode": "Non indicato",
-      "dx": "R2FK",
-      "spotter": "EA6VY",
-      "utc": "0954",
-      "comment": "LZ Contest",
+      "dx": "EA8ED",
+      "spotter": "F5VMN",
+      "utc": "1721",
+      "comment": "diploma escudos autonomias",
       "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:54:34Z"
+      "timestamp": "2026-11-22T17:21:54Z"
     },
     {
-      "frequency_mhz": 7.088,
-      "mode": "SSB",
-      "dx": "EC5AHA",
-      "spotter": "EA5SD",
-      "utc": "0954",
-      "comment": "SSB",
+      "frequency_mhz": 14.0765,
+      "mode": "FT8",
+      "dx": "VE3GLN",
+      "spotter": "EA5BCO",
+      "utc": "1721",
+      "comment": "IM98PG<>FN25DJ FT8 FT8  Sent:",
       "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:54:31Z"
-    },
-    {
-      "frequency_mhz": 14.0538,
-      "mode": "CW",
-      "dx": "LZ3SM",
-      "spotter": "HA8TKS",
-      "utc": "0954",
-      "comment": "CW",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:54:20Z"
-    },
-    {
-      "frequency_mhz": 7.1528,
-      "mode": "SSB",
-      "dx": "G7HFS/M",
-      "spotter": "DA2E",
-      "utc": "0954",
-      "comment": "SSB 11 dB CQ",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:54:15Z"
-    },
-    {
-      "frequency_mhz": 14.2829,
-      "mode": "Non indicato",
-      "dx": "UZ7C",
-      "spotter": "PA6Q",
-      "utc": "0954",
-      "comment": "LZ DX",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:54:01Z"
-    },
-    {
-      "frequency_mhz": 7.198,
-      "mode": "SSB",
-      "dx": "IU5VKD/P",
-      "spotter": "IU5VKD",
-      "utc": "0954",
-      "comment": "Attivazione Pota IT-1403",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:54:00Z"
-    },
-    {
-      "frequency_mhz": 7.1331,
-      "mode": "SSB",
-      "dx": "ON4BW",
-      "spotter": "DA2E",
-      "utc": "0954",
-      "comment": "SSB 23 dB CQ",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:54:00Z"
-    },
-    {
-      "frequency_mhz": 14.2106,
-      "mode": "SSB",
-      "dx": "SQ8LUU",
-      "spotter": "DB6VP",
-      "utc": "0954",
-      "comment": "",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:54:00Z"
-    },
-    {
-      "frequency_mhz": 14.0117,
-      "mode": "CW",
-      "dx": "LZ1PJ",
-      "spotter": "G3ESE",
-      "utc": "0954",
-      "comment": "LZ DX Contest CW",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:54:00Z"
-    },
-    {
-      "frequency_mhz": 14.188,
-      "mode": "SSB",
-      "dx": "R2FK",
-      "spotter": "EA6VY",
-      "utc": "0954",
-      "comment": "LZ Contest",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:54:00Z"
-    },
-    {
-      "frequency_mhz": 7.088,
-      "mode": "SSB",
-      "dx": "EC5AHA",
-      "spotter": "EA5SD",
-      "utc": "0954",
-      "comment": "SSB",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:54:00Z"
-    },
-    {
-      "frequency_mhz": 14.0538,
-      "mode": "CW",
-      "dx": "LZ3SM",
-      "spotter": "HA8TKS",
-      "utc": "0954",
-      "comment": "CW",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:54:00Z"
-    },
-    {
-      "frequency_mhz": 7.1528,
-      "mode": "SSB",
-      "dx": "G7HFS/M",
-      "spotter": "DA2E",
-      "utc": "0954",
-      "comment": "SSB 11 dB CQ",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:54:00Z"
-    },
-    {
-      "frequency_mhz": 14.2829,
-      "mode": "SSB",
-      "dx": "UZ7C",
-      "spotter": "PA6Q",
-      "utc": "0954",
-      "comment": "LZ DX",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:54:00Z"
-    },
-    {
-      "frequency_mhz": 18.1,
-      "mode": "Non indicato",
-      "dx": "MI7RDK",
-      "spotter": "IW2HWN",
-      "utc": "0953",
-      "comment": "73",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:53:54Z"
-    },
-    {
-      "frequency_mhz": 28.432,
-      "mode": "SSB",
-      "dx": "DR1D",
-      "spotter": "DH3KR",
-      "utc": "0953",
-      "comment": "USB",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:53:37Z"
-    },
-    {
-      "frequency_mhz": 3.676,
-      "mode": "Non indicato",
-      "dx": "S50D",
-      "spotter": "S55DK",
-      "utc": "0953",
-      "comment": "kvp",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:53:30Z"
-    },
-    {
-      "frequency_mhz": 3.522,
-      "mode": "CW",
-      "dx": "S50C",
-      "spotter": "S58W",
-      "utc": "0953",
-      "comment": "CW",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:53:29Z"
-    },
-    {
-      "frequency_mhz": 14.0101,
-      "mode": "CW",
-      "dx": "LZ4ZP",
-      "spotter": "G3ESE",
-      "utc": "0953",
-      "comment": "LZ DX Contest CW",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:53:27Z"
-    },
-    {
-      "frequency_mhz": 5.36,
-      "mode": "Non indicato",
-      "dx": "EG2026PC",
-      "spotter": "EA3DOR",
-      "utc": "0953",
-      "comment": "PHO DME-39013 (CabezÃ³n de LiÃ",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:53:24Z"
-    },
-    {
-      "frequency_mhz": 28.505,
-      "mode": "Non indicato",
-      "dx": "LZ7J",
-      "spotter": "LZ3YM",
-      "utc": "0953",
-      "comment": "CQ LZ DX TEST",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:53:18Z"
-    },
-    {
-      "frequency_mhz": 7.107,
-      "mode": "Non indicato",
-      "dx": "PH40EUDXF",
-      "spotter": "PD1ABO",
-      "utc": "0953",
-      "comment": "PH40EUDXF",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:53:13Z"
-    },
-    {
-      "frequency_mhz": 7.027,
-      "mode": "Non indicato",
-      "dx": "IZ5BBS",
-      "spotter": "EA3CWT",
-      "utc": "0953",
-      "comment": "",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:53:10Z"
-    },
-    {
-      "frequency_mhz": 7.073,
-      "mode": "Non indicato",
-      "dx": "OH2NBC/P",
-      "spotter": "OH9JS",
-      "utc": "0953",
-      "comment": "WWFF OHFF-1396",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:53:08Z"
-    },
-    {
-      "frequency_mhz": 28.4529,
-      "mode": "SSB",
-      "dx": "RZ3Z",
-      "spotter": "EA3F",
-      "utc": "0953",
-      "comment": "USB",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:53:05Z"
-    },
-    {
-      "frequency_mhz": 18.1,
-      "mode": "DIGI",
-      "dx": "MI7RDK",
-      "spotter": "IW2HWN",
-      "utc": "0953",
-      "comment": "73",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:53:00Z"
-    },
-    {
-      "frequency_mhz": 28.432,
-      "mode": "SSB",
-      "dx": "DR1D",
-      "spotter": "DH3KR",
-      "utc": "0953",
-      "comment": "USB",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:53:00Z"
-    },
-    {
-      "frequency_mhz": 28.455,
-      "mode": "SSB",
-      "dx": "LZ2ZY",
-      "spotter": "7Z1AO",
-      "utc": "0953",
-      "comment": "",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:53:00Z"
-    },
-    {
-      "frequency_mhz": 3.676,
-      "mode": "SSB",
-      "dx": "S50D",
-      "spotter": "S55DK",
-      "utc": "0953",
-      "comment": "kvp",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:53:00Z"
-    },
-    {
-      "frequency_mhz": 3.522,
-      "mode": "CW",
-      "dx": "S50C",
-      "spotter": "S58W",
-      "utc": "0953",
-      "comment": "CW",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:53:00Z"
-    },
-    {
-      "frequency_mhz": 14.0345,
-      "mode": "CW",
-      "dx": "F6HKA",
-      "spotter": "RD8D",
-      "utc": "0953",
-      "comment": "LZ DX",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:53:00Z"
-    },
-    {
-      "frequency_mhz": 14.0101,
-      "mode": "CW",
-      "dx": "LZ4ZP",
-      "spotter": "G3ESE",
-      "utc": "0953",
-      "comment": "LZ DX Contest CW",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:53:00Z"
-    },
-    {
-      "frequency_mhz": 5.36,
-      "mode": "DIGI",
-      "dx": "EG2026PC",
-      "spotter": "EA3DOR",
-      "utc": "0953",
-      "comment": "PHO DME-39013 (Cabezón de Liébana) TPEA: S",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:53:00Z"
-    },
-    {
-      "frequency_mhz": 28.505,
-      "mode": "SSB",
-      "dx": "LZ7J",
-      "spotter": "LZ3YM",
-      "utc": "0953",
-      "comment": "CQ LZ DX TEST",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:53:00Z"
-    },
-    {
-      "frequency_mhz": 7.107,
-      "mode": "SSB",
-      "dx": "PH40EUDXF",
-      "spotter": "PD1ABO",
-      "utc": "0953",
-      "comment": "PH40EUDXF",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:53:00Z"
-    },
-    {
-      "frequency_mhz": 7.027,
-      "mode": "CW",
-      "dx": "IZ5BBS",
-      "spotter": "EA3CWT",
-      "utc": "0953",
-      "comment": "",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:53:00Z"
-    },
-    {
-      "frequency_mhz": 7.073,
-      "mode": "SSB",
-      "dx": "OH2NBC/P",
-      "spotter": "OH9JS",
-      "utc": "0953",
-      "comment": "WWFF OHFF-1396",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:53:00Z"
-    },
-    {
-      "frequency_mhz": 14.2919,
-      "mode": "SSB",
-      "dx": "RW1F",
-      "spotter": "PA6Q",
-      "utc": "0953",
-      "comment": "LZ DX",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:53:00Z"
-    },
-    {
-      "frequency_mhz": 28.4529,
-      "mode": "SSB",
-      "dx": "RZ3Z",
-      "spotter": "EA3F",
-      "utc": "0953",
-      "comment": "USB",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:53:00Z"
-    },
-    {
-      "frequency_mhz": 3.704,
-      "mode": "Non indicato",
-      "dx": "S51JQ",
-      "spotter": "9A7DX",
-      "utc": "0952",
-      "comment": "KVP",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:52:50Z"
-    },
-    {
-      "frequency_mhz": 7.067,
-      "mode": "Non indicato",
-      "dx": "EA2CKT",
-      "spotter": "EA4GJP",
-      "utc": "0952",
-      "comment": "elo-0184",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:52:47Z"
-    },
-    {
-      "frequency_mhz": 14.2105,
-      "mode": "Non indicato",
-      "dx": "SQ8LUU",
-      "spotter": "EA6VY",
-      "utc": "0952",
-      "comment": "LZ Contest",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:52:41Z"
-    },
-    {
-      "frequency_mhz": 7.108,
-      "mode": "Non indicato",
-      "dx": "EB5EEV",
-      "spotter": "EA4IWX",
-      "utc": "0952",
-      "comment": "DME-03102",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:52:38Z"
-    },
-    {
-      "frequency_mhz": 7.063,
-      "mode": "Non indicato",
-      "dx": "EA3CYM",
-      "spotter": "EA3FBX",
-      "utc": "0952",
-      "comment": "DME-08187 (Sabadell) TPEA: B U",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:52:37Z"
-    },
-    {
-      "frequency_mhz": 3.6912,
-      "mode": "Non indicato",
-      "dx": "S51CK",
-      "spotter": "9A7DX",
-      "utc": "0952",
-      "comment": "KVP",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:52:29Z"
-    },
-    {
-      "frequency_mhz": 7.096,
-      "mode": "Non indicato",
-      "dx": "EA3UBR",
-      "spotter": "EA3EVQ",
-      "utc": "0952",
-      "comment": "EB-340, MVB-412, DME-08015",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:52:15Z"
-    },
-    {
-      "frequency_mhz": 7.1478,
-      "mode": "Non indicato",
-      "dx": "HF6FIRAC",
-      "spotter": "HF0S",
-      "utc": "0952",
-      "comment": "",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:52:12Z"
-    },
-    {
-      "frequency_mhz": 28.0316,
-      "mode": "Non indicato",
-      "dx": "RW1A",
-      "spotter": "DO1HKL",
-      "utc": "0952",
-      "comment": "",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:52:11Z"
-    },
-    {
-      "frequency_mhz": 3.704,
-      "mode": "SSB",
-      "dx": "S51JQ",
-      "spotter": "9A7DX",
-      "utc": "0952",
-      "comment": "KVP",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:52:00Z"
-    },
-    {
-      "frequency_mhz": 7.067,
-      "mode": "SSB",
-      "dx": "EA2CKT",
-      "spotter": "EA4GJP",
-      "utc": "0952",
-      "comment": "elo-0184",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:52:00Z"
-    },
-    {
-      "frequency_mhz": 14.2105,
-      "mode": "SSB",
-      "dx": "SQ8LUU",
-      "spotter": "EA6VY",
-      "utc": "0952",
-      "comment": "LZ Contest",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:52:00Z"
-    },
-    {
-      "frequency_mhz": 7.108,
-      "mode": "SSB",
-      "dx": "EB5EEV",
-      "spotter": "EA4IWX",
-      "utc": "0952",
-      "comment": "DME-03102",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:52:00Z"
-    },
-    {
-      "frequency_mhz": 7.063,
-      "mode": "SSB",
-      "dx": "EA3CYM",
-      "spotter": "EA3FBX",
-      "utc": "0952",
-      "comment": "DME-08187 (Sabadell) TPEA: B Ultimas llamadas",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:52:00Z"
-    },
-    {
-      "frequency_mhz": 3.6912,
-      "mode": "SSB",
-      "dx": "S51CK",
-      "spotter": "9A7DX",
-      "utc": "0952",
-      "comment": "KVP",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:52:00Z"
-    },
-    {
-      "frequency_mhz": 14.0485,
-      "mode": "CW",
-      "dx": "UN8PT",
-      "spotter": "RD8D",
-      "utc": "0952",
-      "comment": "LZ DX",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:52:00Z"
-    },
-    {
-      "frequency_mhz": 7.096,
-      "mode": "SSB",
-      "dx": "EA3UBR",
-      "spotter": "EA3EVQ",
-      "utc": "0952",
-      "comment": "EB-340, MVB-412, DME-08015",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:52:00Z"
-    },
-    {
-      "frequency_mhz": 7.1478,
-      "mode": "SSB",
-      "dx": "HF6FIRAC",
-      "spotter": "HF0S",
-      "utc": "0952",
-      "comment": "",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:52:00Z"
-    },
-    {
-      "frequency_mhz": 28.0316,
-      "mode": "CW",
-      "dx": "RW1A",
-      "spotter": "DO1HKL",
-      "utc": "0952",
-      "comment": "",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:52:00Z"
-    },
-    {
-      "frequency_mhz": 3.6795,
-      "mode": "Non indicato",
-      "dx": "S53F",
-      "spotter": "9A7DX",
-      "utc": "0951",
-      "comment": "KVP",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:51:51Z"
-    },
-    {
-      "frequency_mhz": 14.268,
-      "mode": "Non indicato",
-      "dx": "SM6MVE",
-      "spotter": "DB6VP",
-      "utc": "0951",
-      "comment": "",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:51:49Z"
-    },
-    {
-      "frequency_mhz": 7.189,
-      "mode": "SSB",
-      "dx": "SN100LKK",
-      "spotter": "SO2T",
-      "utc": "0951",
-      "comment": "LSB",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:51:48Z"
-    },
-    {
-      "frequency_mhz": 7.0255,
-      "mode": "Non indicato",
-      "dx": "YO2GL",
-      "spotter": "EA3CWT",
-      "utc": "0951",
-      "comment": "",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:51:47Z"
-    },
-    {
-      "frequency_mhz": 21.025,
-      "mode": "CW",
-      "dx": "LZ3AW",
-      "spotter": "PA0JED",
-      "utc": "0951",
-      "comment": "CW",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:51:45Z"
-    },
-    {
-      "frequency_mhz": 21.0242,
-      "mode": "CW",
-      "dx": "UW2U",
-      "spotter": "PC4Y",
-      "utc": "0951",
-      "comment": "CW",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:51:43Z"
-    },
-    {
-      "frequency_mhz": 14.32,
-      "mode": "SSB",
-      "dx": "M6YJG",
-      "spotter": "M9LCB",
-      "utc": "0951",
-      "comment": "CQ USB",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:51:41Z"
+      "timestamp": "2026-11-22T17:21:37Z"
     },
     {
       "frequency_mhz": 28.074,
       "mode": "FT8",
-      "dx": "VK1AO",
-      "spotter": "GW7SMV",
-      "utc": "0951",
-      "comment": "<F2> FT8 -21 dB 1744 Hz",
+      "dx": "K5WA",
+      "spotter": "G0KTN",
+      "utc": "1721",
+      "comment": "IO81TI<>EM10 FT8",
       "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:51:36Z"
+      "timestamp": "2026-11-22T17:21:05Z"
     },
     {
-      "frequency_mhz": 21.0847,
+      "frequency_mhz": 14.0956,
       "mode": "Non indicato",
-      "dx": "PH3T",
-      "spotter": "UR3AHF",
-      "utc": "0951",
-      "comment": "PSK63",
+      "dx": "F1JSC",
+      "spotter": "UR2680YL",
+      "utc": "1720",
+      "comment": "WSPR sign -26",
       "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:51:32Z"
+      "timestamp": "2026-11-22T17:20:59Z"
     },
     {
-      "frequency_mhz": 28.0345,
-      "mode": "Non indicato",
-      "dx": "LZ3ZZ",
-      "spotter": "IK3QAR",
-      "utc": "0951",
-      "comment": "LZ-DX",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:51:23Z"
-    },
-    {
-      "frequency_mhz": 3.6835,
-      "mode": "SSB",
-      "dx": "S52F",
-      "spotter": "S52K",
-      "utc": "0951",
-      "comment": "LSB",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:51:22Z"
-    },
-    {
-      "frequency_mhz": 7.193,
-      "mode": "Non indicato",
-      "dx": "EA4IFN",
-      "spotter": "EA4HXF",
-      "utc": "0951",
-      "comment": "escudos",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:51:20Z"
-    },
-    {
-      "frequency_mhz": 24.919,
-      "mode": "FT4",
-      "dx": "EK/RX3DPK",
-      "spotter": "RX3DPK",
-      "utc": "0951",
-      "comment": "FT4 +0 dB 2592 Hz",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:51:17Z"
-    },
-    {
-      "frequency_mhz": 7.183,
-      "mode": "Non indicato",
-      "dx": "SP5XTY/P",
-      "spotter": "SP6FVP",
-      "utc": "0951",
-      "comment": "spff-1121 pga or 07",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:51:16Z"
-    },
-    {
-      "frequency_mhz": 7.1919,
-      "mode": "SSB",
-      "dx": "F4JEJ",
-      "spotter": "DA2E",
-      "utc": "0951",
-      "comment": "SSB 17 dB CQ",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:51:13Z"
-    },
-    {
-      "frequency_mhz": 7.198,
-      "mode": "Non indicato",
-      "dx": "IU5VKD/P",
-      "spotter": "IZ4EKI",
-      "utc": "0951",
-      "comment": "POTA  IT-1403",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:51:05Z"
-    },
-    {
-      "frequency_mhz": 18.151,
-      "mode": "Non indicato",
-      "dx": "F4NDD",
-      "spotter": "9A5ACK",
-      "utc": "0951",
-      "comment": "TNX for QSO, 73 Ivan",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:51:05Z"
-    },
-    {
-      "frequency_mhz": 18.1,
-      "mode": "FT8",
-      "dx": "IY5PIS",
-      "spotter": "IK5ZTT",
-      "utc": "0951",
-      "comment": "ft8 Coltano Marconi 1911",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:51:04Z"
-    },
-    {
-      "frequency_mhz": 14.0061,
-      "mode": "Non indicato",
-      "dx": "RT3K",
-      "spotter": "RT3K",
-      "utc": "0951",
-      "comment": "",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:51:03Z"
-    },
-    {
-      "frequency_mhz": 28.455,
-      "mode": "SSB",
-      "dx": "LZ2ZY",
-      "spotter": "UN8PT",
-      "utc": "0951",
-      "comment": "SSB LZ DX Contest",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:51:00Z"
-    },
-    {
-      "frequency_mhz": 3.6795,
-      "mode": "SSB",
-      "dx": "S53F",
-      "spotter": "9A7DX",
-      "utc": "0951",
-      "comment": "KVP",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:51:00Z"
-    },
-    {
-      "frequency_mhz": 14.268,
-      "mode": "SSB",
-      "dx": "SM6MVE",
-      "spotter": "DB6VP",
-      "utc": "0951",
-      "comment": "",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:51:00Z"
-    },
-    {
-      "frequency_mhz": 7.189,
-      "mode": "SSB",
-      "dx": "SN100LKK",
-      "spotter": "SO2T",
-      "utc": "0951",
-      "comment": "LSB",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:51:00Z"
-    },
-    {
-      "frequency_mhz": 14.274,
-      "mode": "SSB",
-      "dx": "R7TD",
-      "spotter": "UA9JFH",
-      "utc": "0951",
-      "comment": "SSB LZ DX Contest",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:51:00Z"
-    },
-    {
-      "frequency_mhz": 7.0255,
+      "frequency_mhz": 28.0112,
       "mode": "CW",
-      "dx": "YO2GL",
-      "spotter": "EA3CWT",
-      "utc": "0951",
-      "comment": "",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:51:00Z"
-    },
-    {
-      "frequency_mhz": 21.025,
-      "mode": "CW",
-      "dx": "LZ3AW",
-      "spotter": "PA0JED",
-      "utc": "0951",
-      "comment": "CW",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:51:00Z"
-    },
-    {
-      "frequency_mhz": 21.0242,
-      "mode": "CW",
-      "dx": "UW2U",
-      "spotter": "PC4Y",
-      "utc": "0951",
-      "comment": "CW",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:51:00Z"
-    },
-    {
-      "frequency_mhz": 14.32,
-      "mode": "SSB",
-      "dx": "M6YJG",
-      "spotter": "M9LCB",
-      "utc": "0951",
-      "comment": "CQ USB",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:51:00Z"
-    },
-    {
-      "frequency_mhz": 28.074,
-      "mode": "FT8",
-      "dx": "VK1AO",
-      "spotter": "GW7SMV",
-      "utc": "0951",
-      "comment": "<F2> FT8 -21 dB 1744 Hz",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:51:00Z"
-    },
-    {
-      "frequency_mhz": 21.0847,
-      "mode": "DIGI",
-      "dx": "PH3T",
-      "spotter": "UR3AHF",
-      "utc": "0951",
-      "comment": "PSK63",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:51:00Z"
-    },
-    {
-      "frequency_mhz": 28.0345,
-      "mode": "CW",
-      "dx": "LZ3ZZ",
-      "spotter": "IK3QAR",
-      "utc": "0951",
-      "comment": "LZ-DX",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:51:00Z"
-    },
-    {
-      "frequency_mhz": 3.6835,
-      "mode": "SSB",
-      "dx": "S52F",
-      "spotter": "S52K",
-      "utc": "0951",
-      "comment": "LSB",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:51:00Z"
-    },
-    {
-      "frequency_mhz": 7.193,
-      "mode": "SSB",
-      "dx": "EA4IFN",
-      "spotter": "EA4HXF",
-      "utc": "0951",
-      "comment": "escudos",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:51:00Z"
-    },
-    {
-      "frequency_mhz": 24.919,
-      "mode": "FT4",
-      "dx": "EK/RX3DPK",
-      "spotter": "RX3DPK",
-      "utc": "0951",
-      "comment": "FT4 +0 dB 2592 Hz",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:51:00Z"
-    },
-    {
-      "frequency_mhz": 7.183,
-      "mode": "SSB",
-      "dx": "SP5XTY/P",
-      "spotter": "SP6FVP",
-      "utc": "0951",
-      "comment": "spff-1121 pga or 07",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:51:00Z"
-    },
-    {
-      "frequency_mhz": 7.1919,
-      "mode": "SSB",
-      "dx": "F4JEJ",
-      "spotter": "DA2E",
-      "utc": "0951",
-      "comment": "SSB 17 dB CQ",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:51:00Z"
-    },
-    {
-      "frequency_mhz": 7.198,
-      "mode": "SSB",
-      "dx": "IU5VKD/P",
-      "spotter": "IZ4EKI",
-      "utc": "0951",
-      "comment": "POTA  IT-1403",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:51:00Z"
-    },
-    {
-      "frequency_mhz": 18.151,
-      "mode": "SSB",
-      "dx": "F4NDD",
-      "spotter": "9A5ACK",
-      "utc": "0951",
-      "comment": "TNX for QSO, 73 Ivan",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:51:00Z"
-    },
-    {
-      "frequency_mhz": 18.1,
-      "mode": "FT8",
-      "dx": "IY5PIS",
-      "spotter": "IK5ZTT",
-      "utc": "0951",
-      "comment": "ft8 Coltano Marconi 1911",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:51:00Z"
-    },
-    {
-      "frequency_mhz": 14.0061,
-      "mode": "CW",
-      "dx": "RT3K",
-      "spotter": "RT3K",
-      "utc": "0951",
-      "comment": "",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:51:00Z"
-    },
-    {
-      "frequency_mhz": 14.074,
-      "mode": "FT8",
-      "dx": "SA7SVR",
-      "spotter": "SA7SVR",
-      "utc": "0951",
-      "comment": "FT8 QRV HELLAS Zone Net",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:51:00Z"
-    },
-    {
-      "frequency_mhz": 14.0084,
-      "mode": "CW",
-      "dx": "LZ4A",
-      "spotter": "G3ESE",
-      "utc": "0950",
-      "comment": "LZ DX Contest CW",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:50:57Z"
-    },
-    {
-      "frequency_mhz": 7.154,
-      "mode": "Non indicato",
-      "dx": "SP8ULA/P",
-      "spotter": "SP8ULA/P",
-      "utc": "0950",
-      "comment": "POTA PL-0152 - POTA PL-0121 -",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:50:50Z"
-    },
-    {
-      "frequency_mhz": 14.0491,
-      "mode": "Non indicato",
-      "dx": "R8XF",
-      "spotter": "ON6VL",
-      "utc": "0950",
-      "comment": "",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:50:50Z"
-    },
-    {
-      "frequency_mhz": 7.118,
-      "mode": "Non indicato",
-      "dx": "EC4S",
-      "spotter": "EA4HWF",
-      "utc": "0950",
-      "comment": "DME 13069MVCR0216 ECR0069",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:50:47Z"
-    },
-    {
-      "frequency_mhz": 14.0847,
-      "mode": "RTTY",
-      "dx": "3X4U",
-      "spotter": "OP4F",
-      "utc": "0950",
-      "comment": "RTTY UP... USB",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:50:44Z"
-    },
-    {
-      "frequency_mhz": 21.2457,
-      "mode": "Non indicato",
-      "dx": "CT7BOD",
-      "spotter": "DO3TX",
-      "utc": "0950",
-      "comment": "LZ test",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:50:43Z"
-    },
-    {
-      "frequency_mhz": 14.2579,
-      "mode": "Non indicato",
-      "dx": "HA5MIG",
-      "spotter": "PA6Q",
-      "utc": "0950",
-      "comment": "LZ DX",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:50:42Z"
-    },
-    {
-      "frequency_mhz": 28.0222,
-      "mode": "Non indicato",
-      "dx": "RV6LN",
-      "spotter": "DO1HKL",
-      "utc": "0950",
-      "comment": "",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:50:39Z"
-    },
-    {
-      "frequency_mhz": 14.034,
-      "mode": "Non indicato",
-      "dx": "IK0YUT",
-      "spotter": "ON6VL",
-      "utc": "0950",
-      "comment": "",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:50:32Z"
-    },
-    {
-      "frequency_mhz": 28.455,
-      "mode": "SSB",
-      "dx": "LZ2ZY",
-      "spotter": "LZ8R",
-      "utc": "0950",
-      "comment": "USB",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:50:27Z"
-    },
-    {
-      "frequency_mhz": 18.145,
-      "mode": "SSB",
-      "dx": "UK8OM",
-      "spotter": "EA7GX",
-      "utc": "0950",
-      "comment": "USB IM76he -> MN51",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:50:26Z"
-    },
-    {
-      "frequency_mhz": 21.29,
-      "mode": "Non indicato",
-      "dx": "3X4U",
-      "spotter": "IW4ENE",
-      "utc": "0950",
-      "comment": "Up5",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:50:24Z"
-    },
-    {
-      "frequency_mhz": 7.0765,
-      "mode": "FT8",
-      "dx": "CT7ATA",
-      "spotter": "EA5BCO",
-      "utc": "0950",
-      "comment": "IM98PG<>IN50 FT8 FT8  Sent: -1",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:50:16Z"
-    },
-    {
-      "frequency_mhz": 28.034,
-      "mode": "Non indicato",
-      "dx": "LZ1ZP",
-      "spotter": "IK3QAR",
-      "utc": "0950",
-      "comment": "LZ-DX",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:50:09Z"
-    },
-    {
-      "frequency_mhz": 3.649,
-      "mode": "Non indicato",
-      "dx": "S51I",
-      "spotter": "9A7DX",
-      "utc": "0950",
-      "comment": "kvp",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:50:02Z"
-    },
-    {
-      "frequency_mhz": 28.042,
-      "mode": "CW",
-      "dx": "RU7A",
-      "spotter": "PC4Y",
-      "utc": "0950",
+      "dx": "D44LZ",
+      "spotter": "EC1R",
+      "utc": "1720",
       "comment": "CW",
       "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:50:02Z"
+      "timestamp": "2026-11-22T17:20:17Z"
     },
     {
-      "frequency_mhz": 14.2771,
+      "frequency_mhz": 1.84,
       "mode": "Non indicato",
-      "dx": "LZ3CC",
-      "spotter": "RA3OA",
-      "utc": "0950",
-      "comment": "LZ DX",
+      "dx": "R6WAO",
+      "spotter": "RN7T",
+      "utc": "1719",
+      "comment": "TNX 73",
       "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:50:01Z"
+      "timestamp": "2026-11-22T17:19:37Z"
     },
     {
-      "frequency_mhz": 14.0084,
+      "frequency_mhz": 21.03,
       "mode": "CW",
-      "dx": "LZ4A",
-      "spotter": "G3ESE",
-      "utc": "0950",
-      "comment": "LZ DX Contest CW",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:50:00Z"
+      "dx": "CQ80BH",
+      "spotter": "EB5GC",
+      "utc": "1719",
+      "comment": "CW 0",
+      "source": "SQ3SWG",
+      "timestamp": "2026-11-22T17:19:18Z"
     },
     {
-      "frequency_mhz": 7.154,
-      "mode": "SSB",
-      "dx": "SP8ULA/P",
-      "spotter": "SP8ULA/P",
-      "utc": "0950",
-      "comment": "POTA PL-0152 - POTA PL-0121 -",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:50:00Z"
+      "frequency_mhz": 7.153,
+      "mode": "Non indicato",
+      "dx": "EG7MNSF",
+      "spotter": "EA7BNL",
+      "utc": "1718",
+      "comment": "Nº SORTEO METOPA",
+      "source": "SQ3SWG",
+      "timestamp": "2026-11-22T17:18:53Z"
     },
     {
-      "frequency_mhz": 14.0491,
-      "mode": "CW",
-      "dx": "R8XF",
-      "spotter": "ON6VL",
-      "utc": "0950",
-      "comment": "",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:50:00Z"
-    },
-    {
-      "frequency_mhz": 7.118,
-      "mode": "SSB",
-      "dx": "EC4S",
-      "spotter": "EA4HWF",
-      "utc": "0950",
-      "comment": "DME 13069MVCR0216 ECR0069",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:50:00Z"
-    },
-    {
-      "frequency_mhz": 14.0847,
-      "mode": "RTTY",
-      "dx": "3X4U",
-      "spotter": "OP4F",
-      "utc": "0950",
-      "comment": "RTTY UP... USB",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:50:00Z"
-    },
-    {
-      "frequency_mhz": 21.2457,
-      "mode": "SSB",
-      "dx": "CT7BOD",
-      "spotter": "DO3TX",
-      "utc": "0950",
-      "comment": "LZ test",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:50:00Z"
-    },
-    {
-      "frequency_mhz": 14.2579,
-      "mode": "SSB",
-      "dx": "HA5MIG",
-      "spotter": "PA6Q",
-      "utc": "0950",
-      "comment": "LZ DX",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:50:00Z"
-    },
-    {
-      "frequency_mhz": 28.0222,
-      "mode": "CW",
-      "dx": "RV6LN",
-      "spotter": "DO1HKL",
-      "utc": "0950",
-      "comment": "",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:50:00Z"
-    },
-    {
-      "frequency_mhz": 14.034,
-      "mode": "CW",
-      "dx": "IK0YUT",
-      "spotter": "ON6VL",
-      "utc": "0950",
-      "comment": "",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:50:00Z"
-    },
-    {
-      "frequency_mhz": 28.455,
-      "mode": "SSB",
-      "dx": "LZ2ZY",
-      "spotter": "LZ8R",
-      "utc": "0950",
-      "comment": "USB",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:50:00Z"
-    },
-    {
-      "frequency_mhz": 18.145,
-      "mode": "SSB",
-      "dx": "UK8OM",
-      "spotter": "EA7GX",
-      "utc": "0950",
-      "comment": "USB IM76he -> MN51",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:50:00Z"
-    },
-    {
-      "frequency_mhz": 18.167,
-      "mode": "SSB",
-      "dx": "UN7CFI",
-      "spotter": "UN7CFI",
-      "utc": "0950",
-      "comment": "Beaming Europe",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:50:00Z"
-    },
-    {
-      "frequency_mhz": 21.29,
-      "mode": "SSB",
-      "dx": "3X4U",
-      "spotter": "IW4ENE",
-      "utc": "0950",
-      "comment": "Up5",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:50:00Z"
-    },
-    {
-      "frequency_mhz": 14.266,
-      "mode": "SSB",
-      "dx": "EA7LMB",
-      "spotter": "EA7KOY",
-      "utc": "0950",
-      "comment": "PHO [POTA] ES 1921",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:50:00Z"
-    },
-    {
-      "frequency_mhz": 7.0765,
+      "frequency_mhz": 3.573,
       "mode": "FT8",
-      "dx": "CT7ATA",
-      "spotter": "EA5BCO",
-      "utc": "0950",
-      "comment": "IM98PG<>IN50 FT8 FT8  Sent: -14  Rcvd: +02",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:50:00Z"
-    },
-    {
-      "frequency_mhz": 28.034,
-      "mode": "CW",
-      "dx": "LZ1ZP",
-      "spotter": "IK3QAR",
-      "utc": "0950",
-      "comment": "LZ-DX",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:50:00Z"
-    },
-    {
-      "frequency_mhz": 3.649,
-      "mode": "SSB",
-      "dx": "S51I",
-      "spotter": "9A7DX",
-      "utc": "0950",
-      "comment": "kvp",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:50:00Z"
-    },
-    {
-      "frequency_mhz": 28.042,
-      "mode": "CW",
-      "dx": "RU7A",
-      "spotter": "PC4Y",
-      "utc": "0950",
-      "comment": "CW",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:50:00Z"
-    },
-    {
-      "frequency_mhz": 14.2771,
-      "mode": "SSB",
-      "dx": "LZ3CC",
-      "spotter": "RA3OA",
-      "utc": "0950",
-      "comment": "LZ DX",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:50:00Z"
-    },
-    {
-      "frequency_mhz": 7.088,
-      "mode": "Non indicato",
-      "dx": "EC5AHA",
-      "spotter": "EA2TW",
-      "utc": "0950",
-      "comment": "CV-233 MVV-0142-1634",
+      "dx": "SP9TEX",
+      "spotter": "SP6FEK",
+      "utc": "1718",
+      "comment": "FT8 +07dB 814Hz",
       "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:50:00Z"
+      "timestamp": "2026-11-22T17:18:45Z"
     },
     {
-      "frequency_mhz": 14.1918,
+      "frequency_mhz": 1.846,
+      "mode": "SSB",
+      "dx": "DK80NDS",
+      "spotter": "DB2AG",
+      "utc": "1718",
+      "comment": "80th of Lower Saxony ssb",
+      "source": "SQ3SWG",
+      "timestamp": "2026-11-22T17:18:43Z"
+    },
+    {
+      "frequency_mhz": 10.136,
       "mode": "Non indicato",
-      "dx": "G6MC",
-      "spotter": "SP9XCN",
-      "utc": "0949",
+      "dx": "UK8APK",
+      "spotter": "GM4FDM",
+      "utc": "1717",
       "comment": "",
       "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:49:50Z"
-    },
-    {
-      "frequency_mhz": 21.25,
-      "mode": "Non indicato",
-      "dx": "CT2GSN",
-      "spotter": "DO3TX",
-      "utc": "0949",
-      "comment": "LZ test",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:49:49Z"
-    },
-    {
-      "frequency_mhz": 24.897,
-      "mode": "Non indicato",
-      "dx": "VK9XY",
-      "spotter": "I8YAV",
-      "utc": "0949",
-      "comment": "73",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:49:44Z"
-    },
-    {
-      "frequency_mhz": 7.185,
-      "mode": "Non indicato",
-      "dx": "PH82LIB",
-      "spotter": "PE5ENJ",
-      "utc": "0949",
-      "comment": "ses",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:49:42Z"
-    },
-    {
-      "frequency_mhz": 7.0761,
-      "mode": "FT8",
-      "dx": "DF4DT",
-      "spotter": "F4BJN",
-      "utc": "0949",
-      "comment": "FT8 -11 Thx for qso 73",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:49:37Z"
-    },
-    {
-      "frequency_mhz": 28.5091,
-      "mode": "SSB",
-      "dx": "DK0HH",
-      "spotter": "DH3KR",
-      "utc": "0949",
-      "comment": "USB",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:49:36Z"
-    },
-    {
-      "frequency_mhz": 14.005,
-      "mode": "CW",
-      "dx": "LY2DX",
-      "spotter": "G3ESE",
-      "utc": "0949",
-      "comment": "LZ DX Contest CW",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:49:33Z"
-    },
-    {
-      "frequency_mhz": 7.099,
-      "mode": "SSB",
-      "dx": "EA1BJE",
-      "spotter": "EA5SD",
-      "utc": "0949",
-      "comment": "SSB",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:49:20Z"
-    },
-    {
-      "frequency_mhz": 7.144,
-      "mode": "Non indicato",
-      "dx": "EA2EZ/P",
-      "spotter": "EA2AU",
-      "utc": "0949",
-      "comment": "",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:49:18Z"
-    },
-    {
-      "frequency_mhz": 18.13,
-      "mode": "SSB",
-      "dx": "9K2HS",
-      "spotter": "EA7GX",
-      "utc": "0949",
-      "comment": "USB IM76he -> LL39",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:49:01Z"
-    },
-    {
-      "frequency_mhz": 14.1918,
-      "mode": "SSB",
-      "dx": "G6MC",
-      "spotter": "SP9XCN",
-      "utc": "0949",
-      "comment": "",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:49:00Z"
-    },
-    {
-      "frequency_mhz": 21.25,
-      "mode": "SSB",
-      "dx": "CT2GSN",
-      "spotter": "DO3TX",
-      "utc": "0949",
-      "comment": "LZ test",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:49:00Z"
-    },
-    {
-      "frequency_mhz": 24.897,
-      "mode": "CW",
-      "dx": "VK9XY",
-      "spotter": "I8YAV",
-      "utc": "0949",
-      "comment": "73",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:49:00Z"
-    },
-    {
-      "frequency_mhz": 7.185,
-      "mode": "SSB",
-      "dx": "PH82LIB",
-      "spotter": "PE5ENJ",
-      "utc": "0949",
-      "comment": "ses",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:49:00Z"
-    },
-    {
-      "frequency_mhz": 7.0761,
-      "mode": "FT8",
-      "dx": "DF4DT",
-      "spotter": "F4BJN",
-      "utc": "0949",
-      "comment": "FT8 -11 Thx for qso 73",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:49:00Z"
-    },
-    {
-      "frequency_mhz": 28.5091,
-      "mode": "SSB",
-      "dx": "DK0HH",
-      "spotter": "DH3KR",
-      "utc": "0949",
-      "comment": "USB",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:49:00Z"
-    },
-    {
-      "frequency_mhz": 14.005,
-      "mode": "CW",
-      "dx": "LY2DX",
-      "spotter": "G3ESE",
-      "utc": "0949",
-      "comment": "LZ DX Contest CW",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:49:00Z"
-    },
-    {
-      "frequency_mhz": 7.162,
-      "mode": "SSB",
-      "dx": "OE3BIY",
-      "spotter": "7Z1AO",
-      "utc": "0949",
-      "comment": "",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:49:00Z"
-    },
-    {
-      "frequency_mhz": 7.099,
-      "mode": "SSB",
-      "dx": "EA1BJE",
-      "spotter": "EA5SD",
-      "utc": "0949",
-      "comment": "SSB",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:49:00Z"
-    },
-    {
-      "frequency_mhz": 7.144,
-      "mode": "SSB",
-      "dx": "EA2EZ/P",
-      "spotter": "EA2AU",
-      "utc": "0949",
-      "comment": "",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:49:00Z"
-    },
-    {
-      "frequency_mhz": 7.1918,
-      "mode": "SSB",
-      "dx": "KA0PQW",
-      "spotter": "W2CDO",
-      "utc": "0949",
-      "comment": "",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:49:00Z"
-    },
-    {
-      "frequency_mhz": 18.13,
-      "mode": "SSB",
-      "dx": "9K2HS",
-      "spotter": "EA7GX",
-      "utc": "0949",
-      "comment": "USB IM76he -> LL39",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:49:00Z"
-    },
-    {
-      "frequency_mhz": 14.004,
-      "mode": "CW",
-      "dx": "TA3X",
-      "spotter": "G3ESE",
-      "utc": "0948",
-      "comment": "LZ DX Contest CW",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:48:59Z"
-    },
-    {
-      "frequency_mhz": 3.6318,
-      "mode": "Non indicato",
-      "dx": "S54O",
-      "spotter": "9A7DX",
-      "utc": "0948",
-      "comment": "KVP",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:48:56Z"
-    },
-    {
-      "frequency_mhz": 7.0149,
-      "mode": "Non indicato",
-      "dx": "9A3VM",
-      "spotter": "EA3CWT",
-      "utc": "0948",
-      "comment": "",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:48:55Z"
-    },
-    {
-      "frequency_mhz": 18.1,
-      "mode": "Non indicato",
-      "dx": "TA1CQ",
-      "spotter": "IW2HWN",
-      "utc": "0948",
-      "comment": "73",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:48:54Z"
-    },
-    {
-      "frequency_mhz": 3.746,
-      "mode": "SSB",
-      "dx": "S52AA",
-      "spotter": "S52K",
-      "utc": "0948",
-      "comment": "LSB",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:48:52Z"
-    },
-    {
-      "frequency_mhz": 28.008,
-      "mode": "CW",
-      "dx": "DL0GSH",
-      "spotter": "DA6KO",
-      "utc": "0948",
-      "comment": "80th of Lower Saxony cw",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:48:48Z"
-    },
-    {
-      "frequency_mhz": 21.0337,
-      "mode": "Non indicato",
-      "dx": "CT7/G4BJM",
-      "spotter": "DL5JQ",
-      "utc": "0948",
-      "comment": "LX-DX Contest",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:48:45Z"
-    },
-    {
-      "frequency_mhz": 7.0133,
-      "mode": "Non indicato",
-      "dx": "IK2UEX",
-      "spotter": "EA3CWT",
-      "utc": "0948",
-      "comment": "",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:48:31Z"
-    },
-    {
-      "frequency_mhz": 5.36,
-      "mode": "SSB",
-      "dx": "EG2026PC",
-      "spotter": "EA1FAC",
-      "utc": "0948",
-      "comment": "SSB DME-39013 (CabezÃ³n de LiÃ",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:48:25Z"
-    },
-    {
-      "frequency_mhz": 7.185,
-      "mode": "Non indicato",
-      "dx": "PH82LIB",
-      "spotter": "DL2BFK",
-      "utc": "0948",
-      "comment": "tnx qso",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:48:24Z"
-    },
-    {
-      "frequency_mhz": 7.0765,
-      "mode": "FT8",
-      "dx": "M7CYY",
-      "spotter": "EA5BCO",
-      "utc": "0948",
-      "comment": "IM98PG<>IO70 FT8 FT8  Sent: -1",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:48:23Z"
-    },
-    {
-      "frequency_mhz": 14.247,
-      "mode": "Non indicato",
-      "dx": "LZ1KAU",
-      "spotter": "IK4ZIF",
-      "utc": "0948",
-      "comment": "LZ-DX",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:48:12Z"
-    },
-    {
-      "frequency_mhz": 7.171,
-      "mode": "Non indicato",
-      "dx": "EA3RKO",
-      "spotter": "EA3INX",
-      "utc": "0948",
-      "comment": "regreso al futuro",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:48:08Z"
-    },
-    {
-      "frequency_mhz": 14.004,
-      "mode": "CW",
-      "dx": "TA3X",
-      "spotter": "G3ESE",
-      "utc": "0948",
-      "comment": "LZ DX Contest CW",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:48:00Z"
-    },
-    {
-      "frequency_mhz": 3.6318,
-      "mode": "SSB",
-      "dx": "S54O",
-      "spotter": "9A7DX",
-      "utc": "0948",
-      "comment": "KVP",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:48:00Z"
-    },
-    {
-      "frequency_mhz": 7.0149,
-      "mode": "CW",
-      "dx": "9A3VM",
-      "spotter": "EA3CWT",
-      "utc": "0948",
-      "comment": "",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:48:00Z"
-    },
-    {
-      "frequency_mhz": 18.1,
-      "mode": "DIGI",
-      "dx": "TA1CQ",
-      "spotter": "IW2HWN",
-      "utc": "0948",
-      "comment": "73",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:48:00Z"
-    },
-    {
-      "frequency_mhz": 3.746,
-      "mode": "SSB",
-      "dx": "S52AA",
-      "spotter": "S52K",
-      "utc": "0948",
-      "comment": "LSB",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:48:00Z"
-    },
-    {
-      "frequency_mhz": 28.008,
-      "mode": "CW",
-      "dx": "DL0GSH",
-      "spotter": "DA6KO",
-      "utc": "0948",
-      "comment": "80th of Lower Saxony cw",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:48:00Z"
-    },
-    {
-      "frequency_mhz": 21.0337,
-      "mode": "CW",
-      "dx": "CT7/G4BJM",
-      "spotter": "DL5JQ",
-      "utc": "0948",
-      "comment": "LX-DX Contest",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:48:00Z"
-    },
-    {
-      "frequency_mhz": 7.0133,
-      "mode": "CW",
-      "dx": "IK2UEX",
-      "spotter": "EA3CWT",
-      "utc": "0948",
-      "comment": "",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:48:00Z"
-    },
-    {
-      "frequency_mhz": 5.36,
-      "mode": "SSB",
-      "dx": "EG2026PC",
-      "spotter": "EA1FAC",
-      "utc": "0948",
-      "comment": "SSB DME-39013 (Cabezón de Liébana) TPEA: S",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:48:00Z"
-    },
-    {
-      "frequency_mhz": 7.185,
-      "mode": "SSB",
-      "dx": "PH82LIB",
-      "spotter": "DL2BFK",
-      "utc": "0948",
-      "comment": "tnx qso",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:48:00Z"
-    },
-    {
-      "frequency_mhz": 7.0765,
-      "mode": "FT8",
-      "dx": "M7CYY",
-      "spotter": "EA5BCO",
-      "utc": "0948",
-      "comment": "IM98PG<>IO70 FT8 FT8  Sent: -16  Rcvd: -07",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:48:00Z"
-    },
-    {
-      "frequency_mhz": 14.247,
-      "mode": "SSB",
-      "dx": "LZ1KAU",
-      "spotter": "IK4ZIF",
-      "utc": "0948",
-      "comment": "LZ-DX",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:48:00Z"
-    },
-    {
-      "frequency_mhz": 7.171,
-      "mode": "SSB",
-      "dx": "EA3RKO",
-      "spotter": "EA3INX",
-      "utc": "0948",
-      "comment": "regreso al futuro",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:48:00Z"
-    },
-    {
-      "frequency_mhz": 7.0125,
-      "mode": "Non indicato",
-      "dx": "IV3KKW",
-      "spotter": "EA3CWT",
-      "utc": "0947",
-      "comment": "",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:47:59Z"
-    },
-    {
-      "frequency_mhz": 21.3,
-      "mode": "Non indicato",
-      "dx": "CT7AUE",
-      "spotter": "DO3TX",
-      "utc": "0947",
-      "comment": "",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:47:58Z"
-    },
-    {
-      "frequency_mhz": 21.0363,
-      "mode": "CW",
-      "dx": "IZ8EPX",
-      "spotter": "PC4Y",
-      "utc": "0947",
-      "comment": "CW",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:47:29Z"
-    },
-    {
-      "frequency_mhz": 28.4671,
-      "mode": "SSB",
-      "dx": "DH1PAL",
-      "spotter": "DH3KR",
-      "utc": "0947",
-      "comment": "USB",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:47:24Z"
-    },
-    {
-      "frequency_mhz": 21.09,
-      "mode": "FT8",
-      "dx": "VK9XY",
-      "spotter": "IW0EWI",
-      "utc": "0947",
-      "comment": "FT8 -04dB in Rome",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:47:08Z"
-    },
-    {
-      "frequency_mhz": 7.099,
-      "mode": "Non indicato",
-      "dx": "EA1BJE",
-      "spotter": "EA1JZB",
-      "utc": "0947",
-      "comment": "PHO DME-37104 (Cilleros de la",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:47:02Z"
-    },
-    {
-      "frequency_mhz": 7.0125,
-      "mode": "CW",
-      "dx": "IV3KKW",
-      "spotter": "EA3CWT",
-      "utc": "0947",
-      "comment": "",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:47:00Z"
-    },
-    {
-      "frequency_mhz": 21.3,
-      "mode": "SSB",
-      "dx": "CT7AUE",
-      "spotter": "DO3TX",
-      "utc": "0947",
-      "comment": "",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:47:00Z"
-    },
-    {
-      "frequency_mhz": 21.0363,
-      "mode": "CW",
-      "dx": "IZ8EPX",
-      "spotter": "PC4Y",
-      "utc": "0947",
-      "comment": "CW",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:47:00Z"
-    },
-    {
-      "frequency_mhz": 28.4671,
-      "mode": "SSB",
-      "dx": "DH1PAL",
-      "spotter": "DH3KR",
-      "utc": "0947",
-      "comment": "USB",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:47:00Z"
-    },
-    {
-      "frequency_mhz": 21.09,
-      "mode": "FT8",
-      "dx": "VK9XY",
-      "spotter": "IW0EWI",
-      "utc": "0947",
-      "comment": "FT8 -04dB in Rome",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:47:00Z"
-    },
-    {
-      "frequency_mhz": 7.099,
-      "mode": "SSB",
-      "dx": "EA1BJE",
-      "spotter": "EA1JZB",
-      "utc": "0947",
-      "comment": "PHO DME-37104 (Cilleros de la Bastida) TPEA: SA",
-      "source": "HamQTH",
-      "timestamp": "2026-11-22T09:47:00Z"
-    },
-    {
-      "frequency_mhz": 14.2079,
-      "mode": "Non indicato",
-      "dx": "UO2L",
-      "spotter": "PE1EWR",
-      "utc": "0946",
-      "comment": "LZ DX test",
-      "source": "SQ3SWG",
-      "timestamp": "2026-11-22T09:46:58Z"
+      "timestamp": "2026-11-22T17:17:39Z"
     }
   ]
 }
