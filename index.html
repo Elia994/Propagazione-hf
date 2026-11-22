@@ -118,6 +118,9 @@
 </section><section class="view" id="view-operators"><h2>Ricerca operatori</h2>
 <div class="panel"><form id="op-forward"><label for="op-call">Nominativo</label><div class="op-line"><input id="op-call" placeholder="Nominativo" required maxlength="20" autocapitalize="characters" spellcheck="false"><button>Cerca operatore</button></div></form><p id="op-profile" role="status">Cerca un nominativo per vedere il profilo.</p></div>
 <div class="panel"><h3>Ultimi collegamenti</h3><p id="op-activity">Fino a 10 QSO pubblicati dall’operatore su Club Log.</p><div id="op-qso"></div></div>
+<section class="panel"><h3>Ultimi spot · HamQTH</h3><div id="op-spots" class="log-table-scroll">Cerca un nominativo.</div></section>
+<section class="panel"><h3>Ricezioni · PSK Reporter</h3><div id="op-heard" class="log-table-scroll">Cerca un nominativo.</div></section>
+<section class="panel"><h3>RadioID · archivio personale</h3><label for="op-radio-file">Apri un archivio utenti DMR in formato JSON per cercare per nome o nominativo e visualizzare l’ID DMR. I dati restano sul dispositivo.</label><input id="op-radio-file" type="file" accept=".json,application/json"><p id="op-radio-status" role="status"></p><div id="op-radio-result"></div></section>
 <div class="panel"><h3>Dal nome al nominativo</h3><form id="op-reverse"><label for="op-name">Nome o cognome</label><div class="op-line"><input id="op-name" placeholder="Nome o cognome" required minlength="2"><button>Cerca nominativi</button></div></form><p>La ricerca comprende i nominativi presenti nell’indice Wikidata, anche storici, e i profili trovati in questa sessione. Seleziona un risultato per consultarlo.</p><div id="op-matches" aria-live="polite"></div></div></section><footer>Autoaggiornamento ogni 5 minuti. Le misure possono essere pubblicate con ritardo. Se un servizio non risponde, il dato resta non disponibile: nessun valore viene simulato. Per verificare aperture effettive usa PSK Reporter o WSPR.</footer></main><nav class="bottom-nav" aria-label="Sezioni del sito"><button class="nav-tab active" type="button" data-view="hf" aria-current="page"><span>◉</span>HF</button><button class="nav-tab" type="button" data-view="live"><span>📡</span>DX Live</button><button class="nav-tab" type="button" data-view="data"><span>⚙</span>Dati</button><button class="nav-tab" type="button" data-view="log"><span>📓</span>Log</button><button class="nav-tab" type="button" data-view="operators"><span>⌕</span>Operatori</button></nav><button id="mobile-refresh" class="mobile-refresh" type="button" aria-label="Aggiorna dati">↻ Aggiorna</button><script>
 const $=id=>document.getElementById(id);let busy=false;
 function num(x){if(x===null||x===undefined||x==='')return null;const n=Number(x);return Number.isFinite(n)?n:null}
@@ -1182,6 +1185,67 @@ loadLive();setInterval(loadLive,300000);
 const opIndex=[["Zhou Haiying", "BA1CY", "Wikidata"], ["SR2PB", "SR2PB", "Wikidata"], ["SP3YOR", "SP3YOR", "Wikidata"], ["Paolo Nespoli", "IZ0JPA", "Wikidata"], ["Miroslav Schäferling", "OK1AA", "Wikidata"], ["Bruce Perens", "K6BP", "Wikidata"], ["Robert Bruninga", "WB4APR", "Wikidata"], ["Alexander Matheisen", "DO4NE", "Wikidata"], ["Imre Ferenczy", "HA1UD", "Wikidata"], ["Donald Arthur Hatch", "VA3DAH", "Wikidata"], ["Laurel Clark", "KC5ZSU", "Wikidata"], ["W. E. Moerner", "WN6I", "Wikidata"], ["Evan Pratten", "VA3ZZA", "Wikidata"], ["Luca Parmitano", "KF5KDP", "Wikidata"], ["Priscilla Presley", "N6YOS", "Wikidata"], ["Markku Korhonen", "AG6OR", "Wikidata"], ["Markku Korhonen", "OH4UV", "Wikidata"], ["Markku Korhonen", "OH7UV", "Wikidata"], ["Markku Korhonen", "OH8UV", "Wikidata"], ["James Heller", "KC0DGR", "Wikidata"], ["Francesco Cossiga", "I0FCG", "Wikidata"], ["Helen Sharman", "GB1MIR", "Wikidata"], ["Louis Varney", "G5RV", "Wikidata"], ["Eytan Stibbe", "4Z9SPC", "Wikidata"], ["Anton Železnikar", "S51EM", "Wikidata"], ["Carlos Menem", "LU1SM", "Wikidata"], ["Pertti Kärkkäinen", "OH2MT", "Wikidata"], ["Pertti Kärkkäinen", "OH3GQ", "Wikidata"], ["Sirindhorn di Thailandia", "HS1D", "Wikidata"], ["Husayn di Giordania", "JY1", "Wikidata"], ["Frederick Kenneth McTaggart", "G3CUA", "Wikidata"], ["Frederick Kenneth McTaggart", "VK3NW", "Wikidata"], ["Martin Klewitz", "DK4XM", "Wikidata"], ["Nigel Roberts", "GU4IJF", "Wikidata"], ["Joseph Hooton Taylor", "K1JT", "Wikidata"], ["James Martel Reneau", "N4REN", "Wikidata"], ["Justine Haupt", "W2GFO", "Wikidata"], ["Wolfgang Rudolph", "DC3PA", "Wikidata"], ["Mark Pathy", "KO4WFH", "Wikidata"], ["Siarhei Besarab", "EU1AEY", "Wikidata"], ["Javier Ramos Nistal", "CL2MM", "Wikidata"], ["Javier Ramos Nistal", "CM2MM", "Wikidata"], ["Javier Ramos Nistal", "CO2MM", "Wikidata"], ["Jeffrey Kadet", "K1MOD", "Wikidata"], ["Giovanni Carlo I di Spagna", "EA0JC", "Wikidata"], ["U Thant", "XZ2TH", "Wikidata"], ["Matti Wihuri", "OH2OH", "Wikidata"], ["Tsuneyoshi Yamano", "JA5HTP", "Wikidata"], ["Massimiliano Maria Kolbe", "SP3RN", "Wikidata"], ["Taiei Gotō", "JH3GAH", "Wikidata"], ["Marc Griffin", "WB9QBG", "Wikidata"], ["Robert Moog", "K2AMH", "Wikidata"], ["Jenean Hampton", "K5EIB", "Wikidata"], ["Leonas Keiteris Neto", "PY2MOK", "Wikidata"], ["Yordán Fonseca Olivera", "CM2YGO", "Wikidata"], ["Andreas Weller", "DF1PAW", "Wikidata"], ["Michael G. Littman", "KD2NFA", "Wikidata"], ["3Y0J Bouvet Island DXpedition", "3Y0J", "Wikidata"], ["Ismary Lezcano García", "CL2TNT", "Wikidata"], ["George Sassoon", "GM3JZK", "Wikidata"], ["Hans Welling", "DJ4PG", "Wikidata"], ["KP6PA Palmyra Atoll DXpedition", "KP6PA", "Wikidata"], ["Matthias Jung", "AJ9MJ", "Wikidata"], ["Matthias Jung", "DL9MJ", "Wikidata"], ["Radio Club Zagreb", "9A1ADE", "Wikidata"], ["The Bharat Scouts and Guides", "VU2BSG", "Wikidata"], ["Émile Lahoud", "OD5LE", "Wikidata"], ["Leo Laporte", "W6TWT", "Wikidata"], ["Seppo Sisättö", "OH1VR", "Wikidata"], ["Theresa M. Korn", "K7JGU", "Wikidata"], ["Emily Calandrelli", "KD8PKR", "Wikidata"], ["Dennis Tito", "KG6FZX", "Wikidata"], ["Fernando Belaúnde Terry", "OA4FB", "Wikidata"], ["Leo Lindell", "LOL", "Wikidata"], ["Birger Sweins", "OH2NZ", "Wikidata"], ["Johan Gørrissen", "LA1Q", "Wikidata"], ["Claude Nicollier", "HB9CN", "Wikidata"], ["Martin Hübner", "DH4MH", "Wikidata"], ["Herbert Lindblad", "SM6NP", "Wikidata"], ["Smithsonian Amateur Radio Group", "NN3SI", "Wikidata"], ["Naomi Uemura", "JG1QFW", "Wikidata"], ["3Y5X Bouvet Island DXpedition", "3Y5X", "Wikidata"], ["BS7H Scarborough Reef DXpedition", "BS7H", "Wikidata"], ["FO0XB Clipperton Island DXpedition", "FO0XB", "Wikidata"], ["Sonia Gandhi", "VU2SON", "Wikidata"], ["Octavio A. Chon Torres", "OA4DWK", "Wikidata"], ["Leo Lindell", "OH1NA", "Wikidata"], ["Leo Lindell", "OH2NA", "Wikidata"], ["Ulf Merbold", "DB1KM", "Wikidata"], ["Ulf Merbold", "DP3MIR", "Wikidata"], ["Thomas Reiter", "DF4TR", "Wikidata"], ["Arvi Hauvonen", "OH3NB", "Wikidata"], ["Arvi Hauvonen", "OH3PP", "Wikidata"], ["Gareth Mitchell", "M7GJM", "Wikidata"], ["James Treybig", "W6JKV", "Wikidata"], ["Owen K. Garriott", "W5LFL", "Wikidata"], ["David Lowery", "KF4KRF", "Wikidata"], ["EntrySat", "ON02FR", "Wikidata"], ["Lelia Constanța Băjenescu", "CV5BI", "Wikidata"], ["Ioan Băjenescu", "CV5BI", "Wikidata"], ["Thomas Pesquet", "KG5FYG", "Wikidata"], ["Diwata-2", "DW4TA", "Wikidata"], ["Tapio Lehtinen", "OH6BUZ", "Wikidata"], ["Timothy Peake", "KG5BVI", "Wikidata"], ["Cathryn N Mitchell", "M0IBG", "Wikidata"], ["Mamoru Mohri", "7L2NJY", "Wikidata"], ["Koichi Wakata", "KC5ZTA", "Wikidata"], ["Al-Walid bin Talal", "HZ1TC", "Wikidata"], ["Dirk Frimout", "ON1AFD", "Wikidata"], ["Frank De Winne", "ON1DWN", "Wikidata"], ["Diana Eng", "KC2UHB", "Wikidata"], ["Samantha Cristoforetti", "IZ0UDF", "Wikidata"], ["Andy Devine", "WB6RER", "Wikidata"], ["Grote Reber", "W9GFZ", "Wikidata"], ["Olivier de Kersauson", "F5IAX", "Wikidata"], ["Daniel Burbank", "K1DCB", "Wikidata"], ["Michael Foale", "KB5UAC", "Wikidata"], ["Pertti Koivula", "OG0W", "Wikidata"], ["Pertti Koivula", "OG2W", "Wikidata"], ["Pertti Koivula", "OH2BEE", "Wikidata"], ["Pertti Koivula", "OH9PK", "Wikidata"], ["Pertti Koivula", "OH9U", "Wikidata"], ["Osmo Antero Wiio", "OH2TK", "Wikidata"], ["Alberto II di Monaco", "3A0AG", "Wikidata"], ["James Howard", "K3JPH", "Wikidata"], ["Renzo Davoli", "IZ4DJE", "Wikidata"], ["Sean Smith", "KG4WSS", "Wikidata"], ["David L. Mills", "W3HCF", "Wikidata"], ["Sunita Williams", "KD5PLB", "Wikidata"], ["Kalpana Chawla", "KD5ESI", "Wikidata"], ["Heather A. Flewelling", "AH7RF", "Wikidata"], ["Nur di Giordania", "JY1NH", "Wikidata"], ["George J. Laurer", "K4HZE", "Wikidata"], ["Stewart Granger", "N6KGB", "Wikidata"], ["Walter Cronkite", "KB2GSD", "Wikidata"], ["Clifford Stoll", "K7TA", "Wikidata"], ["Keizo Obuchi", "JI1KIT", "Wikidata"], ["Ronnie Milsap", "WB4KCG", "Wikidata"], ["Edo Dooijes", "PA0EDO", "Wikidata"], ["Burl Ives", "KA6HVK", "Wikidata"], ["Aharon Kirschner", "4X1AT", "Wikidata"], ["Loyd Sigmon", "W6LQ", "Wikidata"], ["Joseph Acaba", "KE5DAR", "Wikidata"], ["Barry Goldwater", "K7UGA", "Wikidata"], ["Linda Godwin", "N5RAX", "Wikidata"], ["Richard Arnold", "KE5DAU", "Wikidata"], ["Dick Rutan", "KB6LQS", "Wikidata"], ["John W. Campbell", "W2ZGU", "Wikidata"], ["Jean Shepherd", "K2ORS", "Wikidata"], ["Peter Freeman", "K3CS", "Wikidata"], ["Qābūs bin Saʿīd Āl Saʿīd", "A41AA", "Wikidata"], ["Anthony England", "W0ORE", "Wikidata"], ["Prince Hassan bin Talal", "JY2HT", "Wikidata"], ["Rajiv Gandhi", "VU2RG", "Wikidata"], ["Clayton Anderson", "KD5PLA", "Wikidata"], ["Roberto Vittori", "IZ6ERU", "Wikidata"], ["Ambrogio Fogar", "I2NSF", "Wikidata"], ["Dmitry Shparo", "UA3AJH", "Wikidata"], ["Sergej Vasil'evič Avdeev", "RV3DW", "Wikidata"], ["Brian Rix", "G2DQU", "Wikidata"], ["Peter Hultqvist", "SM4HCF", "Wikidata"], ["Joe Walsh", "WB6ACU", "Wikidata"], ["Palden Thondup Namgyal", "AC3PT", "Wikidata"], ["Thom Hartmann", "WAMWU", "Wikidata"], ["Marlon Brando", "FO5GJ", "Wikidata"], ["Sullivan Jovelin", "F4HZC", "Wikidata"], ["Frate Apollo", "SV2ASP", "Wikidata"], ["Daniel Estévez", "EA4GPZ", "Wikidata"], ["Daniel Estévez", "M0HXM", "Wikidata"], ["Marius-Pierre Cousin", "F8DO", "Wikidata"], ["Sako Hasegawa", "JA1MP", "Wikidata"], ["Serena Auñón-Chancellor", "KG5TMT", "Wikidata"], ["Jeri Ellsworth", "AI6TK", "Wikidata"], ["Stu Gilliam", "KI6M", "Wikidata"], ["Masaru Ibuka", "J3BB", "Wikidata"], ["Gaël Musquet", "F4HXS", "Wikidata"], ["Bdale Garbee", "KB0G", "Wikidata"], ["W1AW", "W1AW", "Wikidata"], ["Augusto Pinochet", "CE3GP", "Wikidata"], ["Oona Räisänen", "OH2EIQ", "Wikidata"], ["Jacob Beser", "W3NOD", "Wikidata"], ["Jeana Yeager", "KB6LQR", "Wikidata"], ["Steve Wozniak", "WA6BND", "Wikidata"], ["Arnold Reinhold", "K2PNK", "Wikidata"], ["Sandra Magnus", "KE5FYE", "Wikidata"], ["Bob Tomalski", "G6CQF", "Wikidata"], ["Charles Apgar", "2MM", "Wikidata"], ["Alex Comfort", "KA6UXR", "Wikidata"], ["John Aboud", "KK6ZVQ", "Wikidata"], ["Matthias Maurer", "KI5KFH", "Wikidata"], ["Watanyoo Putta", "E25ZVB", "Wikidata"], ["Kevin Mitnick", "N6NHG", "Wikidata"], ["Hideo Yanagisawa", "JA7JJN", "Wikidata"], ["Alessandro Frigeri", "IK0YUP", "Wikidata"], ["LASARsat", "OK0LSR", "Wikidata"], ["Katashi Nose", "KH6IJ", "Wikidata"], ["Bhumibol Adulyadej", "HS1A", "Wikidata"], ["Faia Brava", "CTFF-0059", "Wikidata"], ["Roger Michael Mahony", "W6QYI", "Wikidata"], ["Karl Rothammel", "Y21BK", "Wikidata"], ["HF0POL", "HF0POL", "Wikidata"], ["Maximilian Gregor Hepach", "M7YZE", "Wikidata"], ["Andrey Stepanov", "UB9UZA", "Wikidata"], ["Eric Grosse", "N2VI", "Wikidata"], ["John Gilmore", "W0GNU", "Wikidata"], ["Jonatan Miarecki", "DN9AJ", "Wikidata"], ["Alex Kasper", "KB6VTM", "Wikidata"], ["Elizabeth K. Joseph", "KN6QGG", "Wikidata"], ["William I. Orr", "W6SAI", "Wikidata"], ["Miroslav Joachim", "OK1WI", "Wikidata"], ["Hasan II del Marocco", "CN8MH", "Wikidata"], ["Eleanor Arroway", "W9GFO", "Wikidata"], ["Jerome Apt", "N5QWL", "Wikidata"], ["Cliff Richard", "W2JOF", "Wikidata"], ["André Kuipers", "PI9ISS", "Wikidata"], ["Hamadoun Touré", "HB9EHT", "Wikidata"], ["International Amateur Radio Club", "4U1ITU", "Wikidata"], ["Joybubbles", "WB0RPA", "Wikidata"], ["Arthur Godfrey", "K4LIB", "Wikidata"], ["Ulrich Rohde", "DJ2LR", "Wikidata"], ["Ulrich Rohde", "N1UL", "Wikidata"], ["Alexander Gerst", "KF5ONO", "Wikidata"], ["Shōzō Hara", "JA1AN", "Wikidata"], ["Mingchuan Wei", "BG2BHC", "Wikidata"], ["Rabea Rogge", "LB9NJ", "Wikidata"], ["Rabea Rogge", "KD3AID", "Wikidata"], ["Jiří Šanda", "OK1RI", "Wikidata"], ["Chet Atkins", "W4CGP", "Wikidata"], ["Jurij Gagarin", "UA1LO", "Wikidata"], ["Wau Holland", "DB4FA", "Wikidata"], ["Björn Bosselmann", "DL8BO", "Wikidata"], ["Jason T. Olin", "KO6GUE", "Wikidata"], ["KOSTKA", "OK0KST", "Wikidata"], ["Don Lancaster", "K3BYG", "Wikidata"], ["Rupert Goodwins", "G6HVY", "Wikidata"], ["Masaco", "JH1CBX", "Wikidata"], ["Radio Club Correntoso", "LU4YYY", "Wikidata"], ["Catherine Coleman", "KC5ZTH", "Wikidata"], ["Austin Hadley", "KE8YGW", "Wikidata"], ["Hanna Shavialenka", "EW8NK", "Wikidata"], ["Attila Matas", "HB9IAJ", "Wikidata"], ["Attila Matas", "OM1AM", "Wikidata"], ["Andreas Spiess", "HB9BLA", "Wikidata"], ["Yvette Cendes", "KB3HTS", "Wikidata"]];
 let opRequest=0;
 function opNormalize(text){return text.normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim().toLowerCase()}
+
+let opRadioRows=[],opRadioRecords=new Map();
+function opRadioShow(call){
+ const records=opRadioRecords.get(call)||[];
+ $('op-radio-result').textContent=records.map(r=>[r.name,r.city,'DMR '+r.id].filter(Boolean).join(' · ')).join(' / ')||(opRadioRecords.size?'Assente dall’archivio personale.':'');
+}
+$('op-radio-file').onchange=async e=>{
+ const file=e.target.files[0];if(!file)return;
+ try{
+  const data=JSON.parse(await file.text()),users=Array.isArray(data)?data:(data.users||data.results);
+  if(!Array.isArray(users))throw Error();
+  const records=new Map(),rows=[];
+  for(const u of users){
+   const call=String(u?.callsign||'').trim().toUpperCase(),id=String(u?.radio_id||u?.id||'');
+   if(!/^[A-Z0-9/]{3,20}$/.test(call)||!/^\d+$/.test(id))continue;
+   const name=[u.fname||u.first_name,u.surname||u.last_name].filter(Boolean).join(' ')||u.name||'';
+   if(!records.has(call)){records.set(call,[]);if(name)rows.push([String(name),call,'RadioID personale'])}
+   records.get(call).push({name,city:u.city,id});
+  }
+  if(!records.size)throw Error();
+  opRadioRows=rows;opRadioRecords=records;$('op-radio-status').textContent=records.size+' nominativi disponibili.';
+  opRadioShow($('op-call').value.trim().toUpperCase());
+ }catch{$('op-radio-status').textContent='Importazione fallita. Serve un JSON utenti RadioID.'}
+};
+const opFeedCache=new Map();
+function opReception(call){
+ return new Promise((resolve,reject)=>{
+  const frame=document.createElement('iframe');frame.hidden=true;frame.setAttribute('sandbox','allow-scripts');
+  function finish(){clearTimeout(timer);window.removeEventListener('message',onMessage);frame.remove()}
+  function onMessage(e){if(e.source!==frame.contentWindow||e.origin!=='null')return;finish();if(e.data?.error||!Array.isArray(e.data?.rows))reject(Error());else resolve(e.data.rows)}
+  const timer=setTimeout(()=>{finish();reject(Error())},15000);
+  window.addEventListener('message',onMessage);
+  const url='https://retrieve.pskreporter.info/query?senderCallsign='+encodeURIComponent(call)+'&rronly=1&rptlimit=10&flowStartSeconds=-21600&callback=receive';
+  frame.srcdoc='<script>function receive(d){parent.postMessage(d && !d.error && ("currentSeconds" in d || "receptionReport" in d) ? {rows:d.receptionReport||[]} : {error:true},"*")}<\/script><script src="'+url.replaceAll('&','&amp;')+'" onerror="parent.postMessage({error:true},\'*\')"><\/script>';
+  document.body.append(frame);
+ });
+}
+async function opActivity(kind,call,request){
+ const el=$('op-'+kind),psk=kind==='heard',key=kind+':'+call;
+ el.textContent='Ricerca in corso…';
+ try{
+  let hit=opFeedCache.get(key);
+  if(!hit||Date.now()-hit.time>(psk?300000:15000)){
+   const pending=psk?opReception(call):fetchWithTimeout('https://www.hamqth.com/api/v2/spots?limit=10&calls='+encodeURIComponent(call),10000).then(d=>{if(!Array.isArray(d.spots))throw Error();return d.spots});
+   hit={time:Date.now(),pending};opFeedCache.set(key,hit);
+  }
+  const data=await hit.pending;if(request!==opRequest)return;
+  const rows=data.filter(r=>!psk||String(r.senderCallsign).toUpperCase()===call).map(r=>{
+   const t=psk?Number(r.flowStartSeconds)*1000:Date.parse(r.time);
+   const mhz=Number(psk?r.frequency:r.freq)/(psk?1e6:1000);
+   return {t,fields:[Number.isFinite(t)?new Date(t).toISOString().slice(5,16).replace('T',' '):'—',psk?r.receiverCallsign:r.spotter,psk?r.receiverLocator:r.dxcall,mhz>0?mhz.toFixed(3):'—',r.mode]};
+  }).sort((a,b)=>b.t-a.t).slice(0,10);
+  if(!rows.length){el.textContent=psk?'Nessuna ricezione segnalata nelle ultime 6 ore.':'Nessuno spot disponibile.';return}
+  const table=document.createElement('table');table.className='log-table';
+  const header=table.createTHead().insertRow();
+  for(const label of ['Data UTC',psk?'Ricevitore':'Segnalato da',psk?'Locator RX':'Stazione','MHz','Modo']){const th=document.createElement('th');th.textContent=label;header.append(th)}
+  const body=table.createTBody();for(const row of rows){const tr=body.insertRow();for(const field of row.fields)tr.insertCell().textContent=field||'—'}
+  el.replaceChildren(table);
+ }catch{if(request===opRequest)el.textContent='Servizio temporaneamente non disponibile.'}
+}
+
 async function opLoadContacts(call,request){
  const status=$('op-activity');
  status.textContent='Ricerca dei collegamenti su Club Log…';
@@ -1220,6 +1284,7 @@ async function opSearch(call,known){
  $('op-profile').textContent=fallback||'Ricerca profilo…';
  $('op-qso').replaceChildren();
  opLoadContacts(call,request);
+ opActivity('spots',call,request);opActivity('heard',call,request);opRadioShow(call);
  try{
  const p=await logFetchCallbook(call);if(request!==opRequest)return;
  if(p){$('op-profile').textContent=[call,p.name,p.place,p.grid,p.source].filter(Boolean).join(' · ');
@@ -1233,9 +1298,10 @@ $('op-reverse').onsubmit=e=>{
  e.preventDefault();const words=opNormalize($('op-name').value).split(/\s+/).filter(Boolean);
  const result=$('op-matches');result.replaceChildren();
  if(!words.length)return;
- const rows=opIndex.filter(row=>words.every(w=>opNormalize(row[0]).includes(w)));
+ const rows=opIndex.concat(opRadioRows).filter(row=>words.every(w=>opNormalize(row[0]).includes(w)));
  result.textContent=rows.length?rows.length+' corrispondenze':'Nessuna corrispondenza in questo indice.';
- for(const row of rows){const b=document.createElement('button');b.textContent=row[1]+' · '+row[0]+' · '+row[2];b.onclick=()=>{opSearch(row[1].toUpperCase(),row);$('op-forward').scrollIntoView({block:'center'})};result.append(b)}
+ if(rows.length>100)result.textContent+=' · primi 100 risultati. Affina la ricerca.';
+ for(const row of rows.slice(0,100)){const b=document.createElement('button');b.textContent=row[1]+' · '+row[0]+' · '+row[2];b.onclick=()=>{opSearch(row[1].toUpperCase(),row);$('op-forward').scrollIntoView({block:'center'})};result.append(b)}
 };
 
 </script></body></html>
