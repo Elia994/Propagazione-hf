@@ -118,8 +118,6 @@
 </section><section class="view" id="view-operators"><h2>Ricerca operatori</h2>
 <div class="panel"><form id="op-forward"><label for="op-call">Nominativo</label><div class="op-line"><input id="op-call" placeholder="Nominativo" required maxlength="20" autocapitalize="characters" spellcheck="false"><button>Cerca operatore</button></div></form><p id="op-profile" role="status">Cerca un nominativo per vedere il profilo.</p></div>
 <div class="panel"><h3>Ultimi collegamenti</h3><p id="op-activity">Fino a 10 QSO pubblicati dall’operatore su Club Log.</p><div id="op-qso"></div></div>
-<section class="panel"><h3>Ultimi spot · HamQTH</h3><div id="op-spots" class="log-table-scroll">Cerca un nominativo.</div></section>
-<section class="panel"><h3>Ricezioni · PSK Reporter</h3><div id="op-heard" class="log-table-scroll">Cerca un nominativo.</div></section>
 <div class="panel"><h3>Dal nome al nominativo</h3><form id="op-reverse"><label for="op-name">Nome o cognome</label><div class="op-line"><input id="op-name" placeholder="Nome o cognome" required minlength="2"><button>Cerca nominativi</button></div></form><p>La ricerca comprende i nominativi presenti nell’indice Wikidata, anche storici, e i profili già trovati per nominativo in questo browser. Seleziona un risultato per consultarlo.</p><div id="op-matches" aria-live="polite"></div></div></section><footer>Autoaggiornamento ogni 5 minuti. Le misure possono essere pubblicate con ritardo. Se un servizio non risponde, il dato resta non disponibile: nessun valore viene simulato. Per verificare aperture effettive usa PSK Reporter o WSPR.<p>Sviluppatore: <strong>Elia Raffanini</strong></p></footer></main><nav class="bottom-nav" aria-label="Sezioni del sito"><button class="nav-tab active" type="button" data-view="hf" aria-current="page"><span>◉</span>HF</button><button class="nav-tab" type="button" data-view="live"><span>📡</span>DX Live</button><button class="nav-tab" type="button" data-view="data"><span>⚙</span>Dati</button><button class="nav-tab" type="button" data-view="log"><span>📓</span>Log</button><button class="nav-tab" type="button" data-view="operators"><span>⌕</span>Operatori</button></nav><button id="mobile-refresh" class="mobile-refresh" type="button" aria-label="Aggiorna dati">↻ Aggiorna</button><script>
 const $=id=>document.getElementById(id);let busy=false;
 function num(x){if(x===null||x===undefined||x==='')return null;const n=Number(x);return Number.isFinite(n)?n:null}
@@ -1199,43 +1197,6 @@ function opRemember(profile,call){
 let opRequest=0;
 function opNormalize(text){return text.normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim().toLowerCase()}
 
-const opFeedCache=new Map();
-function opReception(call){
- return new Promise((resolve,reject)=>{
-  const frame=document.createElement('iframe');frame.hidden=true;frame.setAttribute('sandbox','allow-scripts');
-  function finish(){clearTimeout(timer);window.removeEventListener('message',onMessage);frame.remove()}
-  function onMessage(e){if(e.source!==frame.contentWindow||e.origin!=='null')return;finish();if(e.data?.error||!Array.isArray(e.data?.rows))reject(Error());else resolve(e.data.rows)}
-  const timer=setTimeout(()=>{finish();reject(Error())},15000);
-  window.addEventListener('message',onMessage);
-  const url='https://retrieve.pskreporter.info/query?senderCallsign='+encodeURIComponent(call)+'&rronly=1&rptlimit=10&flowStartSeconds=-21600&callback=receive';
-  frame.srcdoc='<script>function receive(d){parent.postMessage(d && !d.error && ("currentSeconds" in d || "receptionReport" in d) ? {rows:d.receptionReport||[]} : {error:true},"*")}<\/script><script src="'+url.replaceAll('&','&amp;')+'" onerror="parent.postMessage({error:true},\'*\')"><\/script>';
-  document.body.append(frame);
- });
-}
-async function opActivity(kind,call,request){
- const el=$('op-'+kind),psk=kind==='heard',key=kind+':'+call;
- el.textContent='Ricerca in corso…';
- try{
-  let hit=opFeedCache.get(key);
-  if(!hit||Date.now()-hit.time>(psk?300000:15000)){
-   const pending=psk?opReception(call):fetchWithTimeout('https://www.hamqth.com/api/v2/spots?limit=10&calls='+encodeURIComponent(call),10000).then(d=>{if(!Array.isArray(d.spots))throw Error();return d.spots});
-   hit={time:Date.now(),pending};opFeedCache.set(key,hit);
-  }
-  const data=await hit.pending;if(request!==opRequest)return;
-  const rows=data.filter(r=>!psk||String(r.senderCallsign).toUpperCase()===call).map(r=>{
-   const t=psk?Number(r.flowStartSeconds)*1000:Date.parse(r.time);
-   const mhz=Number(psk?r.frequency:r.freq)/(psk?1e6:1000);
-   return {t,fields:[Number.isFinite(t)?new Date(t).toISOString().slice(5,16).replace('T',' '):'—',Number.isFinite(t)?localClock.format(t):'—',psk?r.receiverCallsign:r.spotter,psk?r.receiverLocator:r.dxcall,mhz>0?mhz.toFixed(3):'—',r.mode]};
-  }).sort((a,b)=>b.t-a.t).slice(0,10);
-  if(!rows.length){el.textContent=psk?'Nessuna ricezione segnalata nelle ultime 6 ore.':'Nessuno spot disponibile.';return}
-  const table=document.createElement('table');table.className='log-table';
-  const header=table.createTHead().insertRow();
-  for(const label of ['Data UTC','Data e ora locale',psk?'Ricevitore':'Segnalato da',psk?'Locator RX':'Stazione','MHz','Modo']){const th=document.createElement('th');th.textContent=label;header.append(th)}
-  const body=table.createTBody();for(const row of rows){const tr=body.insertRow();for(const field of row.fields)tr.insertCell().textContent=field||'—'}
-  el.replaceChildren(table);
- }catch{if(request===opRequest)el.textContent='Servizio temporaneamente non disponibile.'}
-}
-
 function stationClockFormat(zone){
  return new Intl.DateTimeFormat('it-IT',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23',timeZone:zone});
 }
@@ -1298,7 +1259,6 @@ async function opSearch(call,known){
  $('op-profile').textContent=fallback||'Ricerca profilo…';
  $('op-qso').replaceChildren();
  opLoadContacts(call,request);
- opActivity('spots',call,request);opActivity('heard',call,request);
  try{
  const p=await logFetchCallbook(call);if(request!==opRequest)return;
  if(p){$('op-profile').textContent=[call,p.name,p.place,p.grid,p.source].filter(Boolean).join(' · ');
