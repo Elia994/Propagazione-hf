@@ -71,6 +71,18 @@
 .log-submit-buttons,.log-selection-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 #log-edit:not(:disabled){border-color:#5de0d2;color:#a9e7dd}
 @media(max-width:490px){.log-selection-actions{width:100%}.log-selection-actions button{flex:1}.log-submit-buttons{width:100%}.log-submit-buttons button{flex:1}}
+.log-profile{margin:10px 0 0;padding:12px;border:1px solid #29485a;border-radius:10px;background:#101a2a}
+.log-profile-title{font-size:12px;font-weight:700;color:#a9e7dd;margin-bottom:7px}
+.log-profile-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.log-profile-value{min-width:0;font-size:13px;color:#edf5ff;overflow-wrap:anywhere}
+.log-profile-value small{display:block;color:#9cb4c7;font-size:11px;margin-bottom:3px}
+.log-profile-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:9px}
+.log-profile-actions button{padding:7px 10px;font-size:12px}
+.log-callbook-status{font-size:11px;color:#9cb4c7}
+.log-history{margin-top:10px;padding-top:9px;border-top:1px solid #304355;font-size:12px;color:#cbd9e9}
+.log-history ul{margin:6px 0 0;padding-left:18px}
+.log-history li{margin:4px 0}
+@media(max-width:490px){.log-profile-grid{grid-template-columns:1fr}.log-profile{padding:10px}}
 </style></head><body><main class="wrap"><header><div><div class="tag"><i class="dot"></i> RADIOAMATORI · HF</div><h1>Propagation <span>Live</span></h1><p class="sub">Monitor delle condizioni solari e geomagnetiche</p></div><button id="refresh">↻ Aggiorna dati</button></header><div id="status" class="status" role="status">Connessione alle fonti dati…</div><section class="view active" id="view-hf"><section class="panel" style="margin-top:14px;padding:12px"><div class="qthbar"><div class="qthbar"><button id="gps" type="button">📍 Rileva QTH GPS</button><input id="locator" aria-label="Locator Maidenhead" placeholder="Locator (es. JN45)" maxlength="8"><button id="apply-locator" type="button">Usa locator</button></div>
 <p id="qth-status" class="sub" role="status">Rileva GPS o inserisci il locator.</p></div></section><h2>Quando provare la propagazione · prossime 24 ore</h2><section class="panel">
 <p>Ogni banda mostra una <strong>finestra di prova in formato 24 ore</strong> (ora italiana). Quando disponibili, gli orari derivano dal modello per tratta ITU-R P.533; altrimenti sono stime solari esplicitamente indicate, <strong>non aperture garantite</strong>.</p>
@@ -84,6 +96,7 @@
 <div class="log-fields three"><div class="log-call"><label for="log-call">Nominativo *</label><input id="log-call" placeholder="Es. JA6CNL" maxlength="20" autocomplete="off" style="text-transform:uppercase;font-weight:700"></div>
 <div><label for="log-freq">Frequenza MHz *</label><input id="log-freq" value="14.250" inputmode="decimal"></div>
 <div><label for="log-mode">Modo</label><select id="log-mode"><option>SSB</option><option>CW</option><option>FT8</option><option>FT4</option><option>RTTY</option><option>FM</option><option>AM</option></select></div></div>
+<div class="log-profile" aria-label="Profilo registrato del corrispondente"><div class="log-profile-title">Profilo operatore · dati registrati</div><div class="log-profile-grid"><div class="log-profile-value"><small>Nome</small><span id="log-callbook-name">—</span></div><div class="log-profile-value"><small>QTH registrato</small><span id="log-callbook-place">—</span></div><div class="log-profile-value"><small>Locator registrato</small><span id="log-callbook-grid">—</span></div></div><div class="log-profile-actions"><button id="log-use-callbook-qth" type="button" disabled>Usa QTH registrato per questo QSO</button><span id="log-callbook-status" class="log-callbook-status" role="status" aria-live="polite">Inserisci un nominativo per cercare i dati disponibili. Fonte: HamDB.</span></div><div id="log-call-history" class="log-history" hidden></div></div>
 <div class="log-fields" style="margin-top:10px"><div><label for="log-rsts">RST inviato</label><input id="log-rsts" value="59" maxlength="12"></div><div><label for="log-rstr">RST ricevuto</label><input id="log-rstr" value="59" maxlength="12"></div></div>
 <div class="log-edit-utc" id="log-edit-utc-wrap" hidden><label for="log-edit-utc">Data e ora del QSO (UTC)</label><input type="datetime-local" id="log-edit-utc" step="1"><div class="log-hint">L'orario originale viene mantenuto se non lo modifichi.</div></div>
 </section>
@@ -108,7 +121,16 @@ function set(id,n,digits=0){$(id).textContent=n===null?'—':n.toFixed(digits)}
 function fmtDate(v){if(!v)return 'non indicato';let d=new Date(v);return isNaN(d)?String(v):d.toLocaleString('it-IT',{dateStyle:'short',timeStyle:'short',timeZone:'UTC'})+' UTC'}
 function grade(sfi,kp,band,night){if(sfi===null||kp===null)return ['Dati insufficienti','unknown'];let score=0;if(band>=20){score=(sfi>=150?2:sfi>=105?1:0)+(kp<=2?1:kp>=5?-2:0)+(night?-2:1);if(band>=28)score-=1}else if(band>=14){score=(sfi>=100?1:0)+(kp>=5?-2:kp<=3?1:0)+(night?-1:1)}else{score=(night?2:0)+(kp>=5?-2:0)+(band<=7?1:0)}return score>=3?['Favorevole*','good']:score>=1?['Variabile*','fair']:['Difficile*','poor']}
 function bands(sfi,kp){const night=(()=>{let h=new Date().getHours();return h<7||h>=19})();const b=[['80 m',3.5],['60 m',5.3],['40 m',7],['30 m',10],['20 m',14],['17 m',18],['15 m',21],['12 m',24],['11 m',27],['10 m',28]];$('bands').replaceChildren(...b.map(([name,mhz])=>{const [label,cls]=grade(sfi,kp,mhz,night);const el=document.createElement('div');el.className='band';const strong=document.createElement('strong');strong.textContent=name;const span=document.createElement('span');span.className=cls;span.textContent=label;el.append(strong,span);return el}))}
-async function fetchJson(url){const res=await fetch(url,{cache:'no-store',signal:AbortSignal.timeout(12000)});if(!res.ok)throw Error('HTTP '+res.status);return res.json()}
+async function fetchWithTimeout(url, timeout, options={}){
+ const controller=new AbortController();
+ const timer=setTimeout(()=>controller.abort(),timeout);
+ try{
+  const response=await fetch(url,{...options,signal:controller.signal});
+  if(!response.ok)throw Error('HTTP '+response.status);
+  return await response.json();
+ }finally{clearTimeout(timer)}
+}
+function fetchJson(url){return fetchWithTimeout(url,12000,{cache:'no-store'})}
 function latest(data, field){if(!Array.isArray(data))return null;return [...data].reverse().find(x=>x&&typeof x==='object'&&!Array.isArray(x)&&num(x[field])!==null)||null}
 let forecastRows=[],selectedBand=null;
 // Geolocalizzazione: nessuna coordinata viene inviata a servizi esterni dal codice DX.
@@ -195,8 +217,8 @@ function scoreHourly(kp,mhz,date){const b=WB.find(x=>Math.abs(x[1]-mhz)<.25),r=b
 function bands(sfi,kp){renderDX()}
 function renderDX(){const grid=$('bands'),tbody=$('dx-rows'),stat=$('dx-engine');if(!grid||!tbody||!stat)return;if(!qth){grid.textContent='Usa GPS o locator per gli orari personalizzati.';tbody.textContent='QTH necessario';stat.textContent='In attesa del QTH.';return}const now=new Date(),items=WB.map(([name,mhz])=>({name,mhz,w:bestWindow(name,mhz,now)}));grid.replaceChildren(...items.map(({name,w})=>{const e=document.createElement('div');e.className='band';const l=document.createElement('div');const b=document.createElement('strong');b.textContent=name;const m=document.createElement('small');m.textContent=w.method;l.append(b,m);const tm=document.createElement('span');tm.className='timing';tm.textContent=hh(w.start)+'–'+hh(w.end);e.append(l,tm);if(selectedBand?.name===name)e.classList.add('selected');return e}));tbody.replaceChildren(...items.map(({name,w})=>{const tr=document.createElement('tr');[name,hh(w.start)+'–'+hh(w.end),w.zone,w.method].forEach(t=>{const el=document.createElement('td');el.textContent=t;tr.append(el)});return tr}));const count=items.filter(x=>x.w.model).length;stat.textContent=count?('Fonte ITU-R P.533 tramite CQDX: '+count+'/10 bande. Gli altri orari sono stime solari.'):'Fasce indicative da QTH, sole e indici NOAA; '+(pathStatus==='caricamento'?'previsioni P.533 in caricamento.':'P.533 non disponibile sul browser o servizio non raggiungibile.');if(ionMuf)stat.textContent+=' MUF(3000) osservata: '+ionMuf.muf.toFixed(1)+' MHz a '+ionMuf.name+' (ora, non nelle prossime 24h).';if(selectedBand)drawChart()}
 async function loadPaths(force=false){if(!qth)return;const locator=maiden(qth.lat,qth.lon).slice(0,4);if(!force&&locator===lastGrid&&Date.now()-modelFetchAt<45*60000)return;lastGrid=locator;modelFetchAt=Date.now();pathStatus='caricamento';pathData=[];renderDX();const key='hf_p533_'+locator;try{if(!force){const cache=JSON.parse(sessionStorage.getItem(key)||'null');if(cache?.ts&&Date.now()-cache.ts<3*3600000&&Array.isArray(cache.paths)){pathData=cache.paths;pathStatus='ok';renderDX();return}}}catch(e){}
-const tasks=WX.map(async z=>{const url='https://cqdx.io/api/v1/propagation/forecast?tx_grid='+locator+'&rx_grid='+z[1];const r=await fetch(url,{signal:AbortSignal.timeout(13000)});if(!r.ok)throw Error('HTTP '+r.status);const rows=readP533(await r.json());if(!rows.length)throw Error('Risposta non riconosciuta');return {zone:z[0],rows}});const all=await Promise.allSettled(tasks);if(!qth||maiden(qth.lat,qth.lon).slice(0,4)!==locator)return;pathData=all.filter(x=>x.status==='fulfilled').map(x=>x.value);pathStatus=pathData.length?'ok':'non disponibile';try{if(pathData.length)sessionStorage.setItem(key,JSON.stringify({ts:Date.now(),paths:pathData}))}catch(e){}renderDX()}
-async function loadIono(){if(!qth)return;try{const r=await fetch('https://skeds.sq3swg.com/api/v1/public/propagation',{signal:AbortSignal.timeout(11000)});if(!r.ok)return;const j=await r.json(),p=(j.ionosondes||[]).filter(x=>num(x.mufF2)!==null&&num(x.lat)!==null&&num(x.lon)!==null);if(!p.length||!qth)return;const x=p.map(s=>({...s,d:Math.hypot((s.lat-qth.lat)*111,(s.lon-qth.lon)*76)})).sort((a,b)=>a.d-b.d)[0];ionMuf=x.d<1100?{muf:num(x.mufF2),name:x.name||x.code}:null;renderDX()}catch(e){}}
+const tasks=WX.map(async z=>{const url='https://cqdx.io/api/v1/propagation/forecast?tx_grid='+locator+'&rx_grid='+z[1];const rows=readP533(await fetchWithTimeout(url,13000));if(!rows.length)throw Error('Risposta non riconosciuta');return {zone:z[0],rows}});const all=await Promise.allSettled(tasks);if(!qth||maiden(qth.lat,qth.lon).slice(0,4)!==locator)return;pathData=all.filter(x=>x.status==='fulfilled').map(x=>x.value);pathStatus=pathData.length?'ok':'non disponibile';try{if(pathData.length)sessionStorage.setItem(key,JSON.stringify({ts:Date.now(),paths:pathData}))}catch(e){}renderDX()}
+async function loadIono(){if(!qth)return;try{const j=await fetchWithTimeout('https://skeds.sq3swg.com/api/v1/public/propagation',11000),p=(j.ionosondes||[]).filter(x=>num(x.mufF2)!==null&&num(x.lat)!==null&&num(x.lon)!==null);if(!p.length||!qth)return;const x=p.map(s=>({...s,d:Math.hypot((s.lat-qth.lat)*111,(s.lon-qth.lon)*76)})).sort((a,b)=>a.d-b.d)[0];ionMuf=x.d<1100?{muf:num(x.mufF2),name:x.name||x.code}:null;renderDX()}catch(e){}}
 
 $('refresh').addEventListener('click',update);$('mobile-refresh').addEventListener('click',update);bands(null,null);document.addEventListener('click',e=>{const card=e.target.closest('.band');if(!card)return;const names=['80 m','60 m','40 m','30 m','20 m','17 m','15 m','12 m','11 m','10 m'],mhz=[3.5,5.3,7.1,10.1,14.2,18.1,21.2,24.9,27,28.4],i=names.indexOf(card.querySelector('strong')?.textContent);if(i<0)return;document.querySelectorAll('.band').forEach(x=>x.classList.remove('selected'));card.classList.add('selected');selectedBand={name:names[i],mhz:mhz[i]};$('chart-title').textContent='Stima indicativa per '+selectedBand.name+' · prossime 24 ore';drawChart()});window.addEventListener('resize',drawChart);let qthRestored=false;try{const prev=localStorage.getItem('hf_locator');if(prev){const v=parseLocator(prev);if(v){setQth(v.lat,v.lon,'QTH memorizzato');qthRestored=true}}}catch(e){}if(!qthRestored&&navigator.geolocation){navigator.geolocation.getCurrentPosition(p=>setQth(p.coords.latitude,p.coords.longitude,'GPS'),()=>{}, {enableHighAccuracy:false,timeout:9000,maximumAge:600000})}update();setInterval(update,300000);
 
@@ -611,6 +633,141 @@ function logUpdateQrb(){
  const km=logComputeQrb($('log-mygrid').value,$('log-dxgrid').value,$('log-lat').value,$('log-lon').value);
  $('log-qrb').textContent=km===null?'—':km.toLocaleString('it-IT')+' km';
 }
+// Callbook: mostra il QTH registrato separatamente e lo usa solo come valore iniziale del QSO.
+// HamDB è un callbook pubblico con copertura geografica variabile; Callook integra i nominativi USA.
+const logCallbookState={serial:0,call:'',record:null,timer:null,placeOverride:false,gridOverride:false};
+const logCallbookCache=new Map();
+function logNormalizeCall(value){return String(value||'').trim().toUpperCase().replace(/\s+/g,'')}
+function logCallbookHistory(call){
+ const box=$('log-call-history');box.replaceChildren();
+ const matches=logEntries.filter(entry=>logNormalizeCall(entry.call)===call).sort((a,b)=>String(b.utc||'').localeCompare(String(a.utc||'')));
+ if(!matches.length){box.hidden=true;return}
+ box.hidden=false;const title=document.createElement('strong');title.textContent='QSO precedenti in questo registro ('+matches.length+')';box.append(title);
+ const list=document.createElement('ul');
+ for(const entry of matches.slice(0,5)){
+  const item=document.createElement('li'),date=new Date(entry.utc);
+  const when=Number.isNaN(date.getTime())?'data non indicata':date.toLocaleString('it-IT',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit',timeZone:'UTC'})+' UTC';
+  item.textContent=when+' · '+(entry.band||'banda non indicata')+' · '+(entry.mode||'modo non indicato')+' · '+(entry.dxplace||entry.dxgrid||'QTH non indicato');
+  list.append(item);
+ }
+ box.append(list);
+}
+function logCallbookReset(call=''){
+ clearTimeout(logCallbookState.timer);logCallbookState.serial++;logCallbookState.call=call;logCallbookState.record=null;
+ logCallbookState.placeOverride=false;logCallbookState.gridOverride=false;
+ $('log-callbook-name').textContent='—';$('log-callbook-place').textContent='—';$('log-callbook-grid').textContent='—';
+ $('log-use-callbook-qth').disabled=true;
+ $('log-callbook-status').textContent=call?'Ricerca dati callbook…':'Inserisci un nominativo per cercare i dati disponibili. Fonte: HamDB.';
+ logCallbookHistory(call);
+}
+function logHamdbProfile(data,call){
+ const row=data?.hamdb?.callsign;
+ const status=String(data?.hamdb?.messages?.status||'').toUpperCase();
+ if(status==='NOT_FOUND')return null;
+ if(status!=='OK'||!row||logNormalizeCall(row.call)!==call)throw Error('Risposta HamDB non valida');
+ const parts=[row.fname,row.mi,row.name,row.suffix].map(v=>String(v||'').trim()).filter(Boolean);
+ const name=parts.join(' ');
+ const place=[row.addr2,row.state,row.country].map(v=>String(v||'').trim()).filter(Boolean).filter((v,i,a)=>a.indexOf(v)===i).join(', ');
+ let grid=String(row.grid||'').trim().toUpperCase();
+ if(!/^[A-R]{2}[0-9]{2}([A-X]{2})?([0-9]{2})?$/.test(grid)||grid==='JJ00AA')grid='';
+ return name||place||grid?{call,name,place,grid,source:'HamDB'}:null;
+}
+function logCallookProfile(data,call){
+ const status=String(data?.status||'').toUpperCase();
+ if(status==='INVALID')return null;
+ if(status!=='VALID'||logNormalizeCall(data.current?.callsign)!==call)throw Error('Risposta Callook non valida');
+ const name=String(data.name||'').trim();
+ const address=data.address||{},city=String(address.line2||'').trim();
+ const place=[city,'United States'].filter(Boolean).join(', ');
+ let grid=String(data.location?.gridsquare||'').trim().toUpperCase();
+ if(!/^[A-R]{2}[0-9]{2}([A-X]{2})?([0-9]{2})?$/.test(grid))grid='';
+ return name||place||grid?{call,name,place,grid,source:'Callook (FCC)'}:null;
+}
+async function logFetchCallbook(call){
+ const cached=logCallbookCache.get(call);if(cached&&Date.now()-cached.time<30*60*1000)return cached.record;
+ const unavailable=[];
+ try{
+  // Il percorso breve rinvia a HTTP. Usa direttamente il percorso HTTPS versionato.
+  const data=await fetchWithTimeout('https://api.hamdb.org/v1/'+encodeURIComponent(call.toLowerCase())+'/json/propagationlive',9000,{headers:{Accept:'application/json'}});
+  const profile=logHamdbProfile(data,call);
+  if(profile){logCallbookCache.set(call,{record:profile,time:Date.now()});return profile;}
+ }catch(error){unavailable.push('HamDB');}
+ if(/^(?:[KNW][0-9]|A[A-L][0-9])/.test(call)){
+  try{
+   const data=await fetchWithTimeout('https://callook.info/'+encodeURIComponent(call)+'/json',9000,{headers:{Accept:'application/json'}});
+   const profile=logCallookProfile(data,call);
+   if(profile){logCallbookCache.set(call,{record:profile,time:Date.now()});return profile;}
+  }catch(error){unavailable.push('Callook');}
+ }
+ if(unavailable.length)throw Error(unavailable.join(', '));
+ logCallbookCache.set(call,{record:null,time:Date.now()});return null;
+}
+function logApplyCallbookQth(){
+ const record=logCallbookState.record;if(!record)return;
+ const dx=logPlaceStates.dx;dx.serial++;dx.autoGrid='';dx.autoCoords=false;dx.userGridEdited=false;
+ if(record.place){$('log-dxplace').value=record.place;logCallbookState.placeOverride=false;}
+ if(record.grid){$('log-dxgrid').value=record.grid;dx.autoGrid=record.grid;logCallbookState.gridOverride=false;}
+ logUpdateQrb();
+ logPlaceStatus('dx','QTH registrato copiato nel QSO. Puoi modificarlo: i dati del profilo restano separati.');
+}
+async function logLookupCallbook(call,apply=true){
+ const serial=++logCallbookState.serial;logCallbookState.call=call;
+ logCallbookState.timer=null;
+ if(!/^[A-Z0-9/]{3,20}$/.test(call)){
+  $('log-callbook-status').textContent='Completa il nominativo per avviare la ricerca.';
+  return;
+ }
+ const active=()=>serial===logCallbookState.serial&&logNormalizeCall($('log-call').value)===call;
+ try{
+  const profile=await logFetchCallbook(call);if(!active())return;
+  logCallbookState.record=profile;
+  if(!profile){$('log-callbook-status').textContent='Nominativo assente nelle fonti consultate. Puoi compilare il QSO manualmente.';return}
+  $('log-callbook-name').textContent=profile.name||'Non disponibile';
+  $('log-callbook-place').textContent=profile.place||'Non disponibile';
+  $('log-callbook-grid').textContent=profile.grid||'Non disponibile';
+  $('log-use-callbook-qth').disabled=!profile.place&&!profile.grid;
+  $('log-callbook-status').textContent='Dati forniti da '+profile.source+'. QTH e locator registrati possono differire dal luogo effettivo del QSO.';
+  if(apply&&logEditIndex===null){
+   const dx=logPlaceStates.dx;
+   const usePlace=profile.place&&!logCallbookState.placeOverride;
+   const useGrid=profile.grid&&!logCallbookState.placeOverride&&!logCallbookState.gridOverride;
+   if(usePlace||useGrid){
+    dx.serial++;
+    if(usePlace)$('log-dxplace').value=profile.place;
+    if(useGrid){$('log-dxgrid').value=profile.grid;dx.autoGrid=profile.grid;dx.userGridEdited=false;}
+    logUpdateQrb();
+    logPlaceStatus('dx','Valori iniziali dal callbook. Correggili se il QTH del collegamento è diverso.');
+   }
+  }
+ }catch(error){
+  if(active())$('log-callbook-status').textContent=error.message+' non disponibile (rete, CORS o servizio). Puoi compilare il QSO manualmente.';
+ }
+}
+function logScheduleCallbookLookup(){
+ const call=logNormalizeCall($('log-call').value);
+ if(call!==logCallbookState.call){
+  const firstCall=!logCallbookState.call;
+  const {placeOverride,gridOverride}=logCallbookState;
+  logCallbookReset(call);
+  if(logEditIndex===null&&firstCall){
+   logCallbookState.placeOverride=placeOverride;
+   logCallbookState.gridOverride=gridOverride;
+  }else if(logEditIndex===null){
+   const dx=logPlaceStates.dx;dx.serial++;dx.autoGrid='';dx.autoCoords=false;dx.userGridEdited=false;
+   $('log-dxplace').value='';$('log-dxgrid').value='';logUpdateQrb();
+  }else{logCallbookState.placeOverride=true;logCallbookState.gridOverride=true;}
+ }
+ logCallbookHistory(call);
+ clearTimeout(logCallbookState.timer);
+ if(!call)return;
+ logCallbookState.timer=setTimeout(()=>logLookupCallbook(call,logEditIndex===null),500);
+}
+$('log-call').addEventListener('input',logScheduleCallbookLookup);
+$('log-use-callbook-qth').addEventListener('click',logApplyCallbookQth);
+for(const id of ['log-dxplace','log-dxgrid'])$(id).addEventListener('input',()=>{
+ if(id==='log-dxplace')logCallbookState.placeOverride=true;
+ else logCallbookState.gridOverride=true;
+});
 // Ricerca solo su conferma (Invio, uscita dal campo o pulsante); mai autocomplete.
 // Nominatim pubblico: cache e coda condivisa, una richiesta ogni 1,1 secondi.
 const logPlaceCache=new Map();
@@ -636,9 +793,7 @@ function logGeocodeRequest(url,stillNeeded=()=>true){
   if(wait)await new Promise(resolve=>setTimeout(resolve,wait));
   if(!stillNeeded())return null;
   logGeocodeNextAt=Date.now()+1100;
-  const response=await fetch(url,{signal:AbortSignal.timeout(12000),headers:{Accept:'application/json'}});
-  if(!response.ok)throw Error('Geocoding HTTP '+response.status);
-  return response.json();
+  return fetchWithTimeout(url,12000,{headers:{Accept:'application/json'}});
  });
  logGeocodeQueue=pending.catch(()=>{});
  return pending;
@@ -653,8 +808,8 @@ function logPlaceResult(place,requested){
 async function logResolvePlace(kind,force=false){
  const state=logPlaceStates[kind],city=$(state.placeId).value.trim(),grid=$(state.gridId);
  if(!city){logPlaceStatus(kind,'Inserisci una città, oppure usa un locator manuale.');return false}
- if(!force&&state.userGridEdited&&grid.value.trim()){
-  logPlaceStatus(kind,'Locator manuale mantenuto. Per ricalcolarlo dalla città usa «Calcola dai comuni».');
+ if(!force&&state.userGridEdited){
+  logPlaceStatus(kind,'Modifica manuale mantenuta. Per calcolare il locator dalla città usa «Calcola dai comuni».');
   return false;
  }
  const serial=++state.serial,active=()=>serial===state.serial&&$(state.placeId).value.trim()===city;
@@ -671,7 +826,7 @@ async function logResolvePlace(kind,force=false){
   }
   if(!active())return false;
   if(!result){logPlaceStatus(kind,'Località non trovata: specifica provincia/Paese o inserisci il locator manualmente.');return false}
-  if(!force&&state.userGridEdited&&grid.value.trim())return false;
+  if(!force&&state.userGridEdited)return false;
   grid.value=result.locator;state.autoGrid=result.locator;state.userGridEdited=false;
   if(kind==='my'&&!state.userCoordsEdited){
    $('log-lat').value=result.latitude.toFixed(6);
@@ -708,14 +863,13 @@ for(const kind of ['my','dx']){
   }
  });
  grid.addEventListener('input',()=>{
-  state.serial++;state.autoGrid='';state.userGridEdited=!!grid.value.trim();
-  if(kind==='my'&&state.autoCoords){
-   $('log-lat').value='';$('log-lon').value='';state.autoCoords=false;
+  state.serial++;state.autoGrid='';state.userGridEdited=true;
+  if(kind==='my'){
+   $('log-lat').value='';$('log-lon').value='';state.autoCoords=false;state.userCoordsEdited=false;
    if(logEditIndex===null)logSaveStation();
   }
   logUpdateQrb();
  });
- grid.addEventListener('change',()=>{if(!grid.value.trim()&&place.value.trim())logResolvePlace(kind)});
 }
 for(const id of ['log-lat','log-lon']){
  $(id).addEventListener('input',()=>{
@@ -756,7 +910,7 @@ $('log-delete').addEventListener('click',()=>{
  const next=logEntries.filter((_,index)=>!logSelected.has(index));
  try{localStorage.setItem(logStorageKey,JSON.stringify(next))}
  catch(e){$('log-message').textContent='Eliminazione non riuscita: impossibile aggiornare la memoria locale.';return}
- logEntries=next;logSelected.clear();logRender();
+ logEntries=next;logSelected.clear();logRender();logCallbookHistory(logNormalizeCall($('log-call').value));
  $('log-message').textContent='✓ Eliminati '+count+' QSO dal registro locale.';
 });
 
@@ -775,6 +929,7 @@ function logEndEdit(clearSelection=false){
  const previous=logPreEditForm;
  logEditIndex=null;logPreEditForm=null;
  if(previous)logRestoreForm(previous);
+ const restoredCall=logNormalizeCall($('log-call').value);logCallbookReset(restoredCall);if(restoredCall)logLookupCallbook(restoredCall,false);
  $('log-form-heading').textContent='📻 Nuovo QSO';
  $('log-edit-utc-wrap').hidden=true;
  $('log-edit-utc').value='';
@@ -803,6 +958,9 @@ function logBeginEdit(){
  $('log-save').textContent='✓ Salva modifiche';
  $('log-cancel-edit').hidden=false;
  $('log-message').textContent='Modifica i dati del QSO selezionato, poi premi Salva modifiche. La data UTC originale è conservata se non la cambi.';
+ logPlaceStates.my.userGridEdited=!!entry.mygrid;
+ logPlaceStates.dx.userGridEdited=!!entry.dxgrid;
+ const editingCall=logNormalizeCall(entry.call);logCallbookReset(editingCall);if(editingCall)logLookupCallbook(editingCall,false);
  logRender();logUpdateInfo();logUpdateQrb();
  $('log-call').scrollIntoView({behavior:'smooth',block:'center'});
  $('log-call').focus();
@@ -898,7 +1056,7 @@ function logSave(){
  }
  logSelected.clear();logResetPlaceLookups();
  $('log-message').textContent='✓ QSO '+call+' registrato nel browser alle '+entry.utc.slice(11,16)+' UTC.';
- $('log-call').value='';$('log-dxplace').value='';$('log-dxgrid').value='';$('log-notes').value='';
+ $('log-call').value='';$('log-dxplace').value='';$('log-dxgrid').value='';$('log-notes').value='';logCallbookReset('');
  $('log-call').focus();logRender();logUpdateInfo();logUpdateQrb();
 }
 $('log-save').addEventListener('click',logSave);
