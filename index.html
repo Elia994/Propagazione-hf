@@ -1227,10 +1227,34 @@ function refreshClocks(){
 }
 refreshClocks();setInterval(refreshClocks,1000);
 function contactLocalTime(raw){
- const m=/^(\d{4}-\d{2}-\d{2})[ T](\d{2}:\d{2})(:\d{2})?\s*(Z|UTC|[+-]\d{2}:\d{2})?$/i.exec(raw);
- if(!m)return '—';
- const instant=Date.parse(m[1]+'T'+m[2]+(m[3]||':00')+(!m[4]||m[4]==='UTC'?'Z':m[4]));
- return Number.isFinite(instant)?new Intl.DateTimeFormat('it-IT',{dateStyle:'short',timeStyle:m[3]?'medium':'short'}).format(instant):'—';
+ const m=/^(\d{4}-\d{2}-\d{2})[ T]+((?:[01]\d|2[0-3]):[0-5]\d)(:[0-5]\d)?(?:\.\d+)?\s*(Z|UTC|[+-]\d{2}:?\d{2})?$/i.exec(raw.trim());
+ if(!m)return '';
+ const zone=m[4]?.toUpperCase();
+ const instant=Date.parse(m[1]+'T'+m[2]+(m[3]||':00')+(!zone||zone==='UTC'?'Z':zone));
+ if(!Number.isFinite(instant))return '';
+ const localTime=new Intl.DateTimeFormat('it-IT',{timeStyle:m[3]?'medium':'short',hourCycle:'h23'});
+ return localTime.format(instant);
+}
+function clubLogContacts(doc){
+ const rows=Array.from(doc.querySelectorAll('tr'));
+ const textCells=row=>Array.from(row.cells,cell=>cell.textContent.trim());
+ const labels=rows.map(textCells).find(cells=>cells.some(label=>/^band$/i.test(label))&&cells.some(label=>/^mode$/i.test(label)))||[];
+ const bandIndex=labels.findIndex(label=>/^band$/i.test(label));
+ const modeIndex=labels.findIndex(label=>/^mode$/i.test(label));
+ const timeIndex=labels.findIndex(label=>/^(?:qso\s+)?(?:time(?:\s*\(?utc\)?)?|utc(?:\s+time)?)$/i.test(label));
+ const records=[];
+ for(const row of rows){
+  const cells=textCells(row);
+  const date=/^\d{4}-\d{2}-\d{2}(?=$|[ T])/.exec(cells[1]||'')?.[0];
+  if(cells.length<4||!/^[A-Z0-9/]+$/i.test(cells[0])||!date)continue;
+  const dateTime=row.cells[1].querySelector('time[datetime]')?.getAttribute('datetime');
+  const separateTime=cells[timeIndex];
+  const localTime=contactLocalTime(dateTime||'')||contactLocalTime(cells[1])
+   ||(separateTime&&contactLocalTime(date+' '+separateTime))||'';
+  records.push({call:cells[0],date,localTime,band:cells[bandIndex<0?2:bandIndex],mode:cells[modeIndex<0?3:modeIndex]});
+  if(records.length===10)break;
+ }
+ return records;
 }
 async function opLoadContacts(call,request){
  const status=$('op-activity');
@@ -1247,17 +1271,19 @@ async function opLoadContacts(call,request){
    return;
   }
   const doc=new DOMParser().parseFromString(html,'text/html');
-  const records=Array.from(doc.querySelectorAll('tr'),row=>Array.from(row.cells,cell=>cell.textContent.trim()))
-   .filter(cells=>cells.length>=4&&/^[A-Z0-9/]+$/i.test(cells[0])&&/^\d{4}-\d{2}-\d{2}/.test(cells[1])).slice(0,10);
+  const records=clubLogContacts(doc);
   if(!records.length){status.textContent='Nessun collegamento leggibile per '+call+' su Club Log.';return}
   status.textContent='Ultimi QSO pubblicati da '+call+' su Club Log';
   const table=document.createElement('table');table.className='log-table';
   const header=table.createTHead().insertRow();
-  for(const label of ['Nominativo','Data Club Log','Data e ora locale','Banda','Modo']){const th=document.createElement('th');th.textContent=label;header.append(th)}
+  for(const label of ['Nominativo','Data Club Log','Ora locale','Banda','Modo']){const th=document.createElement('th');th.textContent=label;header.append(th)}
   const body=table.createTBody();
-  for(const record of records){const row=body.insertRow();for(const field of [record[0],record[1],contactLocalTime(record[1]),record[2],record[3]])row.insertCell().textContent=field}
+  for(const record of records){
+   const row=body.insertRow();
+   for(const field of [record.call,record.date,record.localTime||'—',record.band,record.mode])row.insertCell().textContent=field;
+  }
   $('op-qso').append(table);
-  if(records.some(r=>contactLocalTime(r[1])==='—'))status.textContent+=' · — indica che la fonte non fornisce un orario utilizzabile.';
+  if(records.some(record=>!record.localTime))status.textContent+=' · — indica un orario non disponibile nel riepilogo pubblico.';
  }catch{if(request===opRequest)status.textContent='Club Log al momento non raggiungibile. Riprova più tardi.'}
  finally{clearTimeout(timeout)}
 }
