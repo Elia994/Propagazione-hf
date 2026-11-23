@@ -85,7 +85,9 @@
 .log-history li{margin:4px 0}
 @media(max-width:490px){.log-profile-grid{grid-template-columns:1fr}.log-profile{padding:10px}}
 .prop-hour-area{position:relative}.prop-hour-area canvas{touch-action:pan-y;cursor:crosshair}#prop-hour{position:absolute;top:0;transform:translateX(-50%);padding:4px 6px;border-radius:5px;background:#183b4c;color:#eef6ff;white-space:nowrap;font-size:12px;pointer-events:none}#prop-hour::after{content:"";position:absolute;width:1px;height:204px;top:100%;left:50%;background:#5de0d2;opacity:.6}
-#view-operators{max-width:780px;margin:auto}#view-operators h3{margin-top:0}#view-operators label{font-weight:bold}.op-line{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.op-line input{flex:1;min-width:120px;background:#0b1524;color:white;border:1px solid #495d73;border-radius:10px;padding:12px;font-size:16px}.op-line button{color:#082826;background:#72dece}#op-matches button{display:block;width:100%;margin:7px 0;text-align:left}#op-qso iframe{width:100%;height:325px;background:#fff;border:0;border-radius:8px;margin-bottom:12px}.hf-clocks{display:flex;flex-wrap:wrap;gap:6px 22px;margin-top:12px;padding:10px 12px;border:1px solid #29364a;border-radius:10px;color:#99b8c5;font-size:13px}.hf-clocks time{color:#eef6ff;font-variant-numeric:tabular-nums;margin-left:4px}#op-qso{overflow-x:auto}#hf-clock-date{flex-basis:100%;font-weight:600;color:#eef6ff}.hf-clocks{column-gap:18px;row-gap:4px}</style></head><body><main class="wrap"><header><div><div class="tag"><i class="dot"></i> RADIOAMATORI · HF</div><h1>Propagation <span>Live</span></h1><p class="sub">Monitor delle condizioni solari e geomagnetiche</p></div><button id="refresh">↻ Aggiorna dati</button></header><div class="hf-clocks" role="group" aria-label="Orologi"><div id="hf-clock-date"></div><div>UTC <time id="hf-utc"></time></div><div>Locale <time id="hf-local"></time></div></div><div id="status" class="status" role="status">Connessione alle fonti dati…</div><section class="view active" id="view-hf"><section class="panel" style="margin-top:14px;padding:12px"><div class="qthbar"><div class="qthbar"><button id="gps" type="button">📍 Rileva QTH GPS</button><input id="locator" aria-label="Locator Maidenhead" placeholder="Locator (es. JN45)" maxlength="8"><button id="apply-locator" type="button">Usa locator</button></div>
+#view-operators{max-width:780px;margin:auto}#view-operators h3{margin-top:0}#view-operators label{font-weight:bold}.op-line{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.op-line input{flex:1;min-width:120px;background:#0b1524;color:white;border:1px solid #495d73;border-radius:10px;padding:12px;font-size:16px}.op-line button{color:#082826;background:#72dece}#op-matches button{display:block;width:100%;margin:7px 0;text-align:left}#op-qso iframe{width:100%;height:325px;background:#fff;border:0;border-radius:8px;margin-bottom:12px}.hf-clocks{display:flex;flex-wrap:wrap;gap:6px 22px;margin-top:12px;padding:10px 12px;border:1px solid #29364a;border-radius:10px;color:#99b8c5;font-size:13px}.hf-clocks time{color:#eef6ff;font-variant-numeric:tabular-nums;margin-left:4px}#op-qso{overflow-x:auto}#hf-clock-date{flex-basis:100%;font-weight:600;color:#eef6ff}.hf-clocks{column-gap:18px;row-gap:4px}
+.qrz-link{display:inline-flex;align-items:center;padding:7px 12px;border:1px solid #3c6474;border-radius:10px;background:#183b4c;color:#e9fcff;font-weight:700;text-decoration:none}.qrz-link[hidden]{display:none}.qrz-link:hover,.qrz-link:focus-visible{text-decoration:underline}
+</style></head><body><main class="wrap"><header><div><div class="tag"><i class="dot"></i> RADIOAMATORI · HF</div><h1>Propagation <span>Live</span></h1><p class="sub">Monitor delle condizioni solari e geomagnetiche</p></div><button id="refresh">↻ Aggiorna dati</button></header><div class="hf-clocks" role="group" aria-label="Orologi"><div id="hf-clock-date"></div><div>UTC <time id="hf-utc"></time></div><div>Locale <time id="hf-local"></time></div></div><div id="status" class="status" role="status">Connessione alle fonti dati…</div><section class="view active" id="view-hf"><section class="panel" style="margin-top:14px;padding:12px"><div class="qthbar"><div class="qthbar"><button id="gps" type="button">📍 Rileva QTH GPS</button><input id="locator" aria-label="Locator Maidenhead" placeholder="Locator (es. JN45)" maxlength="8"><button id="apply-locator" type="button">Usa locator</button></div>
 <p id="qth-status" class="sub" role="status">Rileva GPS o inserisci il locator.</p></div></section><h2>Quando provare la propagazione · prossime 24 ore</h2><section class="panel">
 
 <p id="dx-engine" class="dx-info" role="status">In attesa del QTH…</p>
@@ -97,7 +99,7 @@
 <div class="log-fields three"><div class="log-call"><label for="log-call">Nominativo *</label><div class="log-call-search"><input id="log-call" placeholder="Es. W1AW" maxlength="20" autocomplete="off" autocapitalize="characters" spellcheck="false" enterkeyhint="search" style="text-transform:uppercase;font-weight:700"><button type="button" id="log-find-operator" aria-controls="log-callbook-status">Cerca operatore</button></div></div>
 <div><label for="log-freq">Frequenza MHz *</label><input id="log-freq" value="14.250" inputmode="decimal"></div>
 <div><label for="log-mode">Modo</label><select id="log-mode"><option>SSB</option><option>CW</option><option>FT8</option><option>FT4</option><option>RTTY</option><option>FM</option><option>AM</option></select></div></div>
-<div class="log-profile" aria-label="Profilo registrato del corrispondente"><div class="log-profile-title">Profilo operatore · dati registrati</div><div class="log-profile-grid"><div class="log-profile-value"><small>Nome</small><span id="log-callbook-name">—</span></div><div class="log-profile-value"><small>QTH registrato</small><span id="log-callbook-place">—</span></div><div class="log-profile-value"><small>Locator registrato</small><span id="log-callbook-grid">—</span></div></div><div class="log-profile-actions"><button id="log-use-callbook-qth" type="button" disabled>Usa QTH registrato per questo QSO</button><span id="log-callbook-status" class="log-callbook-status" role="status" aria-live="polite">Inserisci il nominativo e premi «Cerca operatore».</span></div><div id="log-call-history" class="log-history" hidden></div></div>
+<div class="log-profile" aria-label="Profilo registrato del corrispondente"><div class="log-profile-title">Profilo operatore · dati registrati</div><div class="log-profile-grid"><div class="log-profile-value"><small>Nome</small><span id="log-callbook-name">—</span></div><div class="log-profile-value"><small>QTH registrato</small><span id="log-callbook-place">—</span></div><div class="log-profile-value"><small>Locator registrato</small><span id="log-callbook-grid">—</span></div></div><div class="log-profile-actions"><button id="log-use-callbook-qth" type="button" disabled>Usa QTH registrato per questo QSO</button><span id="log-callbook-status" class="log-callbook-status" role="status" aria-live="polite">Inserisci il nominativo e premi «Cerca operatore».</span><a id="log-qrz" class="qrz-link" target="_blank" rel="noopener noreferrer" hidden>Apri su QRZ</a></div><div id="log-call-history" class="log-history" hidden></div></div>
 <div class="log-fields" style="margin-top:10px"><div><label for="log-rsts">RST inviato</label><input id="log-rsts" value="59" maxlength="12"></div><div><label for="log-rstr">RST ricevuto</label><input id="log-rstr" value="59" maxlength="12"></div></div>
 <div class="log-edit-utc" id="log-edit-utc-wrap" hidden><label for="log-edit-utc">Data e ora del QSO (UTC)</label><input type="datetime-local" id="log-edit-utc" step="1"><div class="log-hint">L'orario originale viene mantenuto se non lo modifichi.</div></div>
 </section>
@@ -116,7 +118,7 @@
 <div class="log-delete-row"><span class="log-meta" id="log-selected-count">0 QSO selezionati</span><div class="log-selection-actions"><button type="button" id="log-edit" disabled>✎ Modifica selezionato</button><button type="button" id="log-delete" class="log-danger" disabled>🗑 Elimina selezionati</button></div></div>
 <p class="log-hint">Il registro è salvato <strong>solo in questo browser</strong>, non sincronizzato tra dispositivi. Esporta periodicamente un backup ADIF o CSV prima di eliminare i QSO; cancellando i dati del browser potresti perdere il registro.</p></section>
 </section><section class="view" id="view-operators"><h2>Ricerca operatori</h2>
-<div class="panel"><form id="op-forward"><label for="op-call">Nominativo</label><div class="op-line"><input id="op-call" placeholder="Nominativo" required maxlength="20" autocapitalize="characters" spellcheck="false"><button>Cerca operatore</button></div></form><p id="op-profile" role="status">Cerca un nominativo per vedere il profilo.</p></div>
+<div class="panel"><form id="op-forward"><label for="op-call">Nominativo</label><div class="op-line"><input id="op-call" placeholder="Nominativo" required maxlength="20" autocapitalize="characters" spellcheck="false"><button>Cerca operatore</button></div></form><p id="op-profile" role="status">Cerca un nominativo per vedere il profilo.</p><a id="op-qrz" class="qrz-link" target="_blank" rel="noopener noreferrer" hidden>Apri su QRZ</a></div>
 <div class="panel"><h3>Ultimi collegamenti</h3><p id="op-activity">Fino a 10 QSO pubblicati dall’operatore su Club Log.</p><div id="op-qso"></div></div>
 <div class="panel"><h3>Dal nome al nominativo</h3><form id="op-reverse"><label for="op-name">Nome o cognome</label><div class="op-line"><input id="op-name" placeholder="Nome o cognome" required minlength="2"><button>Cerca nominativi</button></div></form><p>Fonti · Wikidata, profili salvati nel browser</p><div id="op-matches" aria-live="polite"></div></div>
 <div class="panel"><h3>Salva operatore</h3><form id="op-save"><div class="op-line"><input id="op-save-call" aria-label="Nominativo da salvare" placeholder="Nominativo" maxlength="20" required autocapitalize="characters" spellcheck="false"><input id="op-save-name" aria-label="Nome da salvare" placeholder="Nome o cognome" maxlength="120" required><button>Salva operatore</button></div></form><p id="op-save-status" role="status"></p></div></section><footer>Autoaggiornamento ogni 5 minuti. Le misure possono essere pubblicate con ritardo. Se un servizio non risponde, il dato resta non disponibile: nessun valore viene simulato. Per verificare aperture effettive usa PSK Reporter o WSPR.<p>Sviluppatore: <strong>Elia Raffanini</strong></p></footer></main><nav class="bottom-nav" aria-label="Sezioni del sito"><button class="nav-tab active" type="button" data-view="hf" aria-current="page"><span>◉</span>HF</button><button class="nav-tab" type="button" data-view="live"><span>📡</span>DX Live</button><button class="nav-tab" type="button" data-view="data"><span>⚙</span>Dati</button><button class="nav-tab" type="button" data-view="log"><span>📓</span>Log</button><button class="nav-tab" type="button" data-view="operators"><span>⌕</span>Operatori</button></nav><button id="mobile-refresh" class="mobile-refresh" type="button" aria-label="Aggiorna dati">↻ Aggiorna</button><script>
@@ -685,6 +687,7 @@ function logCallbookHistory(call){
 }
 function logCallbookReset(call=''){
  logCallbookState.serial++;logCallbookState.call=call;logCallbookState.record=null;
+ setQrzLink('log-qrz');
  logCallbookState.placeOverride=false;logCallbookState.gridOverride=false;
  $('log-callbook-name').textContent='—';$('log-callbook-place').textContent='—';$('log-callbook-grid').textContent='—';
  $('log-use-callbook-qth').disabled=true;
@@ -753,6 +756,7 @@ function logApplyCallbookQth(){
 }
 async function logLookupCallbook(call,apply=true){
  const serial=++logCallbookState.serial;logCallbookState.call=call;
+ setQrzLink('log-qrz');
  if(!/^[A-Z0-9/]{3,20}$/.test(call)){
   $('log-callbook-status').textContent='Completa il nominativo per avviare la ricerca.';
   return;
@@ -763,7 +767,11 @@ async function logLookupCallbook(call,apply=true){
   const profile=await logFetchCallbook(call);if(!active())return;
   logCallbookState.record=profile;
   if(profile)opRemember(profile,call);
-  if(!profile){$('log-callbook-status').textContent='Nominativo assente nelle fonti consultate. Puoi compilare il QSO manualmente.';return}
+  if(!profile){
+   $('log-callbook-status').textContent='Nominativo assente nelle fonti consultate. Puoi compilare il QSO manualmente.';
+   setQrzLink('log-qrz',call);
+   return;
+  }
   $('log-callbook-name').textContent=profile.name||'Non disponibile';
   $('log-callbook-place').textContent=profile.place||'Non disponibile';
   $('log-callbook-grid').textContent=profile.grid||'Non disponibile';
@@ -782,7 +790,10 @@ async function logLookupCallbook(call,apply=true){
    }
   }
  }catch(error){
-  if(active())$('log-callbook-status').textContent=error.message+' non disponibile (rete, CORS o servizio). Puoi compilare il QSO manualmente.';
+  if(active()){
+   $('log-callbook-status').textContent=error.message+' non disponibile (rete, CORS o servizio). Puoi compilare il QSO manualmente.';
+   if(!logCallbookState.record)setQrzLink('log-qrz',call);
+  }
  }
 }
 function logSyncCallbookCall(){
@@ -1250,7 +1261,14 @@ async function opLoadContacts(call,request){
  }catch{if(request===opRequest)status.textContent='Club Log al momento non raggiungibile. Riprova più tardi.'}
  finally{clearTimeout(timeout)}
 }
+function setQrzLink(id,call=''){
+ const link=$(id);
+ link.hidden=!call;
+ if(call)link.href='https://www.qrz.com/db/'+encodeURIComponent(call);
+ else link.removeAttribute('href');
+}
 async function opSearch(call,known){
+ setQrzLink('op-qrz');
  if(!/^[A-Z0-9/]{3,20}$/.test(call)){ $('op-profile').textContent='Inserisci un nominativo valido.';return }
  const request=++opRequest;
  $('op-call').value=call;
@@ -1264,10 +1282,18 @@ async function opSearch(call,known){
  const p=await logFetchCallbook(call);if(request!==opRequest)return;
  if(p){$('op-profile').textContent=[call,p.name,p.place,p.grid,p.source].filter(Boolean).join(' · ');
  opRemember(p,call);}
- else $('op-profile').textContent=fallback||'Profilo assente nelle fonti consultate.';
- }catch{if(request===opRequest)$('op-profile').textContent=(fallback?fallback+' · ':'')+'Ricerca online non disponibile.'}
+ else{
+  $('op-profile').textContent=fallback||'Profilo assente nelle fonti consultate.';
+  if(!fallback&&logNormalizeCall($('op-call').value)===call)setQrzLink('op-qrz',call);
+ }
+ }catch{
+  if(request!==opRequest)return;
+  $('op-profile').textContent=(fallback?fallback+' · ':'')+'Ricerca online non disponibile.';
+  if(!fallback&&logNormalizeCall($('op-call').value)===call)setQrzLink('op-qrz',call);
+ }
 }
-$('op-forward').onsubmit=e=>{e.preventDefault();opSearch($('op-call').value.trim().toUpperCase())};
+$('op-call').addEventListener('input',()=>setQrzLink('op-qrz'));
+$('op-forward').onsubmit=e=>{e.preventDefault();opSearch(logNormalizeCall($('op-call').value))};
 
 $('op-save').onsubmit=e=>{
  e.preventDefault();
