@@ -490,7 +490,8 @@ function renderLive(){
 // Feed CORS pubblici: il browser aggiorna DX Live anche quando GitHub Actions ritarda.
 const liveSources=[
  {name:'HamQTH',url:'https://www.hamqth.com/api/v2/spots?limit=200'},
- {name:'SQ3SWG HF',url:'https://skeds.sq3swg.com/api/v1/public/spots?band=hf&limit=200'},\n {name:'SQ3SWG 2 m',url:'https://skeds.sq3swg.com/api/v1/public/spots?band=144&limit=200'}
+ {name:'SQ3SWG HF',url:'https://skeds.sq3swg.com/api/v1/public/spots?band=hf&limit=200'},
+ {name:'SQ3SWG 2 m',url:'https://skeds.sq3swg.com/api/v1/public/spots?band=144&limit=200'}
 ];
 const liveMaxAgeMs=2*60*60*1000;
 async function fetchLiveJSON(url){
