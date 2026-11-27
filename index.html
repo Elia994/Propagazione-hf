@@ -119,7 +119,7 @@
 <div class="log-delete-row"><span class="log-meta" id="log-selected-count">0 QSO selezionati</span><div class="log-selection-actions"><button type="button" id="log-edit" disabled>✎ Modifica selezionato</button><button type="button" id="log-delete" class="log-danger" disabled>🗑 Elimina selezionati</button></div></div>
 <p class="log-hint">Il registro è salvato <strong>solo in questo browser</strong>, non sincronizzato tra dispositivi. Esporta periodicamente un backup ADIF o CSV prima di eliminare i QSO; cancellando i dati del browser potresti perdere il registro.</p></section>
 </section><section class="view" id="view-operators"><h2>Ricerca operatori</h2>
-<div class="panel"><form id="op-forward"><label for="op-call">Nominativo</label><div class="op-line"><input id="op-call" placeholder="Nominativo" required maxlength="20" autocapitalize="characters" spellcheck="false"><button>Cerca operatore</button></div></form><p id="op-profile" role="status">Cerca un nominativo per vedere il profilo.</p><a id="op-qrz" class="qrz-link" target="_blank" rel="noopener noreferrer" hidden>Apri su QRZ</a></div>
+<div class="panel"><form id="op-forward"><label for="op-call">Nominativo</label><div class="op-line"><input id="op-call" placeholder="Nominativo" required maxlength="20" autocapitalize="characters" spellcheck="false"><button>Cerca operatore</button></div></form><p id="op-profile" role="status">Cerca un nominativo per vedere il profilo.</p><a id="op-qrz" class="qrz-link" target="_blank" rel="noopener noreferrer" hidden>Apri su QRZ</a> <a id="op-hamqth" class="qrz-link" target="_blank" rel="noopener noreferrer" hidden>Apri su HamQTH</a></div>
 <div class="panel"><h3>Ultimi collegamenti</h3><p id="op-activity">Fino a 10 QSO pubblicati dall’operatore su Club Log.</p><div id="op-qso"></div></div>
 <div class="panel"><h3>Dal nome al nominativo</h3><form id="op-reverse"><label for="op-name">Nome o cognome</label><div class="op-line"><input id="op-name" placeholder="Nome o cognome" required minlength="2"><button>Cerca nominativi</button></div></form><p>Fonti · Wikidata, profili salvati nel browser</p><div id="op-matches" aria-live="polite"></div></div>
 <div class="panel"><h3>Salva operatore</h3><form id="op-save"><div class="op-line"><input id="op-save-call" aria-label="Nominativo da salvare" placeholder="Nominativo" maxlength="20" required autocapitalize="characters" spellcheck="false"><input id="op-save-name" aria-label="Nome da salvare" placeholder="Nome o cognome" maxlength="120" required><button>Salva operatore</button></div></form><p id="op-save-status" role="status"></p></div></section><footer>Autoaggiornamento ogni 5 minuti. Le misure possono essere pubblicate con ritardo. Se un servizio non risponde, il dato resta non disponibile: nessun valore viene simulato. Per verificare aperture effettive usa PSK Reporter o WSPR.<p>Sviluppatore: <strong>Elia Raffanini</strong></p></footer></main><nav class="bottom-nav" aria-label="Sezioni del sito"><button class="nav-tab active" type="button" data-view="hf" aria-current="page"><span>◉</span>HF</button><button class="nav-tab" type="button" data-view="live"><span>📡</span>DX Live</button><button class="nav-tab" type="button" data-view="data"><span>⚙</span>Dati</button><button class="nav-tab" type="button" data-view="log"><span>📓</span>Log</button><button class="nav-tab" type="button" data-view="operators"><span>⌕</span>Operatori</button></nav><button id="mobile-refresh" class="mobile-refresh" type="button" aria-label="Aggiorna dati">↻ Aggiorna</button><script>
@@ -1309,10 +1309,14 @@ async function opLoadContacts(call,request){
  finally{clearTimeout(timeout)}
 }
 function setQrzLink(id,call=''){
- const link=$(id);
- link.hidden=!call;
- if(call)link.href='https://www.qrz.com/db/'+encodeURIComponent(call);
- else link.removeAttribute('href');
+ const link=$(id),hamqth=$('op-hamqth');
+ link.hidden=!call;hamqth.hidden=!call;
+ if(call){
+  link.href='https://www.qrz.com/db/'+encodeURIComponent(call);
+  hamqth.href='https://www.hamqth.com/'+encodeURIComponent(call.toLowerCase());
+ }else{
+  link.removeAttribute('href');hamqth.removeAttribute('href');
+ }
 }
 async function opSearch(call,known){
  setQrzLink('op-qrz');
