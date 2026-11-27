@@ -22,7 +22,7 @@
       <div class="field"><label for="file">File elenco ponti (.xls/.xlsx)</label><input id="file" type="file" accept=".xls,.xlsx,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"></div>
       <a class="links" href="https://www.ik2ane.it/pontixls.xls" target="_blank" rel="noopener noreferrer">Scarica pontixls.xls da IK2ANE ↗</a>
     </div>
-    <p class="note">Scarica e seleziona il foglio aggiornato per usarlo in questa sessione.</p>
+    <p class="note">Seleziona il foglio aggiornato. Sul sito online viene salvato in questo browser.</p>
     </details>
   </section>
   <section class="panel">
@@ -120,27 +120,82 @@
     }
   }
 
+  const importPanel = manualInput.closest('details');
+
+  async function savedWorkbook(mode, workbook) {
+    const db = await new Promise((resolve, reject) => {
+      const request = indexedDB.open('propagazione-hf-ponti', 1);
+      request.onupgradeneeded = () => request.result.createObjectStore('workbooks');
+      request.onsuccess = () => resolve(request.result);
+      request.onerror = () => reject(request.error);
+      request.onblocked = () => reject(new Error('Archivio locale occupato'));
+    });
+    try {
+      return await new Promise((resolve, reject) => {
+        const transaction = db.transaction('workbooks', mode);
+        const store = transaction.objectStore('workbooks');
+        const request = mode === 'readwrite'
+          ? store.put(workbook, 'ik2ane')
+          : store.get('ik2ane');
+        transaction.oncomplete = () => resolve(request.result);
+        transaction.onabort = () => reject(transaction.error);
+        transaction.onerror = () => reject(transaction.error);
+      });
+    } finally {
+      db.close();
+    }
+  }
+
+  async function restoreWorkbook() {
+    manualInput.disabled = true;
+    workbookStatus.textContent = 'Ricerca del foglio salvato…';
+    try {
+      const workbook = await savedWorkbook('readonly');
+      if (workbook) {
+        loadBook(workbook.buffer);
+        workbookStatus.textContent = 'Foglio salvato su questo browser · ' + workbook.name;
+        return;
+      }
+      workbookStatus.textContent = 'Importa il foglio IK2ANE una volta. Verrà ricordato su questo browser.';
+    } catch {
+      workbookStatus.textContent = 'Puoi importare il foglio IK2ANE per questa visita.';
+    } finally {
+      manualInput.disabled = false;
+      importPanel.open = entries.length === 0;
+    }
+  }
+
   refreshButton.hidden = !privateServer;
   if (privateServer) {
     refreshButton.addEventListener('click', refreshWorkbook);
     refreshWorkbook();
   } else {
-    manualInput.closest('details').open = true;
-    workbookStatus.textContent = 'Scarica e importa il foglio IK2ANE.';
+    restoreWorkbook();
   }
 
   manualInput.addEventListener('change', async event => {
     const file = event.target.files?.[0];
     if (!file) return;
     refreshButton.disabled = true;
+    manualInput.disabled = true;
     try {
-      loadBook(await file.arrayBuffer());
+      const buffer = await file.arrayBuffer();
+      loadBook(buffer);
       lastModified = '';
       workbookStatus.textContent = 'Foglio caricato · ' + file.name;
+      if (!privateServer) {
+        try {
+          await savedWorkbook('readwrite', {name: file.name, buffer});
+          workbookStatus.textContent = 'Foglio salvato su questo browser · ' + file.name;
+        } catch {
+          workbookStatus.textContent = 'Foglio caricato solo per questa visita · ' + file.name;
+        }
+      }
     } catch (error) {
       workbookStatus.textContent = 'Impossibile leggere il foglio. ' + error.message;
     } finally {
       refreshButton.disabled = false;
+      manualInput.disabled = false;
       manualInput.value = '';
     }
   });
